@@ -1,0 +1,27 @@
+<% if user_signed_in? %>
+	<header id="header">
+		<h1><a href="index.html">RehabID</a> - Automatically identify your next rehab project.</h1>
+			<nav id="nav">
+				<ul>
+					<li><%= link_to 'Home', home_path%></li>
+					<li><a href="contact.html">Contact</a></li>
+					<li><%= link_to 'Logout', destroy_user_session_path, method: "delete"%></li>
+				</ul>
+			</nav>
+	</header>
+	<br>
+	<br>
+	<h2> Welcome <%= current_user.name %>!</h2>
+	<li><%= link_to 'Create New Features', new_room_feature_path%></li>
+<% else %>
+	<header id="header">
+			<h1><a href="index.html">RehabID</a> - Automatically identify your next rehab project.</h1>
+				<nav id="nav">
+					<ul>
+						<li><%= link_to 'Home', home_path%></li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</nav>
+		</header>
+	<h2> Nobody logged in</h2>
+<% end %>

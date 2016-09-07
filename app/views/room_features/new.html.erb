@@ -1,0 +1,16 @@
+<% if policy(@room_feature).new? %>
+
+	<%= form_for @room_feature do |f| %>
+		<%= f.label :name %>
+		<%= f.text_field :name%>
+		<br>
+		<%= f.label :type %>
+		<%= f.collection_select :type_id, Type.all, :id, :name, :prompt => "Select the type of feature." %>
+		<br>
+		<%= f.label :room_type %>
+		<%= f.collection_select :room_type_id, RoomType.all, :id, :name, :prompt => "Select the room this feature belongs to." %>
+		<br>
+		<br>
+		<%= f.submit "New Feature" %>
+	<% end %>
+<% end %>
