@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   helper_method :us_states
+  before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :verify_authorized, :except => :index, unless: :devise_controller?
 
 
@@ -62,6 +63,7 @@ class ApplicationController < ActionController::Base
       ['Wyoming', 'WY']
     ]
 end
+
   protected # works with any inherited class & Private works only with same class
 
   def configure_permitted_parameters
