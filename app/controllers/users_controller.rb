@@ -7,8 +7,9 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		if @resource.save
-			WelcomeMailer.welcome_email(@resource).deliver_now
+		user = @resource
+
+		if user.save
 			redirect_to dashboard_path
 		else
 			renew 'new'

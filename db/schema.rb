@@ -10,49 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160907015812) do
+ActiveRecord::Schema.define(version: 20160910190932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "project_features", force: :cascade do |t|
+    t.integer  "price"
+    t.integer  "project_id"
+    t.integer  "room_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_project_features_on_project_id", using: :btree
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "address"
-    t.string   "square_feet"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip_code"
+    t.integer  "square_feet"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
-  end
-
-  create_table "room_features", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "type_id"
-    t.integer  "room_type_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["room_type_id"], name: "index_room_features_on_room_type_id", using: :btree
-    t.index ["type_id"], name: "index_room_features_on_type_id", using: :btree
-  end
-
-  create_table "room_types", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "rooms", force: :cascade do |t|
-    t.integer  "project_id"
-    t.integer  "room_type_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["project_id"], name: "index_rooms_on_project_id", using: :btree
-    t.index ["room_type_id"], name: "index_rooms_on_room_type_id", using: :btree
-  end
-
-  create_table "types", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -79,9 +60,6 @@ ActiveRecord::Schema.define(version: 20160907015812) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "project_features", "projects"
   add_foreign_key "projects", "users"
-  add_foreign_key "room_features", "room_types"
-  add_foreign_key "room_features", "types"
-  add_foreign_key "rooms", "projects"
-  add_foreign_key "rooms", "room_types"
 end

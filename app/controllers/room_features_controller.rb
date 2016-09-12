@@ -23,6 +23,9 @@ class RoomFeaturesController < ApplicationController
 
 	def index
 		@all_room_features = RoomFeature.all
+
+		# find room features 
+		# room_name.room_type.room_features.where()
 	end
 	
 end

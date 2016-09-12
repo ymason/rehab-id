@@ -1,30 +1,30 @@
-class UserPolicy < ApplicationPolicy
+class ProjectPolicy < ApplicationPolicy
 	def index
 		user.admin?
 	end
 
 	def show
-		user.admin? || user_is_self?
+		index?
 	end
 
 	def new?
-		show?
+		user.admin? || owner_of_project?
 	end
 
 	def create?
-		show?
+		new?
 	end
 
 	def update?
-		show?
+		new?
 	end
 
 	def edit?
-		show?
+		new?
 	end
 
 	def destroy?
-		show?
+		new?
 	end
 
 end

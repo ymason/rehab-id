@@ -20,6 +20,21 @@ class User < ApplicationRecord
 
   validates :role, presence: true
 
+  after_create :send_welcome_email
+
   enum role: [:admin, :lender, :contractor, :user]
 
+  def owner_of_project?(project)
+    self.id == project.user_id
+  end
+
+  def user_is_self?(user)
+    self.id == user.id
+  end
+
+  protected
+
+    def send_welcome_email
+      WelcomeMailer.welcome_email(self).deliver_later
+    end
 end

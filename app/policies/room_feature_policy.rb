@@ -1,10 +1,10 @@
 class RoomFeaturePolicy < ApplicationPolicy
 	def index
-		user.admin? || user.contractor? || user.user?
+		user.admin?
 	end
 
 	def show
-		index?
+		user.admin? || user.contractor? || user.user?
 	end
 
 	def new?

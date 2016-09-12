@@ -13,6 +13,7 @@
 	<br>
 	<h2> Welcome <%= current_user.name %>!</h2>
 	<li><%= link_to 'Create New Features', new_room_feature_path%></li>
+	<li><%= link_to 'Create New Rates', new_user_rate_path(current_user.id) %>
 <% else %>
 	<header id="header">
 			<h1><a href="index.html">RehabID</a> - Automatically identify your next rehab project.</h1>
