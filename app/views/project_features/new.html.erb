@@ -2,7 +2,7 @@
 
 	<%= form_for @project_feature do |f| %>
 		<%= f.label :room_type %>
-		<%= f.select(:room_type, ProjectFeature.room_types.keys.map, :prompt => "Select your price for this project feature.") %>
+		<%= f.select(:room_type, ProjectFeature.room_types.keys.map {|room_type| [room_type.titleize, room_type]}) %>
 		<br>
 		<%= f.label :price %>
 		<%= f.number_field :price%>
