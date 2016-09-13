@@ -1,7 +1,7 @@
 module FeatureType
 	class Ceiling
 		def types
-			["Tile", "Ceramic", "Wood"]
+			["Flat", "Textured/Knockdown", "Popcorn", "Coffered", "Vaulted", "Cut Out" ]
 		end
 	end
 end

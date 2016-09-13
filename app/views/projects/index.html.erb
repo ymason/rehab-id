@@ -1,0 +1,9 @@
+<% if policy(@project).new? %>
+	<ul>
+		<% @all_projects.each do | project | %>
+			<li>
+				<h2><%= project.address %><h2>
+			</li>
+		<% end %>
+	</ul>
+<% end %>

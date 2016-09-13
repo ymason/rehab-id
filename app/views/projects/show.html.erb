@@ -1,0 +1,9 @@
+<h2>Your Project</h2>
+
+<h3><%= @project.address %>
+<br>
+<%= @project.city %>, <%= @project.state %> <%= @project.zip_code %>
+<br></h3>
+<h4> Square Feet: <%= @project.square_feet %></h4>
+<br>
+<li><%= link_to 'Create Pricing', new_project_project_feature_path(@project.id)%></li>

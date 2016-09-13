@@ -1,7 +1,7 @@
 module FeatureType
 	class Electrical
 		def types
-			["Tile", "Ceramic", "Wood"]
+			["Main Panel", "Sub Panel", "Wall Outlets", "Fixtures & Switches", "Appliances", "Entire System"]
 		end
 	end
 end

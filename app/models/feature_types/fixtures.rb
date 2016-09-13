@@ -1,7 +1,7 @@
 module FeatureType
 	class Fixtures
 		def types
-			["Tile", "Ceramic", "Wood"]
+			["Ceiling Light", "Chandelier", "Fan", "Pendant", "Recessed Lighting", "Wall Lighting"]
 		end
 	end
 end

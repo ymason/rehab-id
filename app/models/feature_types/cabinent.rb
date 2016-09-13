@@ -1,7 +1,7 @@
 module FeatureType
 	class Cabinent
 		def types
-			["Tile", "Ceramic", "Wood"]
+			["Shaker/Regular", "Louvered", "Inset", "Distressed", "Beadboard", "Thermofoil", "Custom"]
 		end
 	end
 end

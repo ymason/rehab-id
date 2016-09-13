@@ -1,7 +1,7 @@
 module FeatureType
 	class Door
 		def types
-			["Tile", "Ceramic", "Wood"]
+			["Wood", "Paneled", "Flush", "French", "Pocket", "Patio Sliding", "Storm", "Custom"]
 		end
 	end
 end

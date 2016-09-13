@@ -24,10 +24,6 @@ class User < ApplicationRecord
 
   enum role: [:admin, :lender, :contractor, :user]
 
-  def owner_of_project?(project)
-    self.id == project.user_id
-  end
-
   def user_is_self?(user)
     self.id == user.id
   end

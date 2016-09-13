@@ -15,5 +15,11 @@ class ProjectFeature < ApplicationRecord
 	  	else
 	  		room_features
 	  	end
-  end
+    end
+
+    # @user = project_feature.project.user_id
+
+     def contractor_own_project_features?(project_feature)
+      self.id = User.all.where(role: :contractor)
+    end
 end

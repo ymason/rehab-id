@@ -1,0 +1,22 @@
+<% if policy(@project).new? %>
+
+	<%= form_for @project, url: user_projects_path do |f| %>
+		<%= f.label :address %>
+		<%= f.text_field :address%>
+		<br>
+		<%= f.label :city %>
+		<%= f.text_field :city%>
+		<br>
+		<%= f.label :state %><br />
+    	<%= f.select :state, options_for_select(us_states) %>
+    	<br>
+		<%= f.label :zip_code %>
+		<%= f.number_field :zip_code%>
+		<br>
+		<%= f.label :square_feet %>
+		<%= f.number_field :square_feet%>
+		<br>
+		<br>
+		<%= f.submit "New Project" %>
+	<% end %>
+<% end %>

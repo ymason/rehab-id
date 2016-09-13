@@ -1,0 +1,13 @@
+<% if policy(@project_feature).new? %>
+
+	<%= form_for @project_feature do |f| %>
+		<%= f.label :room_type %>
+		<%= f.select(:room_type, ProjectFeature.room_types.keys.map, :prompt => "Select your price for this project feature.") %>
+		<br>
+		<%= f.label :price %>
+		<%= f.number_field :price%>
+		<br>
+		<br>
+		<%= f.submit "New Price" %>
+	<% end %>
+<% end %>

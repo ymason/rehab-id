@@ -7,7 +7,7 @@ module RoomType
 				Wall.new,
 				Shower.new,
 				Ceiling.new,
-				Fixtures.new,
+				BathroomFixtures.new,
 				Window.new,
 				Door.new,
 				Plumbing.new

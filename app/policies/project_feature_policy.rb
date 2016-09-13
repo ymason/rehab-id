@@ -1,4 +1,4 @@
-class RoomFeaturePolicy < ApplicationPolicy
+class ProjectFeaturePolicy < ApplicationPolicy
 	def index
 		user.admin?
 	end
@@ -8,7 +8,7 @@ class RoomFeaturePolicy < ApplicationPolicy
 	end
 
 	def new?
-		user.admin?
+		user.admin? || contractor_own_project_features?
 	end
 
 	def create?
