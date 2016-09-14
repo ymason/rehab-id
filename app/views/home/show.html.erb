@@ -1,0 +1,103 @@
+<% if policy(current_user).new? %>
+
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1><a href="index.html">RehabID</a> - Automatically identify your next rehab project.</h1>
+					<% if user_signed_in? %>
+						<nav id="nav">
+							<ul>
+								<li><%= link_to 'Dashboard', dashboard_path%></li>
+								<li><%= link_to 'Home', home_path%></li>
+								<li><a href="contact.html">Contact</a></li>
+								<li><%= link_to 'Logout', destroy_user_session_path, method: "delete"%></li>
+							</ul>
+						</nav>
+					<% else %>
+						<nav id="nav">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="contact.html">Contact</a></li>
+								<li><%= link_to 'Sign Up', new_user_registration_path%></li>
+								<li><%= link_to 'Login', new_user_session_path%></li>
+							</ul>
+						</nav>
+					<% end %>
+
+				</header>
+
+			<!-- Main -->
+
+				<section id="main" class="container 75%">
+					<header>
+						<h2>Contact Us</h2>
+						<p>Ask us or tell us what you think about our operation.</p>
+					</header>
+					<div class="box">
+						<form action="http://vestmunity.us12.list-manage.com/subscribe/post?u=3d279e1c62ab7996c31b033c1&amp;id=d3e1f940af" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+							<div class="row uniform 50%">
+								<div class="6u 12u(mobilep)">
+									<input type="text" name="NAME" class="" id="mce-NAME" value="" placeholder="Name" />
+								</div>
+								<div class="6u 12u(mobilep)">
+									<input type="email" name="EMAIL" class="required email" id="mce-EMAIL" value="" placeholder="Email" />
+								</div>
+							</div>
+							<div class="row uniform 50%">
+								<div class="6u 12u(mobilep)">
+									<input type="text" name="PHONE" class="" id="mce-PHONE" value="" placeholder="Phone Number" />
+								</div>
+								<div class="6u 12u(mobilep)">
+									<input type="text" name="subject" id="subject" value="" placeholder="Subject" />
+								</div>
+							</div>
+							<div class="row uniform 50%">
+								<div class="12u">
+									<textarea name="message" name="MMERGE4" id="mce-MMERGE4" placeholder="Enter your message" rows="6"></textarea>
+								</div>
+							</div>
+							<div id="mce-responses" class="clear">
+								<div class="response" id="mce-error-response" style="display:none"></div>
+								<div class="response" id="mce-success-response" style="display:none"></div>
+							</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+							<div class="row uniform">
+								<div class="12u">
+									<ul class="actions align-center">
+										<li><input type="submit" value="Send Message" name="subscribe" id="mc-embedded-subscribe" class="button" /></li>
+									</ul>
+								</div>
+							</div>
+						</form>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; RehabID. All rights reserved.</li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+			<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+			<script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='NAME';ftypes[1]='text';fnames[2]='PHONE';ftypes[2]='text';fnames[3]='STATE';ftypes[3]='number';fnames[4]='MMERGE4';ftypes[4]='text'; }(jQuery));var $mcj = jQuery.noConflict(true);</script>
+
+<% end %>
