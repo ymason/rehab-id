@@ -1,3 +1,5 @@
+<br>
+<br>
 <% if policy(@project).new? %>
 
 	<%= form_for @project, url: user_projects_path do |f| %>
@@ -15,6 +17,12 @@
 		<br>
 		<%= f.label :square_feet %>
 		<%= f.number_field :square_feet%>
+		<br>
+		<%= f.label :number_of_rooms %>
+		<%= f.number_field :rooms%>
+		<br>
+		<%= f.label :number_of_bathrooms %>
+		<%= f.number_field :bathrooms%>
 		<br>
 		<br>
 		<%= f.submit "New Project" %>

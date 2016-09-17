@@ -4,11 +4,11 @@ class ProjectFeaturePolicy < ApplicationPolicy
 	end
 
 	def show
-		user.admin? || user.contractor? || user.user?
+		user.admin? || user.user?
 	end
 
 	def new?
-		user.admin? || contractor_own_project_features?
+		user.admin? || user.user?
 	end
 
 	def create?
@@ -16,15 +16,21 @@ class ProjectFeaturePolicy < ApplicationPolicy
 	end
 
 	def update?
-		new?
+		admin_or_owner_of_project_feature?
 	end
 
 	def edit?
-		new?
+		update?
 	end
 
 	def destroy?
-		new?
+		update?
+	end
+
+	private
+
+	def admin_or_owner_of_price_feature?
+		user.admin? || (user.user? && user.project_features_owner?(record))
 	end
 
 end

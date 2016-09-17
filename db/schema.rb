@@ -10,17 +10,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910190932) do
+ActiveRecord::Schema.define(version: 20160917195959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "estimates", force: :cascade do |t|
+    t.integer  "project_feature_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "price_feature_id"
+    t.index ["price_feature_id"], name: "index_estimates_on_price_feature_id", using: :btree
+    t.index ["project_feature_id"], name: "index_estimates_on_project_feature_id", using: :btree
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "feature_type"
+  end
+
+  create_table "loan_quotes", force: :cascade do |t|
+    t.integer  "property_type"
+    t.integer  "purchase"
+    t.integer  "owner_occupied"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "purchase_price"
+    t.integer  "down_payment"
+    t.integer  "rehab_budget"
+    t.integer  "arv"
+    t.integer  "past_rehabs"
+    t.integer  "fico"
+    t.string   "referral"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "price_features", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "feature_id"
+    t.integer  "estimate_id"
+    t.integer  "floor"
+    t.integer  "ceiling"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["estimate_id"], name: "index_price_features_on_estimate_id", using: :btree
+    t.index ["feature_id"], name: "index_price_features_on_feature_id", using: :btree
+    t.index ["user_id"], name: "index_price_features_on_user_id", using: :btree
+  end
+
   create_table "project_features", force: :cascade do |t|
-    t.integer  "price"
     t.integer  "project_id"
-    t.integer  "room_type"
+    t.integer  "feature_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["feature_id"], name: "index_project_features_on_feature_id", using: :btree
     t.index ["project_id"], name: "index_project_features_on_project_id", using: :btree
   end
 
@@ -33,6 +80,8 @@ ActiveRecord::Schema.define(version: 20160910190932) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "rooms"
+    t.integer  "bathrooms"
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
@@ -60,6 +109,12 @@ ActiveRecord::Schema.define(version: 20160910190932) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "estimates", "price_features"
+  add_foreign_key "estimates", "project_features"
+  add_foreign_key "price_features", "estimates"
+  add_foreign_key "price_features", "features"
+  add_foreign_key "price_features", "users"
+  add_foreign_key "project_features", "features"
   add_foreign_key "project_features", "projects"
   add_foreign_key "projects", "users"
 end

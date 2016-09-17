@@ -1,9 +1,25 @@
-<h2>Your Project</h2>
-
-<h3><%= @project.address %>
+<br><br>
+<h2>Project</h2> <%= @project.address %> <%= @project.city %>, <%= @project.state %> <%= @project.zip_code %>
+<br><%= @project.square_feet %> Sq. Feet
 <br>
-<%= @project.city %>, <%= @project.state %> <%= @project.zip_code %>
-<br></h3>
-<h4> Square Feet: <%= @project.square_feet %></h4>
+<%= @project.rooms %> Rooms
 <br>
-<li><%= link_to 'Create Pricing', new_project_project_feature_path(@project.id)%></li>
+<%= @project.bathrooms %> Bathroom
+<br>
+<h2> Estimated Cost </h2>
+<h4> Still calculating...</h4>
+<h2> Rehab Needs:</h2>
+<ul>
+	<% @project.project_features.each do | f | %>
+		<% if f.feature.self? || f.feature.exterior?  %>
+		  	<li>
+				<h3><%= f.feature.name %></h3>
+			</li>
+		<% else %> 
+		   <li>
+				<h3><%= f.feature.name %> <%= f.feature.feature_type %></h3>
+			</li>
+		<% end %>
+	<% end %>
+		</ul>
+<h4><%= link_to 'Add Project Features', new_project_project_feature_path(@project.id)%></h4>

@@ -1,18 +1,18 @@
 <% if user_signed_in? %>
-	<header id="header">
-		<h1><a href="index.html">RehabID</a> - Automatically identify your next rehab project.</h1>
-			<nav id="nav">
-				<ul>
-					<li><%= link_to 'Home', home_path%></li>
-					<li><%= link_to 'Contact', home_path%></li>
-					<li><%= link_to 'Logout', destroy_user_session_path, method: "delete"%></li>
-				</ul>
-			</nav>
-	</header>
 	<br>
 	<br>
 	<h2> Welcome <%= current_user.name %>!</h2>
-	<li><%= link_to 'Create New Project', new_user_project_path(current_user.id)%></li>
+	<h3><%= link_to 'Create New Project', new_user_project_path(current_user.id)%><br>
+	<br><%= link_to 'Create Pricing', new_user_price_feature_path(current_user.id)%><br>
+	<br><h2>Your Projects</h2>
+		<ul>
+			<% @all_user_projects.each do | project | %>
+				<li>
+					<h3><%= link_to project.address, user_project_path(current_user.id, project.id) %><h3>
+				</li>
+			<% end %>
+		</ul>
+
 <% else %>
 	<header id="header">
 			<h1><a href="index.html">RehabID</a> - Automatically identify your next rehab project.</h1>

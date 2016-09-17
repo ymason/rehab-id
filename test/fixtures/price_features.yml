@@ -1,9 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  project: one
+  user: one
   feature: one
+  estimate: one
+  floor: 1
+  ceiling: 1
 
 two:
-  project: two
+  user: two
   feature: two
+  estimate: two
+  floor: 1
+  ceiling: 1

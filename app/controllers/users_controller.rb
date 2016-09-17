@@ -4,6 +4,8 @@ class UsersController < ApplicationController
 
 	def show
 		authorize current_user
+
+		@all_user_projects = current_user.projects
 	end
 
 	def create

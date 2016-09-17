@@ -1,8 +1,8 @@
-<% if policy(@project).new? %>
+<% if policy(@user).index? %>
 	<ul>
-		<% @all_projects.each do | project | %>
+		<% @all_user_projects.each do | project | %>
 			<li>
-				<h2><%= project.address %><h2>
+				<h2><%= link_to project.address, user_project_path(@user.id, project.id) %><h2>
 			</li>
 		<% end %>
 	</ul>

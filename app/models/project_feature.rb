@@ -1,28 +1,16 @@
 class ProjectFeature < ApplicationRecord
   belongs_to :project
+  belongs_to :feature
+  has_many :estimates
 
-  enum room_type: [:bedroom, :bathroom, :kitchen, :garage, :exterior, :additional_rooms, :additonal_features ]
+   # before_save :merge_author
 
-  def room_features(type)
-    puts type
-    byebug
+  # private
 
-  	# room = room_type.classify.constantize	
-  	# room_features = room_class.features
+  # def merge_author
+  #   if (project_feature_id = ProjectFeature.find_by(proj
+  #     self.id = project_feature_id
+  #   end
+  # end
 
-	  # 	if room_class.additional?
-	  # 		room_class.additonal.features
-	  # 	else
-	  # 		room_features
-	  # 	end
-    end
-
-    def testing_stuff 
-      puts "AAAAAAA"
-    end
-    # @user = project_feature.project.user_id
-
-     def contractor_own_project_features?(project_feature)
-      self.id = User.all.where(role: :contractor)
-    end
 end

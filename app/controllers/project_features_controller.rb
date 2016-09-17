@@ -1,35 +1,29 @@
 class ProjectFeaturesController < ApplicationController
 
 	def new
-		@project_feature = ProjectFeature.new
+		@user_project_features = ProjectFeature.new
 
-		authorize @project_feature
-
-		@all_project_features = ProjectFeature.all
+		@user = current_user
+		@project_id = params[:project_id]
+		@project = Project.where(id: @project_id)
+		authorize @user_project_features
 
 	end
 
 	def create
 
-		@project_feature = ProjectFeature.new(
+		@user_project_features = ProjectFeature.new(
 			project_id: params[:project_id],
-			room_type: params[:project_feature][:room_type],
-			price: params[:project_feature][:price]
+			feature_id: params[:project_feature][:feature]
 			)
 
-		authorize @project_feature
+		authorize @user_project_features
 
-		if @project_feature.save
-			render 'new' 
+		if @user_project_features.save
+			redirect_to user_project_path(current_user.id, id: params[:project_id])
 		else
 			render 'new'
 		end
-	end
-
-	def index
-		@all_user_project_features = self.project.project_features.all
-
-		# find all user prices 
 	end
 
 end

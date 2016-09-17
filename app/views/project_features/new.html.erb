@@ -1,13 +1,39 @@
-<% if policy(@project_feature).new? %>
+<br>
+<br>
+<% if policy(@user_project_features).new? %>
+	<% if @project.include?(feature_type: "Floors") %>
 
-	<%= form_for @project_feature do |f| %>
-		<%= f.label :room_type %>
-		<%= f.select(:room_type, ProjectFeature.room_types.keys.map {|room_type| [room_type.titleize, room_type]}) %>
+	<% else %>
+		<%= form_for @user_project_features do |f| %>
+			<%= f.label :Features %>
+			<%= f.collection_select :feature, Feature.where(feature_type: 1), :id, :name, :prompt => "Select the type of floor you'd like done for your rehab." %>
+			<br>
+			<br>
+			<%= f.submit "Add Feature" %>
+			<% end %>
 		<br>
-		<%= f.label :price %>
-		<%= f.number_field :price%>
+		<%= form_for @user_project_features do |f| %>
+			<%= f.label :Flooring %>
+			<%= f.collection_select :feature, Feature.where(feature_type: 0), :id, :name, :prompt => "Select the type of floor you'd like done for your rehab." %>
+			<br>
+			<br>
+			<%= f.submit "Add Feature" %>
+		<% end %>
 		<br>
+		<%= form_for @user_project_features do |f| %>
+			<%= f.label :Roof %>
+			<%= f.collection_select :feature, Feature.where(feature_type: 2), :id, :name, :prompt => "Select the type of roof you'd like done for your rehab." %>
+			<br>
+			<br>
+			<%= f.submit "Add Feature" %>
+		<% end %>
 		<br>
-		<%= f.submit "New Price" %>
+		<%= form_for @user_project_features do |f| %>
+			<%= f.label :Exterior %>
+			<%= f.collection_select :feature, Feature.where(feature_type: 3), :id, :name, :prompt => "Select the type of exterior features you'd like done for your rehab." %>
+			<br>
+			<br>
+			<%= f.submit "Add Feature" %>
+		<% end %>
 	<% end %>
 <% end %>

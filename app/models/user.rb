@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   has_many :projects
 
+  has_many :price_features
+
+  has_many :features, through: :price_features
+
   validates :name, presence: true
 
   validates :phone, presence: true
@@ -28,6 +32,21 @@ class User < ApplicationRecord
     self.id == user.id
   end
 
+   def owner_of_project?(project)
+    self.id == project.user_id
+  end
+
+  def contractor_own_price_features?(price_feature)
+      self.id = price_feature.user_id
+    end
+
+  def project_features_owner?(project_feature)
+      self.id = project_feature.project.user_id
+    end
+
+  # def contractor_in_area?(project)
+  #     user.where(role: 2 && city = project.city)
+  #   end
   protected
 
     def send_welcome_email

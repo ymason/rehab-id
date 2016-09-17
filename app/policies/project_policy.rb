@@ -1,6 +1,14 @@
 class ProjectPolicy < ApplicationPolicy
+
+	# attr_reader :user, :project
+
+	# def intialize(user, project)
+	# 	@user = user
+	# 	@project = project
+	# end
+
 	def index
-		user.admin?
+		user.admin? || user.contractor? || user.user? || user.lender?
 	end
 
 	def show
@@ -8,7 +16,7 @@ class ProjectPolicy < ApplicationPolicy
 	end
 
 	def new?
-		user.admin? || owner_of_project?
+		user.admin? || user.user?
 	end
 
 	def create?
@@ -16,15 +24,15 @@ class ProjectPolicy < ApplicationPolicy
 	end
 
 	def update?
-		new?
+		user.admin? || user.owner_of_project?(record)
 	end
 
 	def edit?
-		new?
+		update?
 	end
 
 	def destroy?
-		new?
+		update?
 	end
 
 end
