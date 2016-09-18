@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  acts_as_mappable :auto_geocode=>{:field=>:full_address, :error_message=>'Could not geocode address'}
+
   has_many :projects
 
   has_many :price_features
@@ -28,8 +30,18 @@ class User < ApplicationRecord
 
   enum role: [:admin, :lender, :contractor, :user]
 
+  def full_address
+    "#{self.address} #{self.city} #{self.state}"
+  end
+
   def user_is_self?(user)
     self.id == user.id
+  end
+
+  def local_contractors?(project)
+      # contractors = User.where(role: 2)
+      # Find All Contractors Within 50 Miles∂d
+      User.find(:all, :origin=>"#{project.full_address}", :within=>50)
   end
 
    def owner_of_project?(project)

@@ -10,54 +10,22 @@ class Estimate < ApplicationRecord
 
   def what_to_do_with_it
   end
+  
   Estimate.where("project_feature_id = :feature_id OR price_feature_id = :feature_id", feature_id: feature_id)
           .pluck(:project_feature_id, :price_feature_id).uniq.compact - [feature_id]
   end
-  # has_many :features, through: :price_features
 
-  # def estimate_exist?(estimate)
-  # 	self.project_feature_id
-  # end
-
-
-# class JobquoteOrder < ActiveRecord::Base
-#   belongs_to :jobquote
-#   belongs_to :order
-#   has_many :po_receipts, dependent: :restrict_with_exception
-#   has_many :receipts, through: :po_receipts
-#   validates_presence_of :jobquote_id, :order_id, :qty, :total_cost
-#   validates_uniqueness_of :jobquote_id, scope: [:order_id, :qty, :total_cost], message: 'That order already exists.'
-
-#   scope :receipts, -> {PoReceipt.uniq.pluck(:jobquote_order_id)}
-#   scope :summed_receipt, ->(jq_id) {PoReceipt.where(jobquote_order_id: jq_id)
-# .sum(:qty)}
-
-#   scope :open_orders, -> {find(o_c_orders("open"))}
-
-#   scope :closed_orders, -> {find(o_c_orders("closed"))}
-
-#   def self.o_c_orders(which)
-#     ret_arr = []
-#     case which
-#     when "open"
-#       receipts.each do |id|
-#         ret_arr << id unless is_closed?(id)
-#       end
-#       ret_arr << self.includes(:po_receipts).where(:po_receipts => {:id => nil}).pluck(:id)
-#     when "closed"
-#       receipts.each do |id|
-#         ret_arr << id if is_closed?(id)
-#       end
+#   def find_campaigns_near(origin,distance)
+#     locations = Location.find(:all,  
+#             :origin => address,
+#             :within => distance
+#     );
+#     # use Hash for uniqueness based on id
+#     campaigns = Hash.new
+#     locations.each do |location|
+#         location.campaigns.each do |campaign|
+#             campaigns[campaign.id] = campaign if campaigns[campaign.id].blank?
+#         end
 #     end
-#     return ret_arr
-#   end
-
-#   def self.is_closed?(jq_id)
-#     jq = self.find(jq_id)
-#     if jq.qty <= summed_receipt(jq_id)
-#       true
-#     else
-#       false
-#     end
-#   end
-# end  
+#     campaigns
+# end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160917195959) do
+ActiveRecord::Schema.define(version: 20160918022631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,33 +31,13 @@ ActiveRecord::Schema.define(version: 20160917195959) do
     t.integer  "feature_type"
   end
 
-  create_table "loan_quotes", force: :cascade do |t|
-    t.integer  "property_type"
-    t.integer  "purchase"
-    t.integer  "owner_occupied"
-    t.string   "address"
-    t.string   "city"
-    t.string   "state"
-    t.integer  "purchase_price"
-    t.integer  "down_payment"
-    t.integer  "rehab_budget"
-    t.integer  "arv"
-    t.integer  "past_rehabs"
-    t.integer  "fico"
-    t.string   "referral"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
   create_table "price_features", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "feature_id"
-    t.integer  "estimate_id"
     t.integer  "floor"
     t.integer  "ceiling"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["estimate_id"], name: "index_price_features_on_estimate_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["feature_id"], name: "index_price_features_on_feature_id", using: :btree
     t.index ["user_id"], name: "index_price_features_on_user_id", using: :btree
   end
@@ -82,6 +62,8 @@ ActiveRecord::Schema.define(version: 20160917195959) do
     t.datetime "updated_at",  null: false
     t.integer  "rooms"
     t.integer  "bathrooms"
+    t.float    "lat"
+    t.float    "lng"
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
   end
 
@@ -105,13 +87,14 @@ ActiveRecord::Schema.define(version: 20160917195959) do
     t.integer  "zip_code"
     t.integer  "role",                   default: 3
     t.string   "phone"
+    t.float    "lat"
+    t.float    "lng"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
   add_foreign_key "estimates", "price_features"
   add_foreign_key "estimates", "project_features"
-  add_foreign_key "price_features", "estimates"
   add_foreign_key "price_features", "features"
   add_foreign_key "price_features", "users"
   add_foreign_key "project_features", "features"

@@ -42,6 +42,8 @@ class ProjectsController < ApplicationController
 
 		@user = User.find_by(id: params[:user_id])
 
+		# @user.local_contractors?(@project)
+
 		authorize @user
 	end
 	

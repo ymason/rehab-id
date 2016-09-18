@@ -6,7 +6,7 @@
 				<li><%= link_to 'Dashboard', dashboard_path%></li>
 				<li><%= link_to 'Home', home_path%></li>
 				<li><a href="contact.html">Contact</a></li>
-				<li><%= link_to 'Logout', destroy_user_session_path, method: "delete"%></li>
+				<li><%= link_to 'Logout', destroy_user_session_path(:authenticity_token => form_authenticity_token()), method: 'delete' %></li>
 			</ul>
 		</nav>
 	<% else %>

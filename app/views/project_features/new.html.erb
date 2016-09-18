@@ -1,39 +1,12 @@
 <br>
 <br>
+<br>
 <% if policy(@user_project_features).new? %>
-	<% if @project.include?(feature_type: "Floors") %>
-
-	<% else %>
-		<%= form_for @user_project_features do |f| %>
-			<%= f.label :Features %>
-			<%= f.collection_select :feature, Feature.where(feature_type: 1), :id, :name, :prompt => "Select the type of floor you'd like done for your rehab." %>
-			<br>
-			<br>
-			<%= f.submit "Add Feature" %>
-			<% end %>
-		<br>
-		<%= form_for @user_project_features do |f| %>
-			<%= f.label :Flooring %>
-			<%= f.collection_select :feature, Feature.where(feature_type: 0), :id, :name, :prompt => "Select the type of floor you'd like done for your rehab." %>
-			<br>
-			<br>
-			<%= f.submit "Add Feature" %>
-		<% end %>
-		<br>
-		<%= form_for @user_project_features do |f| %>
-			<%= f.label :Roof %>
-			<%= f.collection_select :feature, Feature.where(feature_type: 2), :id, :name, :prompt => "Select the type of roof you'd like done for your rehab." %>
-			<br>
-			<br>
-			<%= f.submit "Add Feature" %>
-		<% end %>
-		<br>
-		<%= form_for @user_project_features do |f| %>
-			<%= f.label :Exterior %>
-			<%= f.collection_select :feature, Feature.where(feature_type: 3), :id, :name, :prompt => "Select the type of exterior features you'd like done for your rehab." %>
-			<br>
-			<br>
-			<%= f.submit "Add Feature" %>
-		<% end %>
-	<% end %>
+	
+	<%= form_tag "/projects/#{@project_id}/project_features", method: :post do %>
+    <%= render 'features_form' %>  
+    <br>
+    <br>   
+  <%= submit_tag "Submit" %>
+  <% end %>
 <% end %>

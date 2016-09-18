@@ -1,4 +1,3 @@
-
 <h3>Floor Pricing</h3>
 <%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 0), :id, :name), prompt: "Select the floor you'd like to price." %>
 <%= label_tag :minimum_price_per_square_feet %>
