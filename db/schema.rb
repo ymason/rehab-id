@@ -10,18 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918022631) do
+ActiveRecord::Schema.define(version: 20160920191853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "estimates", force: :cascade do |t|
-    t.integer  "project_feature_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "price_feature_id"
+    t.integer  "project_id"
+    t.integer  "avg_ceiling"
+    t.integer  "avg_floor"
     t.index ["price_feature_id"], name: "index_estimates_on_price_feature_id", using: :btree
-    t.index ["project_feature_id"], name: "index_estimates_on_project_feature_id", using: :btree
+    t.index ["project_id"], name: "index_estimates_on_project_id", using: :btree
   end
 
   create_table "features", force: :cascade do |t|
@@ -94,7 +96,6 @@ ActiveRecord::Schema.define(version: 20160918022631) do
   end
 
   add_foreign_key "estimates", "price_features"
-  add_foreign_key "estimates", "project_features"
   add_foreign_key "price_features", "features"
   add_foreign_key "price_features", "users"
   add_foreign_key "project_features", "features"

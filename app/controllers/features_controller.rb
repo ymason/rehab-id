@@ -48,5 +48,5 @@ class FeaturesController < ApplicationController
 
 	def feature_params
 		params.require(:feature).permit(:name, :feature_type)
-
+	end
 end

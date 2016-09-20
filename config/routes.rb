@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   # resources :room_features,  only: [:new, :create, :index]
 
 	get '/' => 'home#index', as: :home
-  get '/contact' => 'home#show', as: :contact_us
+  get '/contact' => 'home#show', as: :contact
 	get '/dashboard' => 'users#show', as: :dashboard
   post '/projects/:project_id/project_features' => 'project_features#create', as: :project_features
   post '/users/:user_id/price_features' => 'price_features#create', as: :price_features

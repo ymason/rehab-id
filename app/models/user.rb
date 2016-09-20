@@ -38,11 +38,16 @@ class User < ApplicationRecord
     self.id == user.id
   end
 
-  def local_contractors?(project)
-      # contractors = User.where(role: 2)
-      # Find All Contractors Within 50 Miles∂d
-      User.find(:all, :origin=>"#{project.full_address}", :within=>50)
+  def self.local_contractors(project)
+      # Find All Contractors Within 50 Miles
+      User.within(5, origin: "#{project.full_address}").where(role: 2)
   end
+
+  # def local_contractors?(project)
+  #     # contractors = User.where(role: 2)
+  #     # Find All Contractors Within 50 Miles∂d
+  #     User.find(:all, :origin=>"#{project.full_address}", :within=>50)
+  # end
 
    def owner_of_project?(project)
     self.id == project.user_id

@@ -1,6 +1,4 @@
 <% if user_signed_in? %>
-	<br>
-	<br>
 	<h2> Welcome <%= current_user.name %>!</h2>
 	<h3><%= link_to 'Create New Project', new_user_project_path(current_user.id)%><br>
 	<br><%= link_to 'Create Pricing', new_user_price_feature_path(current_user.id)%><br>
