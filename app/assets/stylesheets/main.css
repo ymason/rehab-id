@@ -1821,6 +1821,16 @@
 			font-weight: bolder;
 		}
 
+	.links a {
+		color: #000000;
+	}
+
+	.links a:hover {
+			color: #ECB021;
+			border-bottom-color: #FFFFFF;
+			font-weight: bolder;
+		}
+
 	strong, b {
 		color: #646464;
 		font-weight: 400;

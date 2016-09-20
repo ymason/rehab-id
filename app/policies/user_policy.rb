@@ -1,30 +1,30 @@
 class UserPolicy < ApplicationPolicy
 	def index
-		user.admin? || user.contractor? || user.lender? || user.user?
+		user.admin?
 	end
 
 	def show
-		index?
+		user.admin? || user_is_self?
 	end
 
 	def new?
-		index?
+		show?
 	end
 
 	def create?
-		index?
+		show?
 	end
 
 	def update?
-		index?
+		show?
 	end
 
 	def edit?
-		index?
+		show?
 	end
 
 	def destroy?
-		index?
+		show?
 	end
 
 end

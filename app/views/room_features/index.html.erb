@@ -1,9 +1,0 @@
-<% if policy(@all_room_features).new? %>
-	<ul>
-		<% @all_room_features.each do | feature | %>
-			<li>
-				<h2><%= feature.name %><h2>
-			</li>
-		<% end %>
-	</ul>
-<% end %>
