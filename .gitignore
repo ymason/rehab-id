@@ -20,3 +20,5 @@
 /config/application.yml
 sendgrid.env
 sendgrid.env
+
+erd.pdf
