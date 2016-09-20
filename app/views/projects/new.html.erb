@@ -1,25 +1,20 @@
 <% if policy(@project).new? %>
-
+<h2> Tell Us About Your Rehab Needs </h2>
 	<%= form_for @project, url: user_projects_path do |f| %>
-		<%= f.label :address %>
+		<h5> Address </h5>
 		<%= f.text_field :address%>
-		<br>
-		<%= f.label :city %>
+		<h5> City </h5>
 		<%= f.text_field :city%>
-		<br>
-		<%= f.label :state %><br />
+		<h5> State </h5>
     	<%= f.select :state, options_for_select(us_states) %>
-    	<br>
-		<%= f.label :zip_code %>
+  
+		<h5> Zip Code </h5>
 		<%= f.number_field :zip_code%>
-		<br>
-		<%= f.label :square_feet %>
+		<h5> Square Feet </h5>
 		<%= f.number_field :square_feet%>
-		<br>
-		<%= f.label :number_of_rooms %>
+		<h5> # of Rooms</h5> <h6><em>(incl. living, family, dining, etc.) </h6>
 		<%= f.number_field :rooms%>
-		<br>
-		<%= f.label :number_of_bathrooms %>
+		<h5> # of Bathrooms </h5>
 		<%= f.number_field :bathrooms%>
 		<br>
 		<br>

@@ -1,33 +1,42 @@
-<h2>Project</h2> <%= @project.address %> <%= @project.city %>, <%= @project.state %> <%= @project.zip_code %>
-<br><%= @project.square_feet %> Sq. Feet
-<br>
-<%= @project.rooms %> Rooms
-<br>
-<%= @project.bathrooms %> Bathroom
-<br>
-<h2> Estimated Cost </h2>
-<h4> Still calculating...</h4>
-<h2> Rehab Needs:</h2>
-<ul>
-	<% @project.project_features.each do | f | %>
-		<% if f.feature.self? || f.feature.exterior?  %>
-		  	<li>
-				<h3><%= f.feature.name %></h3>
-			</li>
-		<% else %> 
-		   <li>
-				<h3><%= f.feature.name %> <%= f.feature.feature_type %></h3>
-			</li>
-		<% end %>
-	<% end %>
-		</ul>
-<h4><%= link_to 'Add Project Features', new_project_project_feature_path(@project.id)%></h4>
+<div section class="box">
+	<div class="row">
+		<div class="6u 12u(mobilep)">
+			<h2>Project</h2>
+			 <%= @project.address %> <%= @project.city %>, <%= @project.state %> <%= @project.zip_code %> | <%= @project.square_feet %> Sq. Feet
+			 <br>
+			 <%= @project.rooms %> Rooms | <%= @project.bathrooms %> Bathrooms
 
-	<ul>
-		<% @contractors.each do | c | %>
-				<li>
-					<h3><%= c.name %></h3>
+		<h2> Estimated Cost </h2>
+		<h4> Still calculating...</h4>
 
-				</li>
+			<h2> Rehab Needs:</h2>
+		<ul>
+			<% @project.project_features.each do | f | %>
+				<% if f.feature.self? || f.feature.exterior?  %>
+				  	<li>
+						<h5><%= f.feature.name %></h5>
+					</li>
+				<% else %> 
+				   <li>
+						<h5><%= f.feature.name %> <%= f.feature.feature_type %></h5>
+					</li>
+				<% end %>
 			<% end %>
-	</ul>
+				</ul>
+
+		<h4><%= link_to 'Add Project Features', new_project_project_feature_path(@project.id)%></h4>
+		</div>
+
+		<div class="6u 12u(mobilep)">
+			<h2> Local Contractors:</h2>
+			<ul>
+				<% @contractors.each do | c | %>
+						<li>
+							<h5><%= c.name %></h5>
+
+						</li>
+					<% end %>
+			</ul>
+		</div>
+	</div>
+</div>
