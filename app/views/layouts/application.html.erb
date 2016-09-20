@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RehabID</title>
-    <%= csrf_meta_tags %>
+    <title>RehabID - Automatically identify your next rehab project.</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   </head>
 
-  <body>
-    <%= yield %>
+<!--   <body> -->
+
+  <body class="landing">
+  
+    <div id="page-wrapper">
+      <%= render 'shared/navbar' %>
+      <br><br>
+      <div class="container">
+        <%= yield %>
+    	</div>
+    </div>
   </body>
 </html>

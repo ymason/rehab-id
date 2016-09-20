@@ -1,0 +1,11 @@
+<h3>Floors</h3>
+<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 0), :id, :name), prompt: "Select the floor you'd like done for your rehab." %>
+<br>
+<h3>Main Features</h3>
+<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 1), :id, :name), prompt: "Select the type of feature you'd like done for your rehab." %>
+<br>
+<h3>Roof</h3>
+<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 2), :id, :name), prompt: "Select the type of roof you'd like done for your rehab." %>
+<br>
+<h3>Exterior Features</h3>
+<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 3), :id, :name), prompt: "Select the type of exterior feature you'd like done for your rehab." %>

@@ -4,11 +4,14 @@ class UsersController < ApplicationController
 
 	def show
 		authorize current_user
+
+		@all_user_projects = current_user.projects
 	end
 
 	def create
-		if @resource.save
-			WelcomeMailer.welcome_email(@resource).deliver_now
+		user = @resource
+
+		if user.save
 			redirect_to dashboard_path
 		else
 			renew 'new'

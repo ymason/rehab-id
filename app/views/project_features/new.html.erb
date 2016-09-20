@@ -1,0 +1,9 @@
+<% if policy(@user_project_features).new? %>
+	
+	<%= form_tag "/projects/#{@project_id}/project_features", method: :post do %>
+    <%= render 'features_form' %>  
+    <br>
+    <br>   
+  <%= submit_tag "Submit" %>
+  <% end %>
+<% end %>

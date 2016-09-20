@@ -1,0 +1,9 @@
+<% if policy(@user).index? %>
+	<ul>
+		<% @all_user_projects.each do | project | %>
+			<li>
+				<h2><%= link_to project.address, user_project_path(@user.id, project.id) %><h2>
+			</li>
+		<% end %>
+	</ul>
+<% end %>

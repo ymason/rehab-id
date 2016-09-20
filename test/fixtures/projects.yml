@@ -2,10 +2,16 @@
 
 one:
   address: MyString
-  square_feet: MyString
+  city: MyString
+  state: MyString
+  zip_code: 1
+  square_feet: 1
   user: one
 
 two:
   address: MyString
-  square_feet: MyString
+  city: MyString
+  state: MyString
+  zip_code: 1
+  square_feet: 1
   user: two

@@ -10,8 +10,8 @@ module RehabID
   class Application < Rails::Application
     config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
- 	:address              => "smtp.sendgrid.net",
-	 :port                 => 587,
+ 	:address              => "smtp.1and1.com",
+	 :port                 => 25,
 	 :user_name            => ENV['email_username'], #retrieved from config/application.yml
 	 :password             => ENV['email_password'], #retrieved from config/application.yml
 	 :authentication       => "plain",
