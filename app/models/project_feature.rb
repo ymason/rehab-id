@@ -1,5 +1,5 @@
 class ProjectFeature < ApplicationRecord
-  belongs_to :project
+  belongs_to :room
   belongs_to :feature
 
    # before_save :merge_author

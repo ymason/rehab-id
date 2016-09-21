@@ -15,18 +15,36 @@ class ProjectsController < ApplicationController
 			state: params[:project][:state],
 			zip_code: params[:project][:zip_code],
 			square_feet: params[:project][:square_feet],
-			rooms: params[:project][:rooms],
+			project_rooms: params[:project][:project_rooms],
 			bathrooms: params[:project][:bathrooms]
 			)
 
 		authorize @project
 
 		if @project.save
-			redirect_to new_project_project_feature_path(@project.id) 
+			redirect_to new_project_room_path(@project.id)
 		else
 			render 'new'
 		end
 	end
+
+	# def rooms
+	# 	@project = Project.find_by(id: params[:project_id])
+
+	# 	authorize @project
+	# end
+
+	# def create_rooms
+	# 	@project = Project.find_by(id: params[:project_id])
+
+	# 	authorize @project
+
+	# 	if @project.update!(rooms_params)
+	# 		redirect_to dashboard_path
+	# 	else
+	# 		render 'rooms'
+	# 	end
+	# end
 
 	def index
 
@@ -44,7 +62,15 @@ class ProjectsController < ApplicationController
 
 		@contractors = User.local_contractors(@project)
 
+		@rooms = @project.rooms
+
 		authorize @user
 	end
+
+	private
+
+    def rooms_params
+      params.require(:project).permit(:rooms, :bathrooms)
+    end
 	
 end

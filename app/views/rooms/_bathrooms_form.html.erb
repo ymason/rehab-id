@@ -1,0 +1,9 @@
+<h3>Bathroom</h3>
+<%= number_field_tag :square_feet%> Square Feet (or best guess)
+<br><br>
+<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 0), :id, :name), prompt: "Select the features you'd like for this room." %>
+<br>
+Room Features
+<%= collection_check_boxes(:room, :project_features, Feature.where(feature_type: 1).take(5), :id, :name) %>
+<br>
+<br>

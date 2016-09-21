@@ -1,0 +1,14 @@
+<% if policy(@project).new? %>
+<h2> How Many Rooms Do You Need To Rehab? </h2>
+	<%= form_for @project, url: create_rooms_path do |f| %>
+		<h5> # of Rooms</h5>
+		<h6><em>(incl. living, family, dining, etc.) </h6>
+		<%= f.number_field :rooms%>
+
+		<h5> # of Bathrooms </h5>
+		<%= f.number_field :bathrooms%>
+		<br>
+		<br>
+		<%= f.submit "Add Rooms" %>
+	<% end %>
+<% end %>

@@ -17,6 +17,7 @@
 
 #Features
 
+floors_none = Feature.create(name: "None", feature_type: 0)
 #1
 floors_ceramic = Feature.create(name: "Ceramic", feature_type: 0)
 #2
@@ -36,11 +37,11 @@ doors = Feature.create(name: "Doors", feature_type: 1)
 #9
 windows = Feature.create(name: "Windows", feature_type: 1)
 #10
-kitchen = Feature.create(name: "Kitchen", feature_type: 1)
+demoliton = Feature.create(name: "Demolition", feature_type: 1)
 #11
-bathroom = Feature.create(name: "Bathroom", feature_type: 1)
+bathroom = Feature.create(name: "Full Bathroom", feature_type: 1)
 #12
-stairs = Feature.create(name: "Stairs", feature_type: 1)
+roof_flat = Feature.create(name: "Flat", feature_type: 2)
 #13
 roof_shingle = Feature.create(name: "Shingle", feature_type: 2)
 #14
@@ -48,7 +49,7 @@ roof_tile = Feature.create(name: "Tile", feature_type: 2)
 #15
 roof_metal = Feature.create(name: "Metal", feature_type: 2)
 #16
-roof_flat = Feature.create(name: "Flat", feature_type: 2)
+stairs = Feature.create(name: "Stairs", feature_type: 3)
 #17
 exterior_landscape = Feature.create(name: "Landscape", feature_type: 3)
 #18
@@ -62,34 +63,34 @@ exterior_patio = Feature.create(name: "Patio", feature_type: 3)
 #22
 plumbing = Feature.create(name: "Plumbing", feature_type: 3)
 #23
-hvac = Feature.create(name: "HVAC", feature_type: 1)
+hvac = Feature.create(name: "HVAC", feature_type: 3)
 #24
-electrical = Feature.create(name: "Electrical", feature_type: 1)
+electrical = Feature.create(name: "Electrical", feature_type: 3)
 #25
-demoliton = Feature.create(name: "Demolition", feature_type: 1)
+kitchen = Feature.create(name: "Kitchen", feature_type: 1)
 
 # Rooms
 
-# #1
-# flooring = Room.create(name: "Bathroom")
-# #2
-# bedroom = Room.create(name: "Bedroom")
-# #3
-# exterior = Room.create(name: "Exterior")
-# #4
-# garage = Room.create(name: "Garage")
-# #5
-# kitchen = Room.create(name: "Kitchen")
-# #6
-# living_room = Room.create(name: "Living Room")
-# #7
-# family_room = Room.create(name: "Family Room")
-# #8
-# dining_room = Room.create(name: "Dining Room")
-# #9
-# laundry_room = Room.create(name: "Laundry Room")
-# #10
-# other_room = Room.create(name: "Other Room")
+#1
+master_bathroom = Room.create(name: "Master Bathroom", room_type: 1)
+#2
+regular_bathroom = Room.create(name: "Bathroom", room_type: 1)
+#3
+half_bathroom = Room.create(name: "Half Bathroom", room_type: 1)
+#4
+jack_and_jill = Room.create(name: "Jack and Jill", room_type: 1)
+#5
+bedroom = Room.create(name: "Bedroom", room_type: 0)
+#6
+living_room = Room.create(name: "Living Room", room_type: 0)
+#7
+family_room = Room.create(name: "Family Room", room_type: 0)
+#8
+dining_room = Room.create(name: "Dining Room", room_type: 0)
+#9
+laundry_room = Room.create(name: "Laundry Room", room_type: 0)
+#10
+other_room = Room.create(name: "Other Room", room_type: 0)
 # #11
 # hvac = Room.create(name: "HVAC")
 # #12

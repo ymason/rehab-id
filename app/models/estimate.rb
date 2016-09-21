@@ -1,6 +1,6 @@
 class Estimate < ApplicationRecord
-  belongs_to :projects
-  belongs_to :price_features
+  belongs_to :room
+  belongs_to :price_feature
 
   def how_to_create_estimate
   end

@@ -1,0 +1,27 @@
+<%= form_tag "/projects/#{@project_id}/rooms", method: :post do %>
+	<div section class="box">
+		<h4> <%= @project.full_address %> Project </h4>
+		
+		<div class="row">
+			<div class="6u 12u(mobilep)">
+				<% @project_rooms.times do |r| %>
+			    	<%= render 'rooms_form' %>
+		  		<% end %>
+		  		<%= submit_tag "Submit" %>
+		  	</div>
+
+			<div class="6u 12u(mobilep)">
+				<% @project_bathrooms.times do |r| %>
+			    	<%= render 'bathrooms_form' %>
+		  		<% end %>
+		  		<h3>Kitchen</h3>
+		  		<%= collection_check_boxes(:room, :project_features, Feature.where(name: "Kitchen"), :id, :name)%>
+			    <h3>Roof</h3>
+				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 2), :id, :name), prompt: "Select the type of roof you'd like done for your rehab." %>
+				<br>
+				<h3>Extra Features</h3>
+				<%= collection_check_boxes(:room, :project_features, Feature.where(feature_type: 3), :id, :name) %>
+			</div>
+		</div>
+	</div>
+<% end %>

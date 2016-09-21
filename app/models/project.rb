@@ -1,7 +1,6 @@
 class Project < ApplicationRecord
   belongs_to :user
-  has_many :project_features
-  has_one :estimate
+  has_many :rooms
 
   acts_as_mappable :auto_geocode=>{:field=>:full_address, :error_message=>'Could not geocode address'}
 

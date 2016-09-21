@@ -10,8 +10,6 @@ class User < ApplicationRecord
 
   has_many :price_features
 
-  has_many :features, through: :price_features
-
   validates :name, presence: true
 
   validates :phone, presence: true
