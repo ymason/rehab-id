@@ -36,11 +36,11 @@ doors = Feature.create(name: "Doors", feature_type: 1)
 #9
 windows = Feature.create(name: "Windows", feature_type: 1)
 #10
-kitchen = Feature.create(name: "Kitchen", feature_type: 1)
+demoliton = Feature.create(name: "Demolition", feature_type: 1)
 #11
-bathroom = Feature.create(name: "Bathroom", feature_type: 1)
+bathroom = Feature.create(name: "Full Bathroom", feature_type: 1)
 #12
-stairs = Feature.create(name: "Stairs", feature_type: 1)
+roof_flat = Feature.create(name: "Flat", feature_type: 2)
 #13
 roof_shingle = Feature.create(name: "Shingle", feature_type: 2)
 #14
@@ -48,7 +48,7 @@ roof_tile = Feature.create(name: "Tile", feature_type: 2)
 #15
 roof_metal = Feature.create(name: "Metal", feature_type: 2)
 #16
-roof_flat = Feature.create(name: "Flat", feature_type: 2)
+stairs = Feature.create(name: "Stairs", feature_type: 3)
 #17
 exterior_landscape = Feature.create(name: "Landscape", feature_type: 3)
 #18
@@ -62,34 +62,130 @@ exterior_patio = Feature.create(name: "Patio", feature_type: 3)
 #22
 plumbing = Feature.create(name: "Plumbing", feature_type: 3)
 #23
-hvac = Feature.create(name: "HVAC", feature_type: 1)
+hvac = Feature.create(name: "HVAC", feature_type: 3)
 #24
-electrical = Feature.create(name: "Electrical", feature_type: 1)
+electrical = Feature.create(name: "Electrical", feature_type: 3)
 #25
-demoliton = Feature.create(name: "Demolition", feature_type: 1)
+kitchen = Feature.create(name: "Kitchen", feature_type: 1)
+
+
+# Dummy Contractos
+
+contractor1 = User.create(name: "Bob", email: "fasdfsf@adf.com", phone:"305-551-4212", role: 2, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
+
+contractor2 = User.create(name: "Pablo", email: "fasdfsf2123@adf.com", phone:"305-551-4252", role: 2, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
+
+contractor3 = User.create(name: "George", email: "fasdfs1424f@adf.com", phone:"305-551-4272", role: 2, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
+
+# Dummy Admn
+
+admin = User.create(name: "Yemani", email: "yemani@yemani.com", phone:"305-555-5555", role: 0, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
+
+# Dummy Prices
+
+	# Contractor1 Prices
+	PriceFeature.create(user_id: 1, feature_id: 1, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 2, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 3, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 4, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 5, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 6, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 7, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 8, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 9, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 10, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 11, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 12, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 13, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 14, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 15, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 16, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 17, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 18, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 19, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 20, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 21, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 22, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 23, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 24, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 25, floor: 1000, ceiling: 2000)
+
+	# Contractor2 Prices
+	PriceFeature.create(user_id: 2, feature_id: 1, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 2, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 3, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 4, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 5, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 6, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 7, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 8, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 9, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 10, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 11, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 12, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 13, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 14, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 15, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 16, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 17, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 18, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 19, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 20, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 21, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 22, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 23, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 24, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 25, floor: 1000, ceiling: 2000)
+
+	# Contractor3 Prices
+	PriceFeature.create(user_id: 3, feature_id: 1, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 2, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 3, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 4, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 5, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 6, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 7, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 8, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 9, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 10, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 11, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 12, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 13, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 14, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 15, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 16, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 17, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 18, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 19, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 20, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 21, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 22, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 23, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 24, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 25, floor: 1000, ceiling: 2000)
 
 # Rooms
 
 # #1
-# flooring = Room.create(name: "Bathroom")
+# master_bathroom = Room.create(name: "Master Bathroom", room_type: 1)
 # #2
-# bedroom = Room.create(name: "Bedroom")
+# regular_bathroom = Room.create(name: "Bathroom", room_type: 1)
 # #3
-# exterior = Room.create(name: "Exterior")
+# half_bathroom = Room.create(name: "Half Bathroom", room_type: 1)
 # #4
-# garage = Room.create(name: "Garage")
+# jack_and_jill = Room.create(name: "Jack and Jill", room_type: 1)
 # #5
-# kitchen = Room.create(name: "Kitchen")
+# bedroom = Room.create(name: "Bedroom", room_type: 0)
 # #6
-# living_room = Room.create(name: "Living Room")
+# living_room = Room.create(name: "Living Room", room_type: 0)
 # #7
-# family_room = Room.create(name: "Family Room")
+# family_room = Room.create(name: "Family Room", room_type: 0)
 # #8
-# dining_room = Room.create(name: "Dining Room")
+# dining_room = Room.create(name: "Dining Room", room_type: 0)
 # #9
-# laundry_room = Room.create(name: "Laundry Room")
+# laundry_room = Room.create(name: "Laundry Room", room_type: 0)
 # #10
-# other_room = Room.create(name: "Other Room")
+# other_room = Room.create(name: "Other Room", room_type: 0)
 # #11
 # hvac = Room.create(name: "HVAC")
 # #12

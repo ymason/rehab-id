@@ -27,6 +27,14 @@ class ProjectPolicy < ApplicationPolicy
 		user.admin? || user.owner_of_project?(record)
 	end
 
+	def create_rooms?
+		update?
+	end
+
+	def rooms?
+		update?
+	end
+
 	def edit?
 		update?
 	end

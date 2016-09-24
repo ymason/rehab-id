@@ -10,8 +10,6 @@ class User < ApplicationRecord
 
   has_many :price_features
 
-  has_many :features, through: :price_features
-
   validates :name, presence: true
 
   validates :phone, presence: true
@@ -40,14 +38,8 @@ class User < ApplicationRecord
 
   def self.local_contractors(project)
       # Find All Contractors Within 50 Miles
-      User.within(5, origin: "#{project.full_address}").where(role: 2)
+      User.within(50, origin: "#{project.full_address}").where(role: 2)
   end
-
-  # def local_contractors?(project)
-  #     # contractors = User.where(role: 2)
-  #     # Find All Contractors Within 50 Miles∂d
-  #     User.find(:all, :origin=>"#{project.full_address}", :within=>50)
-  # end
 
    def owner_of_project?(project)
     self.id == project.user_id
@@ -61,9 +53,6 @@ class User < ApplicationRecord
       self.id = project_feature.project.user_id
     end
 
-  # def contractor_in_area?(project)
-  #     user.where(role: 2 && city = project.city)
-  #   end
   protected
 
     def send_welcome_email

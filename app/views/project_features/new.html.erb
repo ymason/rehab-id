@@ -1,3 +1,4 @@
+<%= render 'shared/wrap' %>	
 <% if policy(@user_project_features).new? %>
 	
 	<%= form_tag "/projects/#{@project_id}/project_features", method: :post do %>

@@ -10,19 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920191853) do
+ActiveRecord::Schema.define(version: 20160923051304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "estimates", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "price_feature_id"
     t.integer  "project_id"
     t.integer  "avg_ceiling"
     t.integer  "avg_floor"
+    t.integer  "feature_id"
+    t.integer  "project_feature_id"
+    t.index ["feature_id"], name: "index_estimates_on_feature_id", using: :btree
     t.index ["price_feature_id"], name: "index_estimates_on_price_feature_id", using: :btree
+    t.index ["project_feature_id"], name: "index_estimates_on_project_feature_id", using: :btree
     t.index ["project_id"], name: "index_estimates_on_project_id", using: :btree
   end
 
@@ -95,7 +99,9 @@ ActiveRecord::Schema.define(version: 20160920191853) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "estimates", "features"
   add_foreign_key "estimates", "price_features"
+  add_foreign_key "estimates", "project_features"
   add_foreign_key "price_features", "features"
   add_foreign_key "price_features", "users"
   add_foreign_key "project_features", "features"

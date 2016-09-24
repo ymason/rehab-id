@@ -12,32 +12,23 @@ class ProjectFeaturesController < ApplicationController
 	end
 
 	def create
+		@project_id = params[:project_id]
+		@project = Project.where(id: @project_id)
 		
 		params[:feature].each do |f|
 			feature_hash = {}
 			feature_hash[:feature_id] = f[:feature_id]
-			p = ProjectFeature.new(feature_hash)
-			p.project_id = params[:project_id]
 
-		p.save
-	end
-
-	@project_id = params[:project_id]
-
+				p = ProjectFeature.new(feature_hash)
+				p.project_id = @project_id
+				
+			if p.project.project_features.exists?(feature_id: f[:feature_id])
+				flash[:error] = "This feature was already added."
+			else
+				p.save
+			end
+		end
 	redirect_to user_project_path(current_user.id, @project_id)
-
-		# @user_project_features = ProjectFeature.new(
-		# 	project_id: params[:project_id],
-		# 	feature_id: params[:project_feature][:feature]
-		# 	)
-
-		# authorize @user_project_features
-
-		# if @user_project_features.save
-		# 	redirect_to user_project_path(current_user.id, id: params[:project_id])
-		# else
-		# 	render 'new'
-		# end
 	end
 
 end

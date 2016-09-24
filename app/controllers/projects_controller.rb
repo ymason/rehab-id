@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+	include ActionView::Helpers::NumberHelper
 
 	def new
 		@project = Project.new
@@ -43,6 +44,20 @@ class ProjectsController < ApplicationController
 		@user = User.find_by(id: params[:user_id])
 
 		@contractors = User.local_contractors(@project)
+
+		@project_sqft = number_with_delimiter(@project.square_feet)
+
+		# @estimates = @project.create_estimates
+
+		@project_estimate = @project.min_and_max
+
+		@minimum = @project_estimate[0]
+
+		@maximum = @project_estimate[1]
+
+		@minimum_number = number_to_currency(@minimum, :precision => 0)
+
+		@maximum_number = number_to_currency(@maximum, :precision => 0)
 
 		authorize @user
 	end
