@@ -10,6 +10,12 @@ class User < ApplicationRecord
 
   has_many :price_features
 
+  has_many :lender_underwritings
+
+  has_many :lender_loans
+
+  has_many :loan_quotes
+
   validates :name, presence: true
 
   validates :phone, presence: true
@@ -36,22 +42,39 @@ class User < ApplicationRecord
     self.id == user.id
   end
 
+  # Projects Policies
+
   def self.local_contractors(project)
       # Find All Contractors Within 50 Miles
       User.within(50, origin: "#{project.full_address}").where(role: 2)
   end
 
-   def owner_of_project?(project)
+  def owner_of_project?(project)
     self.id == project.user_id
   end
 
+
   def contractor_own_price_features?(price_feature)
       self.id = price_feature.user_id
-    end
+  end
 
   def project_features_owner?(project_feature)
       self.id = project_feature.project.user_id
-    end
+  end
+
+  # Loans Policies
+
+  def lender_own_underwriting?(lender_underwriting)
+      self.id = lender_underwriting.user_id
+  end
+
+  def owner_of_loan_quote?(loan_quote)
+    self.id == loan_quote.user_id
+  end
+
+  def owner_of_loan_app?(loan_application)
+    self.id == loan_application.lender_quote.loan_quote.user_id
+  end
 
   protected
 

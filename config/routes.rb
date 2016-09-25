@@ -14,6 +14,14 @@ Rails.application.routes.draw do
     resources :project_features
   end
 
+  resources :users, only: [] do
+    resources :lender_underwritings
+  end
+
+  resources :users, only: [] do
+    resources :loan_quotes
+  end
+
 	get '/' => 'home#index', as: :home
   get '/contact' => 'home#show', as: :contact
 	get '/dashboard' => 'users#show', as: :dashboard
@@ -21,5 +29,6 @@ Rails.application.routes.draw do
   patch '/projects/:project_id/add_rooms' => 'projects#create_rooms', as: :create_rooms
   post '/projects/:project_id/project_features' => 'project_features#create', as: :project_features
   post '/users/:user_id/price_features' => 'price_features#create', as: :price_features
-
+  post '/users/:user_id/loan_quotes' => 'loan_quotes#create', as: :loan_quote
+  post '/users/:user_id/lender_underwritings' => 'lender_underwritings#create', as: :lender_underwriting
 end

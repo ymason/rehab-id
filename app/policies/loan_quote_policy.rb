@@ -1,11 +1,11 @@
-class ProjectPolicy < ApplicationPolicy
+class LoanQuotePolicy < ApplicationPolicy
 
 	def index
 		user.admin?
 	end
 
 	def show
-		admin_or_owner_of_project?
+		admin_or_owner_of_loan_quote?
 	end
 
 	def new?
@@ -36,10 +36,8 @@ class ProjectPolicy < ApplicationPolicy
 		show?
 	end
 
-	private
-
-	def admin_or_owner_of_project?
-		user.admin? || (user.user? && user.owner_of_project?(record))
+	def admin_or_owner_of_loan_quote?
+		user.admin? || (user.user? && user.owner_of_loan_quote?(record))
 	end
 
 end

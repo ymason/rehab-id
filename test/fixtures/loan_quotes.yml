@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  property_type: 1
+  purchase: false
+  occupied: false
+  address: MyString
+  city: MyString
+  state: MyString
+  zip_code: 1
+  price: 1
+  down_payment: 1
+  rehab: 1
+  arv: 1
+  experience: 1
+  fico: 1
+  referral: MyString
+
+two:
+  user: two
+  property_type: 1
+  purchase: false
+  occupied: false
+  address: MyString
+  city: MyString
+  state: MyString
+  zip_code: 1
+  price: 1
+  down_payment: 1
+  rehab: 1
+  arv: 1
+  experience: 1
+  fico: 1
+  referral: MyString

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923051304) do
+ActiveRecord::Schema.define(version: 20160924191953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,138 @@ ActiveRecord::Schema.define(version: 20160923051304) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "feature_type"
+  end
+
+  create_table "lender_loans", force: :cascade do |t|
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip_code"
+    t.boolean  "approved"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lender_loans_on_user_id", using: :btree
+  end
+
+  create_table "lender_quotes", force: :cascade do |t|
+    t.decimal  "interest_rate"
+    t.integer  "loan_purchase"
+    t.integer  "loan_rehab"
+    t.decimal  "origination_fee"
+    t.integer  "term"
+    t.integer  "pre_payment"
+    t.integer  "draws"
+    t.integer  "min_draw"
+    t.decimal  "min_final_draw"
+    t.integer  "loan_quote_id"
+    t.integer  "lender_underwriting_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["lender_underwriting_id"], name: "index_lender_quotes_on_lender_underwriting_id", using: :btree
+    t.index ["loan_quote_id"], name: "index_lender_quotes_on_loan_quote_id", using: :btree
+  end
+
+  create_table "lender_underwritings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.decimal  "ltv"
+    t.decimal  "arv"
+    t.integer  "experience"
+    t.integer  "fico"
+    t.decimal  "interest_rate"
+    t.integer  "loan_min"
+    t.integer  "loan_max"
+    t.decimal  "origination_fee"
+    t.integer  "term"
+    t.integer  "process_time"
+    t.integer  "pre_payment"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip_code"
+    t.decimal  "ltc"
+    t.integer  "draws"
+    t.integer  "min_draw"
+    t.decimal  "min_final_draw"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "name"
+    t.index ["user_id"], name: "index_lender_underwritings_on_user_id", using: :btree
+  end
+
+  create_table "loan_applications", force: :cascade do |t|
+    t.boolean  "occupied"
+    t.boolean  "loan_purpose"
+    t.string   "entity_name"
+    t.integer  "entity_type"
+    t.string   "state"
+    t.integer  "ein"
+    t.string   "legal_address"
+    t.string   "legal_city"
+    t.string   "legal_state"
+    t.string   "legal_zip_code"
+    t.string   "mailing_address"
+    t.string   "mailing_city"
+    t.string   "mailing_state"
+    t.string   "mailing_zip_code"
+    t.string   "owner_name"
+    t.string   "owner_title"
+    t.string   "owner_email"
+    t.integer  "owner_ss"
+    t.string   "owner_phone"
+    t.date     "owner_dob"
+    t.string   "guarantor_name"
+    t.string   "guarantor_email"
+    t.integer  "guarantor_ss"
+    t.string   "guarantor_phone"
+    t.date     "guarantor_dob"
+    t.date     "closing_date"
+    t.string   "contact_name"
+    t.string   "contact_email"
+    t.string   "contact_phone"
+    t.text     "property_instructions"
+    t.integer  "rehab_time"
+    t.integer  "add_sq_ft"
+    t.boolean  "rehabber"
+    t.string   "contractor_name"
+    t.string   "contractor_company"
+    t.string   "contractor_phone"
+    t.string   "contractor_email"
+    t.string   "closer_name"
+    t.string   "closer_company"
+    t.string   "closer_email"
+    t.string   "closer_phone"
+    t.string   "insurance_name"
+    t.string   "insurance_company"
+    t.string   "insurance_email"
+    t.string   "insurance_phone"
+    t.integer  "lender_loan_id"
+    t.integer  "lender_quote_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["lender_loan_id"], name: "index_loan_applications_on_lender_loan_id", using: :btree
+    t.index ["lender_quote_id"], name: "index_loan_applications_on_lender_quote_id", using: :btree
+  end
+
+  create_table "loan_quotes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "property_type"
+    t.boolean  "purchase"
+    t.boolean  "occupied"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip_code"
+    t.integer  "price"
+    t.integer  "down_payment"
+    t.integer  "rehab"
+    t.integer  "arv"
+    t.integer  "experience"
+    t.integer  "fico"
+    t.string   "referral"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["user_id"], name: "index_loan_quotes_on_user_id", using: :btree
   end
 
   create_table "price_features", force: :cascade do |t|
@@ -102,6 +234,13 @@ ActiveRecord::Schema.define(version: 20160923051304) do
   add_foreign_key "estimates", "features"
   add_foreign_key "estimates", "price_features"
   add_foreign_key "estimates", "project_features"
+  add_foreign_key "lender_loans", "users"
+  add_foreign_key "lender_quotes", "lender_underwritings"
+  add_foreign_key "lender_quotes", "loan_quotes"
+  add_foreign_key "lender_underwritings", "users"
+  add_foreign_key "loan_applications", "lender_loans"
+  add_foreign_key "loan_applications", "lender_quotes"
+  add_foreign_key "loan_quotes", "users"
   add_foreign_key "price_features", "features"
   add_foreign_key "price_features", "users"
   add_foreign_key "project_features", "features"

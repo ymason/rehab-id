@@ -1,0 +1,45 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  ltv: 9.99
+  arv: 9.99
+  experience: 1
+  fico: 1
+  interest_rate: 9.99
+  loan_min: 1
+  loan_max: 1
+  origination_fee: 9.99
+  term: 1
+  process_time: 1
+  pre_payment: 1
+  address: MyString
+  city: MyString
+  state: MyString
+  zip_code: 1
+  ltc: 9.99
+  draws: 1
+  min_draw: 1
+  min_final_draw: 9.99
+
+two:
+  user: two
+  ltv: 9.99
+  arv: 9.99
+  experience: 1
+  fico: 1
+  interest_rate: 9.99
+  loan_min: 1
+  loan_max: 1
+  origination_fee: 9.99
+  term: 1
+  process_time: 1
+  pre_payment: 1
+  address: MyString
+  city: MyString
+  state: MyString
+  zip_code: 1
+  ltc: 9.99
+  draws: 1
+  min_draw: 1
+  min_final_draw: 9.99

@@ -81,6 +81,15 @@ contractor3 = User.create(name: "George", email: "fasdfs1424f@adf.com", phone:"3
 
 admin = User.create(name: "Yemani", email: "yemani@yemani.com", phone:"305-555-5555", role: 0, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
 
+# Dummy Lenders
+
+lender1 = User.create(name: "John", email: "fasdfs21f@adf.com", phone:"305-551-4212", role: 1, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
+
+lender2 = User.create(name: "Leo", email: "fa12sdfsf2123@adf.com", phone:"305-551-4252", role: 1, password: "angrybirds", password_confirmation: "angrybirds", address: "110 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
+
+lender3 = User.create(name: "Walter", email: "fasd121fs1424f@adf.com", phone:"305-551-4272", role: 1, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
+
+
 # Dummy Prices
 
 	# Contractor1 Prices

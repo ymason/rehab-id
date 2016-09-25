@@ -1,10 +1,10 @@
-class ProjectFeaturePolicy < ApplicationPolicy
+class LoanApplicationPolicy < ApplicationPolicy
 	def index
 		user.admin?
 	end
 
 	def show
-		admin_or_owner_of_project_feature?
+		admin_or_owner_of_loan_app?
 	end
 
 	def new?
@@ -29,8 +29,8 @@ class ProjectFeaturePolicy < ApplicationPolicy
 
 	private
 
-	def admin_or_owner_of_price_feature?
-		user.admin? || (user.user? && user.project_features_owner?(record))
+	def admin_or_owner_of_loan_app?
+		user.admin? || (user.user? && user.owner_of_loan_app?(record))
 	end
 
 end

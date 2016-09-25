@@ -1,0 +1,71 @@
+<% if policy(current_user).new? %>
+	<div class="row">
+		<div class="6u 12u(mobilep)">
+			<h2>Loan Type:</h2>
+
+			<h2>Company Address</h2>
+			 <%= @loan_underwriting.address %> <%= @loan_underwriting.city %>, <%= @loan_underwriting.state %> <%= @loan_underwriting.zip_code %>
+			 <br>
+
+			<h2> Loan Terms </h2>
+
+			<ul>
+			  	<li>
+					<h5>Max LTV: <%= @loan_underwriting.ltv %>%</h5>
+				</li>
+			   	<li>
+					<h5>Max ARV: <%= @loan_underwriting.arv %>%</h5>
+				</li>
+				<li>
+					<h5>Min. Past Rehabs: <%= @loan_underwriting.experience %></h5>
+				</li>
+			   <li>
+					<h5>Interest Rate: <%= @loan_underwriting.interest_rate %></h5>
+				</li>
+				<li>
+					<h5>Min. Loan Amount: <%= @loan_underwriting.loan_min %></h5>
+				</li>
+			</ul>
+		</div>
+			<div class="6u 12u(mobilep)">
+				<h2><%= @loan_underwriting.name%></h2>
+				<ul>
+				   	<li>
+						<h5>Max Loan Amount: <%= @loan_underwriting.loan_max %></h5>
+					</li>
+					<li>
+						<h5>Origination Fee: <%= @loan_underwriting.origination_fee %>%</h5>
+					</li>
+				   <li>
+						<h5>Length of Term: <%= @loan_underwriting.term %></h5>
+					</li>
+					<li>
+						<h5>Max Time To Process Loan: <%= @loan_underwriting.process_time %></h5>
+					</li>
+				   <li>
+						<h5>Pre-Payment Penalty: <%= @loan_underwriting.pre_payment %></h5>
+					</li>
+				</ul>
+
+				<% if @loan_underwriting != nil %>
+					<h2> Rehab Loan Terms </h2>
+				<ul>
+				  	<li>
+						<h5>Max LTC: <%= @loan_underwriting.ltc %>%</h5>
+					</li>
+				   	<li>
+						<h5>Max # of Draws: <%= @loan_underwriting.draws %></h5>
+					</li>
+					<li>
+						<h5>Min. Draw Amount: <%= @loan_underwriting.min_draw %></h5>
+					</li>
+				   <li>
+						<h5>Min. Final Draw: <%= @loan_underwriting.min_final_draw %>%</h5>
+					</li>
+				<% end %>
+			
+				<h4><%= link_to 'Edit Loan Terms', edit_user_lender_underwriting_path(current_user.id, @loan_underwriting.id)%></h4>
+				 <h4><%= link_to 'Create New Loan Terms', new_user_lender_underwriting_path(current_user.id)%></h4>
+			</div>
+		</div>
+<% end %>
