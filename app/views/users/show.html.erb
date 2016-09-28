@@ -18,7 +18,8 @@
 
 			<div class="4u 12u(mobilep)">
 				<h2> Loan Quotes </h2>
-				<h4><%= link_to 'Create Lending Terms', new_user_lender_underwriting_path(current_user.id)%><br>
+				<h4><%= link_to 'Create Lending Policy', new_user_lender_underwriting_path(current_user.id)%> |
+				<%= link_to 'See All Policies', user_lender_underwritings_path(current_user.id)%><br>
 				<br><%= link_to 'Get New Loan', new_user_loan_quote_path(current_user.id)%><br></h4>
 				<br>
 				<br><h3>Your Loans</h3>

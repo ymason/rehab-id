@@ -1,33 +1,10 @@
 <% if policy(current_user).new? %>
 <h4><b> Tell Us About Your Lending Terms</b> </h4>
 	<div class="row">
-		<div class="2u 12u(mobilep)">
-		<%= form_for @lender_underwriting, url: lender_underwriting_path do |f| %>
-			<h5> Max LTV % </h5>
-			<%= f.number_field :ltv%>
-			<h5> Max ARV % </h5>
-			<%= f.number_field :arv%>
-			<h5> Min. Past Rehabs </h5>
-			<%= f.number_field :experience%>
-			<h5> Interest Rate </h5>
-			<%= f.number_field :interest_rate%>
-			<h5> Min. Loan Amount</h5>
-			<%= f.number_field :loan_min%>
-			<h5> Max Loan Amount </h5>
-			<%= f.number_field :loan_max%>
-			<h5> Origination Fee % </h5>
-			<%= f.number_field :origination_fee%>
-			<h5> Length of Term <em>(months)</em> </h5>
-			<%= f.number_field :term%>
-			<h5> Max Time To Process Loan <em>(days)</em> </h5>
-			<%= f.number_field :process_time%>
-			<h5> Pre-Payment Penalty <em>(months)</em></h5>
-			<%= f.number_field :pre_payment%>
-		</div>
 		<div class="6u 12u(mobilep)">
+		<%= form_for @lender_underwriting, url: lender_underwriting_path do |f| %>
 			<h5> Name of Loan Type </h5>
-			<h6><em>(i.e. "High LTV Florida Loans")</em> </h6>
-			<%= f.text_field :name%>
+			<%= f.text_field :name, placeholder: "i.e. 'High LTV Florida Loans'"%>
 			<h5> Company Address </h5>
 			<%= f.text_field :address%>
 			<h5> City </h5>
@@ -38,21 +15,45 @@
 			<%= f.number_field :zip_code%>
 		</div>
 
-		<div class="4u 12u(mobilep)">
-		<h4><em> If Lending For Rehab (Optional) </em> </h4>
-			<h5> Max LTC %</h5>
+		<div class="2u 12u(mobilep)">
+			<h5> Max LTV </h5>
+			<%= f.number_field :ltv, placeholder: "%" %>
+			<h5> Max ARV </h5>
+			<%= f.number_field :arv, placeholder: "%"%>
+			<h5> Min. Past Rehabs </h5>
+			<%= f.number_field :experience, placeholder: "#"%>
+			<h5> Interest Rate </h5>
+			<%= f.number_field :interest_rate, placeholder: "%"%>
+			<h5> Min. Loan Amount</h5>
+			<%= f.number_field :loan_min, placeholder: "$"%>
+			</div>
+		<div class="2u 12u(mobilep)">
+			<h5> Max Loan Amount </h5>
+			<%= f.number_field :loan_max, placeholder: "$"%>
+			<h5> Origination Fee </h5>
+			<%= f.number_field :origination_fee, placeholder: "%"%>
+			<h5> Length of Term</h5>
+			<%= f.number_field :term, placeholder: "months"%>
+			<h5> Max Underwriting Time</h5>
+			<%= f.number_field :process_time, placeholder: "days"%>
+			<h5> Pre-Payment Penalty</h5>
+			<%= f.number_field :pre_payment, placeholder: "months"%>
+		</div>
+
+		<div class="2u 12u(mobilep)">
+		<h4><em> If Lending For Rehab/Construction (Optional) </em> </h4>
+			<h5> Max LTC </h5>
 			<h6><em>(loan to construction budget) </h6>
-			<%= f.number_field :ltc%>
-			<h5> Max # of Draws</h5>
-			<%= f.number_field :draws%>
+			<%= f.number_field :ltc, placeholder: "%"%>
+			<h5> Max Amount of Draws</h5>
+			<%= f.number_field :draws, placeholder: "#"%>
 			<h5> Min. Draw Amount</h5>
-			<%= f.number_field :min_draw%>
-			<h5> Min. Final Draw %</h5>
+			<%= f.number_field :min_draw, placeholder: "$"%>
+			<h5> Min. Final Draw </h5>
 			<h6><em>(holdback until rehab done)</em> </h6>
-			<%= f.number_field :min_final_draw%>
+			<%= f.number_field :min_final_draw, placeholder: "%"%>
 			<h5> Min. FICO Score</h5>
-			<%= f.text_field :fico%>
-			<br>
+			<%= f.text_field :fico, placeholder: "#"%>
 			<br>
 			<%= f.submit "Submit New Terms" %>
 		</div>

@@ -25,7 +25,6 @@ class LoanQuotesController < ApplicationController
 			rehab: params[:loan_quote][:rehab],
 			arv: params[:loan_quote][:arv],
 			experience: params[:loan_quote][:experience],
-			fico: params[:loan_quote][:fico],
 			referral: params[:loan_quote][:referral]
 			)
 
@@ -51,6 +50,14 @@ class LoanQuotesController < ApplicationController
 		@loan_quote_rehab = number_to_currency(@loan_quote.rehab, :precision => 0)
 
 		@loan_quote_arv = number_to_currency(@loan_quote.arv, :precision => 0)
+
+		authorize @user
+	end
+
+	def index
+		@user = User.find_by(id: params[:user_id])
+
+		@all_user_loan_quotes = @user.loan_quotes
 
 		authorize @user
 	end

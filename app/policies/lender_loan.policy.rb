@@ -1,6 +1,6 @@
-class LenderUndewritingPolicy < ApplicationPolicy
+class LenderLoanPolicy < ApplicationPolicy
 	def index
-		admin_or_owner_of_lender_underwriting?
+		admin_or_owner_of_lender_loan?
 	end
 
 	def show
@@ -29,8 +29,8 @@ class LenderUndewritingPolicy < ApplicationPolicy
 
 	private
 
-	def admin_or_owner_of_lender_underwriting?
-		user.admin? || (user.lender? && user.lender_own_underwriting?(record))
+	def admin_or_owner_of_lender_loan?
+		user.admin? || (user.lender? && user.lender_own_loan?(record))
 	end
 
 end

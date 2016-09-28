@@ -49,6 +49,11 @@ class User < ApplicationRecord
       User.within(50, origin: "#{project.full_address}").where(role: 2)
   end
 
+  def self.local_lenders(loan_quote)
+      # Find All Contractors Within 50 Miles
+      User.within(50, origin: "#{loan_quote.full_address}").where(role: 1)
+  end
+
   def owner_of_project?(project)
     self.id == project.user_id
   end
@@ -74,6 +79,10 @@ class User < ApplicationRecord
 
   def owner_of_loan_app?(loan_application)
     self.id == loan_application.lender_quote.loan_quote.user_id
+  end
+
+  def lender_own_loan?(lender_loan)
+    self.id = lender_loan.user_id
   end
 
   protected
