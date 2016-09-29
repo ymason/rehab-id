@@ -50,23 +50,22 @@ class LoanQuote < ApplicationRecord
 
 	    end
 	end
-
-        policies.each do |f|
+        policies.each do |policy|
 
           policies_hash = {}
-          policies_hash[:draws] = f[:draws]
-          policies_hash[:interest_rate] = f[:interest_rate]
-          policies_hash[:loan_purchase] = f[:loan_purchase]
-          policies_hash[:loan_rehab] = f[:loan_rehab]
-          policies_hash[:min_draw] = f[:min_draw]
-          policies_hash[:min_final_draw] = f[:min_final_draw]
-          policies_hash[:origination_fee] = f[:origination_fee]
-          policies_hash[:pre_payment] = f[:pre_payment]
-          policies_hash[:term] = f[:term]
-          policies_hash[:lender_underwriting_id] = f[:lender_underwriting_id]
+          policies_hash[:draws] = policy[:draws]
+          policies_hash[:interest_rate] = policy[:interest_rate]
+          policies_hash[:loan_purchase] = policy[:loan_purchase]
+          policies_hash[:loan_rehab] = policy[:loan_rehab]
+          policies_hash[:min_draw] = policy[:min_draw]
+          policies_hash[:min_final_draw] = policy[:min_final_draw]
+          policies_hash[:origination_fee] = policy[:origination_fee]
+          policies_hash[:pre_payment] = policy[:pre_payment]
+          policies_hash[:term] = policy[:term]
+          policies_hash[:lender_underwriting_id] = policy[:lender_underwriting_id]
           
 
-            if self.lender_quotes.exists?(lender_underwriting_id: f[:lender_underwriting_id])
+            if self.lender_quotes.exists?(lender_underwriting_id: policy[:lender_underwriting_id])
 
             else
             p = LenderQuote.new(policies_hash)

@@ -8,6 +8,8 @@ class UsersController < ApplicationController
 		@all_user_projects = current_user.projects
 
 		@all_user_loans = current_user.loan_quotes
+
+		@user_lender_loans = current_user.lender_loans
 	end
 
 	def create

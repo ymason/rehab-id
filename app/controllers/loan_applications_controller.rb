@@ -20,6 +20,7 @@ class LoanApplicationsController < ApplicationController
 			lender_loan_id: @lender_loan.id,
 			lender_quote_id: @lender_quote_id,
 			)
+
 		authorize current_user
 
 		if @loan_application.save
@@ -30,13 +31,21 @@ class LoanApplicationsController < ApplicationController
 				address: @loan_quote.address,
 				city: @loan_quote.city,
 				state: @loan_quote.state,
-				zip_code: @loan_quote.zip_code)
+				zip_code: @loan_quote.zip_code,
+				loan_application_id: @loan_application.id)
 
 			redirect_to edit_lender_quote_loan_application_path(@lender_quote_id, @loan_application.id)
 		else
 			redirect_to dashboard_path
 		end
 	end
+
+	# def approved
+
+	# 	@loan_application = LoanApplication.find_by(id: params[:id])
+		
+	# 	authorize current_user
+	# end
 
 	def edit
 		@loan_application = LoanApplication.find_by(id: params[:id])
@@ -94,6 +103,5 @@ class LoanApplicationsController < ApplicationController
 			redirect_to dashboard_path
 
 			authorize current_user
-
 	end
 end

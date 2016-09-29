@@ -22,6 +22,10 @@ Rails.application.routes.draw do
     resources :loan_quotes
   end
 
+  resources :users, only: [] do
+    resources :lender_loans
+  end
+
   resources :lender_quotes, only: [] do
     resources :loan_applications
   end
@@ -36,4 +40,5 @@ Rails.application.routes.draw do
   post '/users/:user_id/loan_quotes' => 'loan_quotes#create', as: :loan_quote
   post '/users/:user_id/lender_underwritings' => 'lender_underwritings#create', as: :lender_underwriting
   patch '/lender_quotes/:lender_quote_id/loan_applications/:id' =>  'loan_applications#update', as: :loan_application
+  patch '/lender_quotes/:lender_quote_id/loan_applications/:id/approved' =>  'loan_applications#approved', as: :loan_approved
 end

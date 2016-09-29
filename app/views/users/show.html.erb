@@ -30,6 +30,14 @@
 							</li>
 						<% end %>
 					</ul>
+				<br><h3>Lender Loans</h3>
+					<ul>
+						<% @user_lender_loans.each do | loan | %>
+							<li>
+								<h5><%= link_to loan.address, user_lender_loan_path(current_user.id, loan.id) %></h5>
+							</li>
+						<% end %>
+					</ul>
 			</div>
 
 			<div class="4u 12u(mobilep)">
