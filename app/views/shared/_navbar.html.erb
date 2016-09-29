@@ -1,23 +1,33 @@
-<header id="header">
-	<h1><%= link_to 'RehabID', home_path%> - Automatically identify your next rehab project.</h1>
-	<% if user_signed_in? %>
-		<nav id="nav">
-			<ul>
-				<li><%= link_to 'Dashboard', dashboard_path%></li>
-				<li><%= link_to 'Home', home_path%></li>
-				<li><%= link_to 'Contact', contact_path%></li>
-				<li><%= link_to 'Logout', destroy_user_session_path(:authenticity_token => form_authenticity_token()), method: 'delete' %></li>
-			</ul>
-		</nav>
-	<% else %>
-		<nav id="nav">
-			<ul>
-				<li><%= link_to 'Home', home_path%></li>
-				<li><%= link_to 'Contact', contact_path%></li>
-				<li><%= link_to 'Sign Up', new_user_registration_path%></li>
-				<li><%= link_to 'Login', new_user_session_path%></li>
-			</ul>
-		</nav>
-	<% end %>
+<!--Body-->
+<body class="space-top">
 
+<!--Page Preloading-->
+<div id="preloader"><div id="spinner"></div></div>
+
+<!--Header-->
+<header class="stiky-header">
+	<div class="container group">
+		<%= link_to 'RehabID', home_path %> - Automatically identify your next rehab project.
+		<div class="navi-toggle group">
+			<span class="dot"></span><span class="line"></span>
+			<span class="dot"></span><span class="line"></span>
+			<span class="dot"></span><span class="line"></span>
+			<span class="dot"></span><span class="line"></span>
+		</div>
+		<nav class="main-navi">
+			<ul>
+				<% if user_signed_in? %>
+							<li><%= link_to 'Dashboard', dashboard_path%></li>
+							<li><%= link_to 'Home', home_path%></li>
+							<li><%= link_to 'Contact', contact_path%></li>
+							<li><%= link_to 'Logout', destroy_user_session_path(:authenticity_token => form_authenticity_token()), method: 'delete' %></li>
+				<% else %>
+							<li><%= link_to 'Home', home_path%></li>
+							<li><%= link_to 'Contact', contact_path%></li>
+							<li><%= link_to 'Sign Up', new_user_registration_path%></li>
+							<li><%= link_to 'Login', new_user_session_path%></li>
+				<% end %>
+			</ul>
+		</nav>
+	</div>
 </header>

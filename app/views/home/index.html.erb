@@ -1,99 +1,174 @@
 <!-- <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us12.list-manage.com","uuid":"3d279e1c62ab7996c31b033c1","lid":"d3e1f940af"}) })</script> -->
 
-				<%= render 'banner' %>
-
 			<!-- Main -->
-				<section id="main" class="container">
-
-					<section class="box special">
-						<header class="major">
-							<h2>Introducing the ultimate app
-							<br />
-							for rehabbers and fixxer uppers.</h2>
-							<p>You provide the property details and we automatically do the hard work<br />
-							for you, like getting estimates, loans, and bids for the renovation.</p>
-						</header>
-						<span class="image featured"><%= image_tag("pic01.jpg", id:"learn") %></span>
-					</section>
-
-					<section class="box special features">
-						<div class="features-row">
-							<section id="hard-money">
-								<span class="icon major fa-bolt accent2"></span>
-								<h3>Hard Money Loans</h3>
-								<p>Hard money loans are typically issued by private investors or companies. We aggregate from the best hard money lenders available and get you instantly pre-approved!</p>
-							</section>
-							<section id="renovations">
-								<span class="icon major fa-area-chart accent3"></span>
-								<h3>Renovation Cost Estimator</h3>
-								<p>See how much your rehab needs will cost you within minutes and get an accurate estimate of costs for the renovations based on property condition, location, and rehab type.</p>
-							</section>
+			<!--Hero Unit without Slider-->
+	    <section class="hero">
+	    	<div class="container">
+	        <div class="row">
+	              <div class="col-lg-5 col-md-5 col-sm-5 animated">
+	                <h2 style="margin-top:50px;" class="text-light text-left">RehabID</h2>
+	                <p>Introducing the ultimate app &amp; for rehabbers and fixxer uppers.</p>
+	                <p>You provide the property details and we automatically do the hard work you, like getting estimates, loans, and bids for the renovation.</p>
+	                <span class="btn btn-primary"><%= link_to 'Sign Up', new_user_registration_path%></span>
+	              </div>
+	              <div class="col-lg-7 col-md-7 col-sm-7 animated">
+	                <span class="pull-right" width="689" height="659" alt="RehabID"/><%= image_tag("pic01.jpg", id:"learn") %></span>
+	              </div>
 						</div>
-						<!-- <div class="features-row"> -->
-							<section id = "bids">
-								<span class="icon major fa-cloud accent4"></span>
-								<h3>Guaranteed Contractor Bids</h3>
-								<p>Our system has guaranteed pre-approved pricing from a comprehensive database of contractors who specialize in the renovation of properties and schedules 3 different ones to physically inspect the property and provide you detailed quotes.</p>
-							</section>
-							<!-- <section>
-								<span class="icon major fa-lock accent5"></span>
-								<h3>Enim phasellus</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section> -->
+				</div>
+			</section>
+
+			<!--Features-->
+	    <section class="page-block" id="features">
+	    	<div class="container">
+	        <div class="row page-header">
+	          <h2>Features</h2>
+	          <span>The best tools a rehabber can have!</span>
+	        </div>
+	        <div class="row features">
+	          <div class="col-lg-4 col-md-4 col-sm-4">
+	            <div class="feature-img"><%= image_tag("feature1.png", id:"learn", width: '124', height: '120', alt: "Hard Money Loans") %></div>
+	            <h3>Hard Money Loans</h3>
+							<p>Hard money loans are typically issued by private investors or companies. We aggregate from the best hard money lenders available and get you instantly pre-approved!</p>
 						</div>
-					</section>
+						<div class="col-lg-4 col-md-4 col-sm-4">
+							<div class="feature-img"><%= image_tag("feature3.png", id:"learn", width: '124', height: '120', alt: "Renovation Cost Estimator") %></div>
+							<h3>Renovation Cost Estimator</h3>
+							<p>See how much your rehab needs will cost you within minutes and get an accurate estimate of costs for the renovations based on property condition, location, and rehab type.</p>
+	          </div>
+	          <div class="col-lg-4 col-md-4 col-sm-4">
+							<div class="feature-img"><%= image_tag("feature2.png", id:"learn", width: '124', height: '120', alt: "Contractor Bids") %></div>
+							<h3>Guaranteed Contractor Bid</h3>
+							<p>Our system has guaranteed pre-approved pricing from a comprehensive database of contractors who specialize in the renovation of properties and schedules 3 different ones to physically inspect the property and provide you detailed quotes.</p>
+	          </div>
+	        </div>
+	      </div>
+			</section>
 
-					<div class="row">
-						<div class="6u 12u(narrower)">
+			<!--Tabs-->
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs central">
+            <li class="active"><a href="#better-deals" data-toggle="tab">Find Better Deals</a></li>
+            <li><a href="#higher-profits" data-toggle="tab">Make Higher Profits</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Tab panes -->
+      <div class="container">
+        <div class="row tab-content central">
+          <div class="tab-pane fade in active col-lg-12" id="better-deals">
+          	<div class="row">
+            	<div class="col-lg-6 col-md-6 animated fadeInLeft">
+                <%= image_tag("pic02.jpg", alt: "Find Better Rehab Deals") %>
+              </div>
+            	<div class="col-lg-6 col-md-6 animated fadeInRight">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h2>Find Better Deals</h2>
+                    <p class="double-space-bottom">Why waste time finding properties and trying to figure out the financing, renovations, etc?</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                  	<p class="double-space-bottom">Use RehabID to identify better deals, let us help you figure out if they are even deals.</p>
+                  </div>
+                </div>
+                  </div>
+                </div>
+              </div>
+							<div class="tab-pane fade in active col-lg-12" id="higher-profits">
+		          	<div class="row">
+		            	<div class="col-lg-6 col-md-6 animated fadeInLeft">
+		                <%= image_tag("pic03.jpg", alt: "Make Higher Profits on Rehabs") %>
+		              </div>
+		            	<div class="col-lg-6 col-md-6 animated fadeInRight">
+		                <div class="row">
+		                  <div class="col-lg-12">
+		                    <h2>Make Higher Profits</h2>
+		                    <p class="double-space-bottom">We guarantee you'll find the best hard money rates and contractor bids through our system.</p>
+		                  </div>
+		                </div>
+										<div class="row">
+		                  <div class="col-lg-12">
+		                  	<p class="double-space-bottom">Therefore you'll spend less on expenses and make higher profits.</p>
+		                  </div>
+		                </div>
+		                  </div>
+		                </div>
+		              </div>
+            </div>
+          </div>
 
-							<section class="box special">
-								<span class="image featured"><%= image_tag("pic02.jpg", id:"learn") %></span>
-								<h3>Find Better Deals</h3>
-								<p>Why waste time finding properties and trying to figure out the financing, renovations, etc? Use RehabID to identify better deals, let us help you figure out if they are even deals.</p>
-								<ul class="actions">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
+					<!--Footer-->
+			    <footer class="footer">
+			    	<div class="container">
+			      	<div class="row">
+			        	<div class="col-lg-12">
+			          	<h2 class="text-center text-light">Sign up for early beta access!</h2>
+			            <p class="text-light text-center">Get an early peek at some great tools prior to our upcoming launch:</p>
+			          </div>
+			        </div>
+			        <div class="row">
 
-						</div>
-						<div class="6u 12u(narrower)">
-
-							<section class="box special">
-								<span class="image featured"><%= image_tag("pic03.jpg", id:"learn") %></span>
-								<h3>Make Higher Profits</h3>
-								<p>We guarantee you'll find the best hard money rates and contractor bids through our system, therefore you'll spend less on expenses and make higher profits.</p>
-								<ul class="actions">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
-
-						</div>
-					</div>
-
-				</section>
-
-			<!-- CTA -->
-				<section id="cta">
-
-					<h2>Sign up for beta access!</h2>
-					<p>Get an early peek at some great tools prior to our upcoming launch.</p>
-
-					<form action="http://vestmunity.us12.list-manage.com/subscribe/post?u=3d279e1c62ab7996c31b033c1&amp;id=d3e1f940af" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-						<div id="mce-responses" class="clear">
-							<div class="response" id="mce-error-response" style="display:none"></div>
-							<div class="response" id="mce-success-response" style="display:none"></div> 
+								<!-- Begin MailChimp Signup Form -->
+			          <form class="subscribe-form validate" action="http://vestmunity.us12.list-manage.com/subscribe/post?u=3d279e1c62ab7996c31b033c1&amp;id=d3e1f940af" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+			            <div class="form-group col-lg-7 col-md-8 col-sm-8 col-lg-offset-1">
+			              <label class="sr-only" for="mce-EMAIL">Email address</label>
+			              <input type="email" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Enter email" required>
+			              <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+			              <div style="position: absolute; left: -5000px;"><input type="text" name="b_168a366a98d3248fbc35c0b67_73d49e0d23" value=""></div>
+			            </div>
+			            <div class="form-group col-lg-3 col-md-4 col-sm-4"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary btn-block"></div>
+			          </form>
+			          <!-- Close MailChimp Signup Form -->
 							</div>
-						<div class="row uniform 50%" id="mc_embed_signup_scroll">
-							<div class="8u 12u(mobilep)">
-								<input type="email" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address" />
-							</div>
-							<div class="4u 12u(mobilep)">
-								<input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe" class="fit" />
-							</div>
-						</div>
-					</form>
-				</section>
+			        <div class="row">
+			        	<div class="col-lg-12">
+			          	<p class="copyright">&copy; 2016 RehabID.</p>
+			        </div>
+			      </div>
+			    </footer>
 
-		<!-- Scripts -->
-			<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='NAME';ftypes[1]='text';fnames[2]='PHONE';ftypes[2]='text';fnames[3]='STATE';ftypes[3]='number'; }(jQuery));var $mcj = jQuery.noConflict(true);</script>
-			<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us12.list-manage.com","uuid":"3d279e1c62ab7996c31b033c1","lid":"d3e1f940af"}) })</script>
+					<!--Scroll To Top Button-->
+			    <div id="scroll-top" class="scroll-up"><i class="icon-arrow-up"></i></div>
+
+			    <!--Javascript (jQuery) Libraries and Plugins-->
+			    <script src="jquery-1.11.2.min.js"></script>
+					<script src="jquery.easing.1.3.js"></script>
+					<script src="bootstrap.min.js"></script>
+					<script src="jquery.touchSwipe.min.js"></script>
+					<script src="jquery.placeholder.js"></script>
+			    <script src="icheck.min.js"></script>
+			    <script src="jquery.validate.min.js"></script>
+					<script src="gallery.js"></script>
+			    <script src="jquery.fitvids.js"></script>
+					<script src="jquery.bxslider.min.js"></script>
+					<script src="chart.js"></script>
+					<script src="waypoints.min.js"></script>
+			    <script src="smoothscroll.js"></script>
+					<script src="color-switcher.js"></script>
+			    <script src="mailer.js"></script>
+					<script src="js/landing2.js"></script>
+
+					<!-- Scripts -->
+					<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='NAME';ftypes[1]='text';fnames[2]='PHONE';ftypes[2]='text';fnames[3]='STATE';ftypes[3]='number'; }(jQuery));var $mcj = jQuery.noConflict(true);</script>
+					<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us12.list-manage.com","uuid":"3d279e1c62ab7996c31b033c1","lid":"d3e1f940af"}) })</script>
+
+
+			    <!--Google Remarketing Tag (Placed before </body>)-->
+			    <!-- <script type="text/javascript">
+			    /* <![CDATA[ */
+			    var google_conversion_id = 966923546;
+			    var google_custom_params = window.google_tag_params;
+			    var google_remarketing_only = true;
+			    /* ]]> */
+			    </script> -->
+			    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+			    </script>
+			    <noscript>
+			    <div style="display:inline;">
+			    <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/966923546/?value=0&amp;guid=ON&amp;script=0"/>
+			    </div>
+			    </noscript>
