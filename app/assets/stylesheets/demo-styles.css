@@ -26,7 +26,6 @@
 body {
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 	background-color: #ffffff;
-	background-image: url("banner.jpg");
 	font-weight: normal;
 	color: #313447;
 	background-color: #ff6f69;
@@ -156,3 +155,11 @@ footer p a:hover {
 	margin: -40px 0 0 -40px;
 	background: url(../img/spinner.GIF) no-repeat;
 }
+
+#banner {
+		background-attachment: scroll;
+		background-image: url("banner.jpg");
+		background-position: auto;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
