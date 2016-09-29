@@ -25,6 +25,7 @@ class PriceFeaturesController < ApplicationController
 
 	end
 
+	# If Contractor changes prices then send email to all users who had a estimate based on that contractor w/ ActiveJob
 	def index
 		# @user_price_feature = self.price_features
 

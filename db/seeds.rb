@@ -81,7 +81,6 @@ contractor3 = User.create(name: "George", email: "fasdfs1424f@adf.com", phone:"3
 
 admin = User.create(name: "Yemani", email: "yemani@yemani.com", phone:"305-555-5555", role: 0, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
 
-# Dummy Prices
 
 	# Contractor1 Prices
 	PriceFeature.create(user_id: 1, feature_id: 1, floor: 1000, ceiling: 2000)
@@ -163,6 +162,22 @@ admin = User.create(name: "Yemani", email: "yemani@yemani.com", phone:"305-555-5
 	PriceFeature.create(user_id: 3, feature_id: 23, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 3, feature_id: 24, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 3, feature_id: 25, floor: 1000, ceiling: 2000)
+
+# Dummy Lenders
+
+lender1 = User.create(name: "John", email: "fasdfs21f@adf.com", phone:"305-551-4212", role: 1, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
+
+lender2 = User.create(name: "Leo", email: "fa12sdfsf2123@adf.com", phone:"305-551-4252", role: 1, password: "angrybirds", password_confirmation: "angrybirds", address: "110 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
+
+lender3 = User.create(name: "Walter", email: "fasd121fs1424f@adf.com", phone:"305-551-4272", role: 1, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")
+
+# Dummy Lender Policies
+	
+	# Lender1 Policy
+
+	LenderUnderwriting.create(user_id: 5, ltv: 0.80, arv: 0.80, experience: 2, fico: 600, interest_rate: 0.12, loan_min: 20000, loan_max: 2500000, origination_fee: 0.02, term: 6, address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130", ltc: 0.80, draws: 3, min_draw: 12000, min_final_draw: 0.25)
+	LenderUnderwriting.create(user_id: 6, ltv: 0.85, arv: 0.70, experience: 4, fico: 650, interest_rate: 0.15, loan_min: 20000, loan_max: 1500000, origination_fee: 0.03, term: 8, address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130", ltc: 0.90, draws: 4, min_draw: 15000, min_final_draw: 0.20)
+	LenderUnderwriting.create(user_id: 7, ltv: 0.95, arv: 0.60, experience: 5, fico: 700, interest_rate: 0.20, loan_min: 20000, loan_max: 1000000, origination_fee: 0.04, term: 12, address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130", ltc: 1.00, draws: 5, min_draw: 10000, min_final_draw: 0.15)
 
 # Rooms
 

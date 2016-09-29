@@ -6,11 +6,23 @@ gem 'pundit'
 
 gem 'figaro'
 
-gem 'rails-erd'
-
 gem 'geokit-rails'
 
 gem 'money-rails'
+
+gem 'encrypted_form_fields'
+
+# gem "bower-rails", "~> 0.11.0"
+
+# gem 'picnic-rails'
+
+# gem 'autoprefixer-rails'
+
+# gem "therubyracer"
+
+# gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+
+# gem "twitter-bootstrap-rails"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'

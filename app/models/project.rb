@@ -16,9 +16,10 @@ class Project < ApplicationRecord
 
     # What is needed to get an estimate
 
-    contractors = User.local_contractors(self).limit(1)
+    contractors = User.local_contractors(self)
 
     features = []
+
 
     contractors.each do | c |
 
@@ -40,11 +41,13 @@ class Project < ApplicationRecord
 
               @price_feature_id = p.id
 
+              @user_id = p.user_id
+
               @project_feature = self.project_features.find_by(feature_id: p.feature.id)
 
               @project_feature_id = @project_feature.id
 
-              hash = {:price_feature_id => @price_feature_id, :project_feature_id => @project_feature_id, :feature_id => @feature_id, :avg_floor => @floor_price, :avg_ceiling => @ceiling_price}
+              hash = {:price_feature_id => @price_feature_id, :project_feature_id => @project_feature_id, :feature_id => @feature_id, :avg_floor => @floor_price, :avg_ceiling => @ceiling_price, :user_id => @user_id}
 
               features.push(hash)
 
@@ -61,7 +64,7 @@ class Project < ApplicationRecord
           estimate_hash[:avg_floor] = f[:avg_floor]
           estimate_hash[:avg_ceiling] = f[:avg_ceiling]
 
-            if self.estimates.exists?(project_feature_id: f[:project_feature_id])
+            if self.estimates.exists?(price_feature_id: f[:price_feature_id])
 
             else
             p = Estimate.new(estimate_hash)
@@ -76,24 +79,33 @@ class Project < ApplicationRecord
 
   def min_and_max
   # What to do with all estimates
+
+    contractors = User.local_contractors(self)
+
+    number_of_contractors = contractors.size
     
-    project_minimum = []
-    project_maximum = []
+    total_minimum = []
+    total_maximum = []
 
     self.estimates.each do | e |
 
       @floor = e.avg_floor
 
-      project_minimum.push(@floor)
+      total_minimum.push(@floor)
 
       @ceiling = e.avg_ceiling
 
-      project_maximum.push(@ceiling)
+      total_maximum.push(@ceiling)
 
       end
-      @project_minimum = project_minimum.reduce(0, :+)
 
-      @project_maximum = project_maximum.reduce(0, :+)
+      @total_minimum = total_minimum.reduce(0, :+)
+
+      @total_maximum = total_maximum.reduce(0, :+)
+
+      @project_minimum = (@total_minimum / number_of_contractors)
+
+      @project_maximum = (@total_maximum / number_of_contractors)
 
       min_max = [@project_minimum, @project_maximum]
   end

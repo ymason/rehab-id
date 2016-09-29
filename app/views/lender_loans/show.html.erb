@@ -1,0 +1,188 @@
+<% if policy(current_user).show? %>
+	<div class="row">
+		<div class="4u 12u(mobilep)">
+
+			<h2>Property Address</h2>
+
+			 <h4><%= @lender_loan.address %> <%= @lender_loan.city %>, <%= @lender_loan.state %> <%= @lender_loan.zip_code %></h4>
+
+			 <h2> Loan Terms</h2>
+
+			 <h5>Interest Rate: <%= number_to_percentage(@lender_quote.interest_rate * 100, precision: 0) %> </h5>
+			<h5>Loan Amount: <%= number_to_currency(@lender_quote.loan_purchase, :precision => 0) %> </h5>
+			<h5>Origination Fee: <%= number_to_currency(@lender_quote.origination_fee, :precision => 0) %> </h5>
+			<h5>Term: <%= @lender_quote.term %> Months </h5>	
+			<h5>Pre-Payment Penalty: <%= @lender_quote.pre_payment %> Months </h5>
+			<h5>Rehab Loan: <%= number_to_currency(@lender_quote.loan_rehab, :precision => 0) %> </h5>
+			<h5>Max # of Draws: <%= @lender_quote.draws %> Draws </h5>
+			<h5>Minimum Draw Amount: <%= number_to_currency(@lender_quote.min_draw, :precision => 0) %> </h5>
+			<h5>Minimum Final Draw Holdback: <%= number_to_percentage(@lender_quote.min_final_draw * 100, precision: 0) %> </h5>
+			
+			<% if @lender_loan.approved? %>
+			<h2>Loan Status: </h2>
+			 <h4>This Loan Has Been Approved!</h4>
+
+			<% else %>
+			<h2>Loan Status: </h2>
+			<h4> This Loan Is Unapproved!</h4>
+			<td><%= button_to 'Approve Loan', {:controller => "lender_loans", :action => "update", :user_id => @lender_loan.user_id, :id=> @lender_loan.id} , :method=>:patch  %></td>
+
+			<% end %>
+		</div>
+
+		<h2><%= link_to "See Loan Application Information Below", lender_quote_loan_application_path(@lender_quote.id, @loan_application_id) %></h2>
+
+		<div class="2u 12u(mobilep)">
+			<ul>
+			  	<li>
+					<h5>Occupied: <%= @loan_application.occupied %></h5>
+				</li>
+			   	<li>
+					<h5>Loan Purpose: <%= @loan_application.loan_purpose %></h5>
+				</li>
+				<li>
+					<h5>Entity Name: <%= @loan_application.entity_name %> </h5>
+				</li>
+			   <li>
+					<h5>Entity Type: <%= @loan_application.entity_type %></h5>
+				</li>
+				<li>
+					<h5>State Based: <%= @loan_application.state %></h5>
+				</li>
+			   	<li>
+					<h5>EIN: <%= @loan_application.ein %></h5>
+				</li>
+				<li>
+					<h5>Legal Address: <%= @loan_application.legal_address %></h5>
+				</li>
+			   <li>
+					<h5>Legal City: <%= @loan_application.legal_city %></h5>
+				</li>
+				<li>
+					<h5>Legal State: <%= @loan_application.legal_state %></h5>
+				</li>
+			   <li>
+					<h5>Legal Zip Code: <%= @loan_application.legal_zip_code %></h5>
+				</li>
+				<li>
+					<h5>Mailing Address: <%= @loan_application.mailing_address %></h5>
+				</li>
+			   <li>
+					<h5>Mailing City: <%= @loan_application.mailing_city %></h5>
+				</li>
+				<li>
+					<h5>Mailing State: <%= @loan_application.mailing_state %></h5>
+				</li>
+			   <li>
+					<h5>Mailing Zip Code: <%= @loan_application.mailing_zip_code %></h5>
+				</li>
+				<li>
+					<h5>Occupied: <%= @loan_application.occupied %></h5>
+				</li>
+			</ul>
+			</div>
+		<div class="2u 12u(mobilep)">
+			<ul>
+			   	<li>
+					<h5>Owner Name: <%= @loan_application.owner_name %></h5>
+				</li>
+				<li>
+					<h5>Owner Title: <%= @loan_application.owner_title %> </h5>
+				</li>
+			   <li>
+					<h5>Owner Email: <%= @loan_application.owner_email %></h5>
+				</li>
+				<li>
+					<h5>Owner SS: <%= @loan_application.owner_ss %></h5>
+				</li>
+			   	<li>
+					<h5>Owner Phone: <%= @loan_application.owner_phone %></h5>
+				</li>
+				<li>
+					<h5>Owner DOB: <%= @loan_application.owner_dob %></h5>
+				</li>
+				<li>
+					<h5>Guarantor Name: <%= @loan_application.guarantor_name %></h5>
+				</li>
+			   <li>
+					<h5>Guarantor Email: <%= @loan_application.guarantor_email %></h5>
+				</li>
+				<li>
+					<h5>Guarantor SS: <%= @loan_application.guarantor_ss %></h5>
+				</li>
+			   	<li>
+					<h5>Guarantor Phone: <%= @loan_application.guarantor_phone %></h5>
+				</li>
+				<li>
+					<h5>Guarantor DOB: <%= @loan_application.guarantor_dob %></h5>
+				</li>
+				<li>
+					<h5>Closing Date: <%= @loan_application.closing_date %></h5>
+				</li>
+				<li>
+					<h5>Contact Name: <%= @loan_application.contact_name %></h5>
+				</li>
+			   <li>
+					<h5>Contact Email: <%= @loan_application.contact_email %></h5>
+				</li>
+			   	<li>
+					<h5>Contact Phone: <%= @loan_application.contact_phone %></h5>
+				</li>
+				<li>
+					<h5>Property Instructions: <%= @loan_application.property_instructions %></h5>
+				</li>
+			</ul>
+		</div>
+		<div class="2u 12u(mobilep)">
+			<ul>
+			   	<li>
+					<h5>Rehab Time: <%= @loan_application.rehab_time %></h5>
+				</li>
+				<li>
+					<h5>Added Sq. Ft: <%= @loan_application.add_sq_ft %></h5>
+				</li>
+				<li>
+					<h5>Rehabber: <%= @loan_application.rehabber %></h5>
+				</li>
+				<li>
+					<h5>Contractor Name: <%= @loan_application.contractor_name %></h5>
+				</li>
+				<li>
+					<h5>Contractor Company: <%= @loan_application.contractor_company %></h5>
+				</li>
+			   <li>
+					<h5>Contractor Email: <%= @loan_application.contractor_email %></h5>
+				</li>
+			   	<li>
+					<h5>Contractor Phone: <%= @loan_application.contractor_phone %></h5>
+				</li>
+				<li>
+					<h5>Closer Name: <%= @loan_application.closer_name %></h5>
+				</li>
+				<li>
+					<h5>Closer Company: <%= @loan_application.closer_company %></h5>
+				</li>
+			   <li>
+					<h5>Closer Email: <%= @loan_application.closer_email %></h5>
+				</li>
+			   	<li>
+					<h5>Closer Phone: <%= @loan_application.closer_phone %></h5>
+				</li>
+				<li>
+					<h5>Insurance Agent Name: <%= @loan_application.insurance_name %></h5>
+				</li>
+				<li>
+					<h5>Insurance Company: <%= @loan_application.insurance_company %></h5>
+				</li>
+			   <li>
+					<h5>Insurance Email: <%= @loan_application.insurance_email %></h5>
+				</li>
+			   	<li>
+					<h5>Insurance Phone: <%= @loan_application.insurance_phone %></h5>
+				</li>
+			</ul>
+		</div>
+
+		<h2><%= link_to "Click Here To View Underwriting Policy", user_lender_underwriting_path(current_user.id, @lender_underwriting_id) %></h2>
+	</div>
+<% end %>

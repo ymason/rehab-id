@@ -1,25 +1,50 @@
 <% if user_signed_in? %>
-	<h2> Welcome <%= current_user.name %>!</h2>
-	<h3><%= link_to 'Create New Project', new_user_project_path(current_user.id)%><br>
-	<br><%= link_to 'Create Pricing', new_user_price_feature_path(current_user.id)%><br>
-	<br><h2>Your Projects</h2>
-		<ul>
-			<% @all_user_projects.each do | project | %>
-				<li>
-					<h3><%= link_to project.address, user_project_path(current_user.id, project.id) %><h3>
-				</li>
-			<% end %>
-		</ul>
+<h4> Welcome <%= current_user.name %>!</h4>
+	<div class="row">
+		<div class="4u 12u(mobilep)">
+			<h2> Project Estimates </h2>
+			<h4><%= link_to 'Create New Project', new_user_project_path(current_user.id)%><br>
+			<br><%= link_to 'Create Pricing', new_user_price_feature_path(current_user.id)%><br></h4>
+			<br>
+			<br><h3>Your Projects</h3>
+				<ul>
+					<% @all_user_projects.each do | project | %>
+						<li>
+							<h5><%= link_to project.address, user_project_path(current_user.id, project.id) %></h5>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+
+			<div class="4u 12u(mobilep)">
+				<h2> Loan Quotes </h2>
+				<h4><%= link_to 'Create Lending Policy', new_user_lender_underwriting_path(current_user.id)%> |
+				<%= link_to 'See All Policies', user_lender_underwritings_path(current_user.id)%><br>
+				<br><%= link_to 'Get New Loan', new_user_loan_quote_path(current_user.id)%><br></h4>
+				<br>
+				<br><h3>Your Loans</h3>
+					<ul>
+						<% @all_user_loans.each do | loan | %>
+							<li>
+								<h5><%= link_to loan.address, user_loan_quote_path(current_user.id, loan.id) %></h5>
+							</li>
+						<% end %>
+					</ul>
+				<br><h3>Lender Loans</h3>
+					<ul>
+						<% @user_lender_loans.each do | loan | %>
+							<li>
+								<h5><%= link_to loan.address, user_lender_loan_path(current_user.id, loan.id) %></h5>
+							</li>
+						<% end %>
+					</ul>
+			</div>
+
+			<div class="4u 12u(mobilep)">
+				<h2> Contractor Bids </h2>
+					<h4> Bids Coming Soon..</h4>
+			</div>
 
 <% else %>
-	<header id="header">
-			<h1><a href="index.html">RehabID</a> - Automatically identify your next rehab project.</h1>
-				<nav id="nav">
-					<ul>
-						<li><%= link_to 'Home', home_path%></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</nav>
-		</header>
-	<h2> Nobody logged in</h2>
+	<h2> Please sign up or log in..</h2>
 <% end %>

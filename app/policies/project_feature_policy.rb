@@ -4,7 +4,7 @@ class ProjectFeaturePolicy < ApplicationPolicy
 	end
 
 	def show
-		user.admin? || user.user?
+		admin_or_owner_of_project_feature?
 	end
 
 	def new?
@@ -16,15 +16,15 @@ class ProjectFeaturePolicy < ApplicationPolicy
 	end
 
 	def update?
-		admin_or_owner_of_project_feature?
+		show?
 	end
 
 	def edit?
-		update?
+		show?
 	end
 
 	def destroy?
-		update?
+		show?
 	end
 
 	private

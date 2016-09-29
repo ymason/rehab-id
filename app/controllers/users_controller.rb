@@ -6,6 +6,10 @@ class UsersController < ApplicationController
 		authorize current_user
 
 		@all_user_projects = current_user.projects
+
+		@all_user_loans = current_user.loan_quotes
+
+		@user_lender_loans = current_user.lender_loans
 	end
 
 	def create
