@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   acts_as_mappable :auto_geocode=>{:field=>:full_address, :error_message=>'Could not geocode address'}
 
+
   has_many :projects
 
   has_many :price_features
@@ -16,6 +17,10 @@ class User < ApplicationRecord
 
   has_many :loan_quotes
 
+  has_many :bids
+
+  has_many :contractor_bids
+  
   validates :name, presence: true
 
   validates :phone, presence: true
@@ -34,6 +39,12 @@ class User < ApplicationRecord
 
   enum role: [:admin, :lender, :contractor, :user]
 
+  acts_as_messageable
+
+  def mailboxer_email(object)
+    self.email
+  end
+
   def full_address
     "#{self.address} #{self.city} #{self.state}"
   end
@@ -46,7 +57,7 @@ class User < ApplicationRecord
 
   def self.local_contractors(project)
       # Find All Contractors Within 50 Miles
-      User.within(50, origin: "#{project.full_address}").where(role: 2)
+      User.within(25, origin: "#{project.full_address}").where(role: 2)
   end
 
   def self.local_lenders(loan_quote)
@@ -58,13 +69,19 @@ class User < ApplicationRecord
     self.id == project.user_id
   end
 
-
+  
   def contractor_own_price_features?(price_feature)
       self.id = price_feature.user_id
   end
 
-  def project_features_owner?(project_feature)
-      self.id = project_feature.project.user_id
+  # Bids Policies
+
+  def owner_of_bid_project?(bid)
+    self.id == bid.project.user_id
+  end
+
+   def owner_of_bid_approval?(bid_project)
+    self.id == bid_project.bid.project.user_id
   end
 
   # Loans Policies

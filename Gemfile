@@ -10,7 +10,9 @@ gem 'geokit-rails'
 
 gem 'money-rails'
 
-gem 'encrypted_form_fields'
+# gem 'encrypted_form_fields'
+
+gem 'mailboxer'
 
 # gem "bower-rails", "~> 0.11.0"
 

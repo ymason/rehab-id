@@ -1,0 +1,66 @@
+<% if policy(@bid_project).show? %>
+	<div class="row">
+		<div class="4u 12u(mobilep)">
+
+			<h2>Property Address</h2>
+
+			 <%= @bid_project.address %> <%= @bid_project.city %>, <%= @bid_project.state %> <%= @bid_project.zip_code %>
+			 <br>
+
+			<h2> Inspection Schedule</h2>
+
+			<h4>First Availabity: <%= @bid.date1 %></h4>
+				<h5><%= @bid.start_time1 %> - <%= @bid.end_time1 %></h5>
+
+			<h4>Second Availabity: <%= @bid.date2 %></h4>
+				<h5><%= @bid.start_time2 %> - <%= @bid.end_time2 %></h5>
+
+			<h4>Third Availabity: <%= @bid.date3 %></h4>
+				<h5><%= @bid.start_time3 %> - <%= @bid.end_time3 %></h5>
+		</div>
+
+		<div class="4u 12u(mobilep)">
+		<% if @bid_projects.all? {|project| project.total == nil} %>
+			<h2>No Current Bids</h2>
+				<h4> Waiting on bids.. </h4>
+		<% else %>
+			<h2>Current Bids</h2>
+			<% @bid_projects.each.with_index(1) do | bid, index | %>
+				<% if bid.total =! nil %>
+					<ul>
+					   <li>
+					   <h4> Bid #<%= index %></h4>
+							<h5>Total: <%= number_to_currency(bid.total, :precision => 0) %> </h5>	
+							<h5>Estimated Project Length: <%= bid.days %> Days </h5>
+							<h5>Number of Draws: <%= bid.draws %> </h5>
+							<h5>Breakdown: <%= bid.breakdown %> </h5>
+							<td><%= button_to 'Select This Bid', {:controller => "bid_projects", :action => "update", :user_id => current_user.id, :project_id=> @bid_project.id, :bid_id=> @bid.id, :id=> bid.id}, :method=>:patch  %></td>
+						</li>
+					</ul>
+				<% else %>
+				<% end %>
+			<% end %>
+
+		<% end %>
+		</div>
+
+		<div class="4u 12u(mobilep)">
+			<h2> Estimated Cost </h2>
+			<h4><%= @minimum_number %> - <%= @maximum_number %></h4>
+				<h2> Rehab Needs:</h2>
+			<ul>
+				<% @bid_project.project_features.each do | f | %>
+					<% if f.feature.self? || f.feature.extra?  %>
+					  	<li>
+							<h5><%= f.feature.name %></h5>
+						</li>
+					<% else %> 
+					   <li>
+							<h5><%= f.feature.name %> <%= f.feature.feature_type %></h5>
+						</li>
+					<% end %>
+				<% end %>
+					</ul>
+		</div>
+	</div>
+<% end %>

@@ -1,5 +1,4 @@
 class ProjectFeaturesController < ApplicationController
-	skip_after_action :verify_authorized, :only => :create
 	
 	def new
 		@user_project_features = ProjectFeature.new
@@ -7,7 +6,7 @@ class ProjectFeaturesController < ApplicationController
 		@user = current_user
 		@project_id = params[:project_id]
 		@project = Project.where(id: @project_id)
-		authorize @user_project_features
+		authorize current_user
 
 	end
 
@@ -29,6 +28,8 @@ class ProjectFeaturesController < ApplicationController
 			end
 		end
 	redirect_to user_project_path(current_user.id, @project_id)
+
+	authorize current_user
 	end
 
 end

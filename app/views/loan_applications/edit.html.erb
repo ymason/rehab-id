@@ -1,118 +1,120 @@
-<h4><b> Congratulations Your Pre-Approved, Please Complete Application</b> </h4>
-	<div class="row">
-		<div class="2u 12u(mobilep)">
-		<%= form_for @loan_application, url: loan_application_path do |f| %>
-			<h5> Purchasing Entity Name </h5>
-			<%= f.text_field :entity_name%>
-			<h5> Entity Type </h5>
-			<%= f.text_field :entity_type%>
-			<h5> State Formed </h5>
-	    	<%= f.select :state, options_for_select(us_states) %>
-			<h5> EIN </h5>
-			<%= f.number_field :ein%>
-			<h5> Legal Adresss </h5>
-			<%= f.text_field :legal_address%>
-			<h5> Legal City </h5>
-			<%= f.text_field :legal_city%>
-			<h5> Legal State</h5>
-			<%= f.select :legal_state, options_for_select(us_states) %>
-			<br>
-			<h5> Legal Zip Code </h5>
-			<%= f.number_field :legal_zip_code%>
-		</div>
-
-		<div class="2u 12u(mobilep)">
-			<h5> Mailing Adresss </h5>
-			<%= f.text_field :mailing_address%>
-			<h5> Mailing City </h5>
-			<%= f.text_field :mailing_city%>
-			<h5> Mailing State</h5>
-			<%= f.select :mailing_state, options_for_select(us_states) %>
-			<br>
-			<h5> Mailing Zip Code </h5>
-			<%= f.number_field :mailing_zip_code%>
-			<h5> Owner Name </h5>
-			<%= f.text_field :owner_name %>
-			<h5> Owner Title </h5>
-			<%= f.text_field :owner_title, placeholder: "i.e. Manager"%>
-			<h5> Owner Email </h5>
-			<%= f.text_field :owner_email%>
-			<h5> Owner Social Security </h5>
-			<%= f.number_field :owner_ss%>
-			<h5> Owner Phone Number </h5>
-			<%= f.number_field :owner_phone%>
-			<h5> Owner Date of Birth </h5>
-			<%= f.date_field :owner_dob	%>
-			</div>
-		
-		<div class="2u 12u(mobilep)">
-			<h5> Guarantor Name </h5>
-			<%= f.text_field :guarantor_name %>
-			<h5> Guarantor Email </h5>
-			<%= f.text_field :guarantor_email%>
-			<h5> Guarantor Social Security </h5>
-			<%= f.number_field :guarantor_ss%>
-			<h5> Guarantor Phone Number </h5>
-			<%= f.number_field :guarantor_phone%>
-			<h5> Guarantor Date of Birth </h5>
-			<%= f.date_field :guarantor_dob	%>
-			<br>
-			<br>
-			<%= f.radio_button(:occupied, "") %>
-			<%= label_tag(:occupied, "This property will be non-owner occupied.") %>
-			<%= f.radio_button(:loan_purpose, "") %>
-			<%= label_tag(:loan_purpose, "This loan is for business purposes only.") %>
+<% if policy(@loan_application).edit? %>
+	<h4><b> Congratulations Your Pre-Approved, Please Complete Application</b> </h4>
+		<div class="row">
+			<div class="2u 12u(mobilep)">
+			<%= form_for @loan_application, url: loan_application_path do |f| %>
+				<h5> Purchasing Entity Name </h5>
+				<%= f.text_field :entity_name%>
+				<h5> Entity Type </h5>
+				<%= f.text_field :entity_type%>
+				<h5> State Formed </h5>
+		    	<%= f.select :state, options_for_select(us_states) %>
+				<h5> EIN </h5>
+				<%= f.number_field :ein%>
+				<h5> Legal Adresss </h5>
+				<%= f.text_field :legal_address%>
+				<h5> Legal City </h5>
+				<%= f.text_field :legal_city%>
+				<h5> Legal State</h5>
+				<%= f.select :legal_state, options_for_select(us_states) %>
+				<br>
+				<h5> Legal Zip Code </h5>
+				<%= f.number_field :legal_zip_code%>
 			</div>
 
-		<div class="2u 12u(mobilep)">
-			<h5> Contact Name </h5>
-			<%= f.text_field :contact_name %>
-			<h5> Contact Email </h5>
-			<%= f.text_field :contact_email%>
-			<h5> Contact Phone Number </h5>
-			<%= f.number_field :contact_phone%>
-			<h5> Closing Date </h5>
-			<%= f.date_field :closing_date%>
-			<h5> Property Instructions </h5>
-			<%= f.text_area :property_instructions %>
-			</div>
+			<div class="2u 12u(mobilep)">
+				<h5> Mailing Adresss </h5>
+				<%= f.text_field :mailing_address%>
+				<h5> Mailing City </h5>
+				<%= f.text_field :mailing_city%>
+				<h5> Mailing State</h5>
+				<%= f.select :mailing_state, options_for_select(us_states) %>
+				<br>
+				<h5> Mailing Zip Code </h5>
+				<%= f.number_field :mailing_zip_code%>
+				<h5> Owner Name </h5>
+				<%= f.text_field :owner_name %>
+				<h5> Owner Title </h5>
+				<%= f.text_field :owner_title, placeholder: "i.e. Manager"%>
+				<h5> Owner Email </h5>
+				<%= f.text_field :owner_email%>
+				<h5> Owner Social Security </h5>
+				<%= f.number_field :owner_ss%>
+				<h5> Owner Phone Number </h5>
+				<%= f.number_field :owner_phone%>
+				<h5> Owner Date of Birth </h5>
+				<%= f.date_field :owner_dob	%>
+				</div>
+			
+			<div class="2u 12u(mobilep)">
+				<h5> Guarantor Name </h5>
+				<%= f.text_field :guarantor_name %>
+				<h5> Guarantor Email </h5>
+				<%= f.text_field :guarantor_email%>
+				<h5> Guarantor Social Security </h5>
+				<%= f.number_field :guarantor_ss%>
+				<h5> Guarantor Phone Number </h5>
+				<%= f.number_field :guarantor_phone%>
+				<h5> Guarantor Date of Birth </h5>
+				<%= f.date_field :guarantor_dob	%>
+				<br>
+				<br>
+				<%= f.radio_button(:occupied, "") %>
+				<%= label_tag(:occupied, "This property will be non-owner occupied.") %>
+				<%= f.radio_button(:loan_purpose, "") %>
+				<%= label_tag(:loan_purpose, "This loan is for business purposes only.") %>
+				</div>
 
-		<div class="2u 12u(mobilep)">
-			<h5> Estimated Time To Complete Rehab </h5>
-			<%= f.number_field :rehab_time, placeholder: "Months" %>
-			<h5> Sq. Ft Being Added? </h5>
-			<%= f.number_field :add_sq_ft, placeholder: "0 if None"%>
-			<h5> Are You Personally Doing Rehab? </h5>
-			<%= f.text_field :rehabber, placeholder: "No If Contractor"%>
-			<h5> Contractor Name </h5>
-			<%= f.text_field :contractor_name %>
-			<h5> Contractor Company </h5>
-			<%= f.text_field :contractor_company %>
-			<h5> Contractor Email </h5>
-			<%= f.text_field :contractor_email%>
-			<h5> Contractor Phone Number </h5>
-			<%= f.number_field :contractor_phone%>
-			</div>
+			<div class="2u 12u(mobilep)">
+				<h5> Contact Name </h5>
+				<%= f.text_field :contact_name %>
+				<h5> Contact Email </h5>
+				<%= f.text_field :contact_email%>
+				<h5> Contact Phone Number </h5>
+				<%= f.number_field :contact_phone%>
+				<h5> Closing Date </h5>
+				<%= f.date_field :closing_date%>
+				<h5> Property Instructions </h5>
+				<%= f.text_area :property_instructions %>
+				</div>
 
-		<div class="2u 12u(mobilep)">
-			<h5> Closer Name </h5>
-			<%= f.text_field :closer_name %>
-			<h5> Closer Company </h5>
-			<%= f.text_field :closer_company %>
-			<h5> Closer Email </h5>
-			<%= f.text_field :closer_email %>
-			<h5> Closer Phone Number </h5>
-			<%= f.number_field :closer_phone %>
+			<div class="2u 12u(mobilep)">
+				<h5> Estimated Time To Complete Rehab </h5>
+				<%= f.number_field :rehab_time, placeholder: "Months" %>
+				<h5> Sq. Ft Being Added? </h5>
+				<%= f.number_field :add_sq_ft, placeholder: "0 if None"%>
+				<h5> Are You Personally Doing Rehab? </h5>
+				<%= f.text_field :rehabber, placeholder: "No If Contractor"%>
+				<h5> Contractor Name </h5>
+				<%= f.text_field :contractor_name %>
+				<h5> Contractor Company </h5>
+				<%= f.text_field :contractor_company %>
+				<h5> Contractor Email </h5>
+				<%= f.text_field :contractor_email%>
+				<h5> Contractor Phone Number </h5>
+				<%= f.number_field :contractor_phone%>
+				</div>
 
-			<h5> Insurance Agent Name </h5>
-			<%= f.text_field :insurance_name %>
-			<h5> Insurance Email </h5>
-			<%= f.text_field :insurance_email %>
-			<h5> Insurance Phone Number </h5>
-			<%= f.number_field :insurance_phone %>
-			<br>
-			<br>
-			<%= f.submit "Submit Application" %>
-			</div>
-	</div>
+			<div class="2u 12u(mobilep)">
+				<h5> Closer Name </h5>
+				<%= f.text_field :closer_name %>
+				<h5> Closer Company </h5>
+				<%= f.text_field :closer_company %>
+				<h5> Closer Email </h5>
+				<%= f.text_field :closer_email %>
+				<h5> Closer Phone Number </h5>
+				<%= f.number_field :closer_phone %>
+
+				<h5> Insurance Agent Name </h5>
+				<%= f.text_field :insurance_name %>
+				<h5> Insurance Email </h5>
+				<%= f.text_field :insurance_email %>
+				<h5> Insurance Phone Number </h5>
+				<%= f.number_field :insurance_phone %>
+				<br>
+				<br>
+				<%= f.submit "Submit Application" %>
+				</div>
 		<% end %>
+	</div>
+<% end %>

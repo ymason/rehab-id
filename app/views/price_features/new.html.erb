@@ -1,5 +1,5 @@
 <%= render 'shared/wrap' %>		
-<% if policy(@user_price_features).new? %>
+<% if policy(current_user).new? %>
 	<%= form_tag "/users/#{current_user.id}/price_features", method: :post do %>
     <%= render 'feature_types_form' %>  
   <%= submit_tag "Submit" %>

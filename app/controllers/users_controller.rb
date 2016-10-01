@@ -10,6 +10,8 @@ class UsersController < ApplicationController
 		@all_user_loans = current_user.loan_quotes
 
 		@user_lender_loans = current_user.lender_loans
+
+		@user_project_bids = current_user.bids
 	end
 
 	def create

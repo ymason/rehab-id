@@ -4,7 +4,7 @@ class ProjectFeaturePolicy < ApplicationPolicy
 	end
 
 	def show
-		admin_or_owner_of_project_feature?
+		admin_or_owner_of_project?
 	end
 
 	def new?
@@ -30,7 +30,7 @@ class ProjectFeaturePolicy < ApplicationPolicy
 	private
 
 	def admin_or_owner_of_price_feature?
-		user.admin? || (user.user? && user.project_features_owner?(record))
+		user.admin? || (user.user? && user.owner_of_project?(project)(record))
 	end
 
 end

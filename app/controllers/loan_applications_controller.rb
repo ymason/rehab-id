@@ -40,15 +40,10 @@ class LoanApplicationsController < ApplicationController
 		end
 	end
 
-	# def approved
-
-	# 	@loan_application = LoanApplication.find_by(id: params[:id])
-		
-	# 	authorize current_user
-	# end
-
 	def edit
 		@loan_application = LoanApplication.find_by(id: params[:id])
+
+		authorize @loan_application
 	end
 
 	def update
@@ -102,6 +97,6 @@ class LoanApplicationsController < ApplicationController
 
 			redirect_to dashboard_path
 
-			authorize current_user
+			authorize @loan_application
 	end
 end

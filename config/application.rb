@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module RehabID
   class Application < Rails::Application
+  	config.active_record.time_zone_aware_types = [:datetime]
     config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
  	:address              => "smtp.1and1.com",

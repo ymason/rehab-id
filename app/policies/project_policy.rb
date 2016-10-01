@@ -20,14 +20,6 @@ class ProjectPolicy < ApplicationPolicy
 		show?
 	end
 
-	def create_rooms?
-		show?
-	end
-
-	def rooms?
-		show?
-	end
-
 	def edit?
 		show?
 	end

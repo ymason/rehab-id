@@ -4,6 +4,7 @@ class Project < ApplicationRecord
   has_many :project_features
   has_many :estimates
   has_many :features, through: :project_features
+  has_one :bid
 
 
   acts_as_mappable :auto_geocode=>{:field=>:full_address, :error_message=>'Could not geocode address'}
@@ -19,7 +20,6 @@ class Project < ApplicationRecord
     contractors = User.local_contractors(self)
 
     features = []
-
 
     contractors.each do | c |
 

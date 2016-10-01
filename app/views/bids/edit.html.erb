@@ -1,0 +1,43 @@
+<% if policy(@bid_project).edit? %>
+	<h2> Schedule Inspections for <%= @bid_project.address %></h2>
+	<h6>
+	<b>(Select Three Different 4 Hour Intervals for Contractors To Come Inspect Property)</b>
+	</h6>
+		<div class="row">
+			<div class="2u 12u(mobilep)">
+			<%= form_for @bid, url: user_bids_path do |f| %>
+				<h5> Schedule Date </h5>
+				<%= f.date_field :date1%>
+				<h5> Begin Time </h5>
+				<%= f.time_field :start_time1%>
+				<h5> End Time </h5>
+		    	<%= f.time_field :end_time1%>
+		    	<h5> Schedule Date 2 </h5>
+				<%= f.date_field :date2%>
+				<h5> Begin Time 2</h5>
+				<%= f.time_field :start_time2%>
+				<h5> End Time 2</h5>
+		    	<%= f.time_field :end_time2%>
+		    	<h5> Schedule Date </h5>
+				<%= f.date_field :date3%>
+				<h5> Begin Time </h5>
+				<%= f.time_field :start_time3%>
+				<h5> End Time </h5>
+		    	<%= f.time_field :end_time3%>
+		    	</div>
+		    	<div class="4u 12u(mobilep)">
+				<h5> Contact Name </h5>
+				<%= f.text_field :contact_name%>
+				<h5> Contact Email </h5>
+				<%= f.text_field :contact_email%>
+				<h5> Contact Phone </h5>
+				<%= f.text_field :contact_phone%>
+				<h5> Instructions (i.e. Lockbox location) </h5>
+				<%= f.text_area :instructions%>
+				<br>
+				<br>
+		<%= f.submit "Submit Application" %>
+			</div>
+		</div>
+	<% end %>
+<% end %>

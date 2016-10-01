@@ -4,7 +4,7 @@ class PriceFeaturesController < ApplicationController
 	def new
 		@user_price_features = PriceFeature.new
 
-		authorize @user_price_features
+		authorize current_user
 
 	end
 
@@ -19,16 +19,19 @@ class PriceFeaturesController < ApplicationController
 			p.user = current_user
 
 		p.save
-	end
 
-			redirect_to dashboard_path
+		end
+		authorize current_user
+		
+		redirect_to dashboard_path
 
 	end
 
 	# If Contractor changes prices then send email to all users who had a estimate based on that contractor w/ ActiveJob
 	def index
-		# @user_price_feature = self.price_features
 
-		# find all contractor prices 
+		@user = current_user
+		@user_price_features = @user.price_features
+
 	end
 end

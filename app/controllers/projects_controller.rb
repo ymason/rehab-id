@@ -1,10 +1,12 @@
 class ProjectsController < ApplicationController
 	include ActionView::Helpers::NumberHelper
 
+	skip_after_action :verify_authorized, :only => :index
+
 	def new
 		@project = Project.new
 
-		authorize @project
+		authorize current_user
 	end
 
 	def create
@@ -20,7 +22,7 @@ class ProjectsController < ApplicationController
 			bathrooms: params[:project][:bathrooms]
 			)
 
-		authorize @project
+		authorize current_user
 
 		if @project.save
 			redirect_to new_project_project_feature_path(@project.id) 
@@ -31,11 +33,10 @@ class ProjectsController < ApplicationController
 
 	def index
 
-		@user = User.find_by(id: params[:user_id])
+		@user = current_user
 
 		@all_user_projects = @user.projects
 
-		authorize current_user
 	end
 
 	def show
@@ -45,9 +46,9 @@ class ProjectsController < ApplicationController
 
 		@contractors = User.local_contractors(@project)
 
-		@project_sqft = number_with_delimiter(@project.square_feet)
+		@contractor_ids = @contractors.pluck(:id)
 
-		# @estimates = @project.create_estimates
+		@project_sqft = number_with_delimiter(@project.square_feet)
 
 		@project_estimate = @project.min_and_max
 
@@ -59,7 +60,7 @@ class ProjectsController < ApplicationController
 
 		@maximum_number = number_to_currency(@maximum, :precision => 0)
 
-		authorize @user
+		authorize @project
 	end
 	
 end

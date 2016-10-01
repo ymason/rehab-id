@@ -28,6 +28,6 @@ class LenderLoansController < ApplicationController
 
 		redirect_to dashboard_path
 
-		authorize current_user
+		authorize @lender_loan
 	end
 end

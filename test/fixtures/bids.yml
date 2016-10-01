@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  project: one
+  date1: 2016-09-29
+  start_time1: 2016-09-29 14:21:11
+  end_time1: 2016-09-29 14:21:11
+  date2: 2016-09-29
+  start_time2: 2016-09-29 14:21:11
+  end_time2: 2016-09-29 14:21:11
+  date3: 2016-09-29
+  start_time3: 2016-09-29 14:21:11
+  end_time3: 2016-09-29 14:21:11
+  contact_name: MyString
+  contact_phone: MyString
+  contact_email: MyString
+  instructions: MyText
+
+two:
+  user: two
+  project: two
+  date1: 2016-09-29
+  start_time1: 2016-09-29 14:21:11
+  end_time1: 2016-09-29 14:21:11
+  date2: 2016-09-29
+  start_time2: 2016-09-29 14:21:11
+  end_time2: 2016-09-29 14:21:11
+  date3: 2016-09-29
+  start_time3: 2016-09-29 14:21:11
+  end_time3: 2016-09-29 14:21:11
+  contact_name: MyString
+  contact_phone: MyString
+  contact_email: MyString
+  instructions: MyText

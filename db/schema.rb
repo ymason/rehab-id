@@ -10,10 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928234511) do
+ActiveRecord::Schema.define(version: 20161001194043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bid_projects", force: :cascade do |t|
+    t.integer  "contractor_bid_id"
+    t.integer  "bid_id"
+    t.integer  "total"
+    t.integer  "draws"
+    t.integer  "days"
+    t.text     "breakdown"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.boolean  "accepted"
+    t.index ["bid_id"], name: "index_bid_projects_on_bid_id", using: :btree
+    t.index ["contractor_bid_id"], name: "index_bid_projects_on_contractor_bid_id", using: :btree
+  end
+
+  create_table "bids", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.date     "date1"
+    t.time     "start_time1"
+    t.time     "end_time1"
+    t.date     "date2"
+    t.time     "start_time2"
+    t.time     "end_time2"
+    t.date     "date3"
+    t.time     "start_time3"
+    t.time     "end_time3"
+    t.string   "contact_name"
+    t.string   "contact_phone"
+    t.string   "contact_email"
+    t.text     "instructions"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["project_id"], name: "index_bids_on_project_id", using: :btree
+    t.index ["user_id"], name: "index_bids_on_user_id", using: :btree
+  end
+
+  create_table "contractor_bids", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "total"
+    t.integer  "draws"
+    t.integer  "days"
+    t.text     "breakdown"
+    t.boolean  "accepted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_contractor_bids_on_user_id", using: :btree
+  end
 
   create_table "estimates", force: :cascade do |t|
     t.datetime "created_at",         null: false
@@ -170,6 +218,59 @@ ActiveRecord::Schema.define(version: 20160928234511) do
     t.index ["user_id"], name: "index_loan_quotes_on_user_id", using: :btree
   end
 
+  create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
+    t.string  "unsubscriber_type"
+    t.integer "unsubscriber_id"
+    t.integer "conversation_id"
+    t.index ["conversation_id"], name: "index_mailboxer_conversation_opt_outs_on_conversation_id", using: :btree
+    t.index ["unsubscriber_id", "unsubscriber_type"], name: "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type", using: :btree
+  end
+
+  create_table "mailboxer_conversations", force: :cascade do |t|
+    t.string   "subject",    default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "mailboxer_notifications", force: :cascade do |t|
+    t.string   "type"
+    t.text     "body"
+    t.string   "subject",              default: ""
+    t.string   "sender_type"
+    t.integer  "sender_id"
+    t.integer  "conversation_id"
+    t.boolean  "draft",                default: false
+    t.string   "notification_code"
+    t.string   "notified_object_type"
+    t.integer  "notified_object_id"
+    t.string   "attachment"
+    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                           null: false
+    t.boolean  "global",               default: false
+    t.datetime "expires"
+    t.index ["conversation_id"], name: "index_mailboxer_notifications_on_conversation_id", using: :btree
+    t.index ["notified_object_id", "notified_object_type"], name: "index_mailboxer_notifications_on_notified_object_id_and_type", using: :btree
+    t.index ["sender_id", "sender_type"], name: "index_mailboxer_notifications_on_sender_id_and_sender_type", using: :btree
+    t.index ["type"], name: "index_mailboxer_notifications_on_type", using: :btree
+  end
+
+  create_table "mailboxer_receipts", force: :cascade do |t|
+    t.string   "receiver_type"
+    t.integer  "receiver_id"
+    t.integer  "notification_id",                            null: false
+    t.boolean  "is_read",                    default: false
+    t.boolean  "trashed",                    default: false
+    t.boolean  "deleted",                    default: false
+    t.string   "mailbox_type",    limit: 25
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.boolean  "is_delivered",               default: false
+    t.string   "delivery_method"
+    t.string   "message_id"
+    t.index ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
+    t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
+  end
+
   create_table "price_features", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "feature_id"
@@ -232,6 +333,11 @@ ActiveRecord::Schema.define(version: 20160928234511) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "bid_projects", "bids"
+  add_foreign_key "bid_projects", "contractor_bids"
+  add_foreign_key "bids", "projects"
+  add_foreign_key "bids", "users"
+  add_foreign_key "contractor_bids", "users"
   add_foreign_key "estimates", "features"
   add_foreign_key "estimates", "price_features"
   add_foreign_key "estimates", "project_features"
@@ -242,6 +348,9 @@ ActiveRecord::Schema.define(version: 20160928234511) do
   add_foreign_key "loan_applications", "lender_loans"
   add_foreign_key "loan_applications", "lender_quotes"
   add_foreign_key "loan_quotes", "users"
+  add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
+  add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
+  add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "price_features", "features"
   add_foreign_key "price_features", "users"
   add_foreign_key "project_features", "features"

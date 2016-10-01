@@ -71,11 +71,11 @@ class LenderUnderwritingsController < ApplicationController
 		@loan_max = number_to_currency(@loan_underwriting.loan_max, :precision => 0)
 		@min_draw = number_to_currency(@loan_underwriting.min_draw, :precision => 0)
 
-		authorize @user
+		authorize @loan_underwriting
 	end
 
 	def index
-		@user = User.find_by(id: params[:user_id])
+		@user = current_user
 
 		@all_lender_under_writing = @user.lender_underwritings.all
 	end

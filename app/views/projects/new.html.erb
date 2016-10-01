@@ -1,4 +1,4 @@
-<% if policy(@project).new? %>
+<% if policy(current_user).new? %>
 	<h2> Tell Us About Your Rehab Needs </h2>
 		<%= form_for @project, url: user_projects_path do |f| %>
 			<div class="row">

@@ -1,9 +1,8 @@
-<% if policy(@user).index? %>
-	<ul>
-		<% @all_user_projects.each do | project | %>
-			<li>
-				<h2><%= link_to project.address, user_project_path(@user.id, project.id) %><h2>
-			</li>
-		<% end %>
-	</ul>
-<% end %>
+<ul>
+	<% @all_user_projects.each do | project | %>
+		<li>
+			<h2><%= project.address %></h2>
+			<td><%= button_to 'Get Project Bids', {:controller => "bids", :action => "create", :project_id => project.id, :user_id => current_user.id, :contractors => User.local_contractors(project).pluck(:id)}, :method=>:post  %></td>
+		</li>
+	<% end %>
+</ul>
