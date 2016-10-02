@@ -1,29 +1,23 @@
 <% if policy(@bid_project).edit? %>
 	<h2> Schedule Inspections for <%= @bid_project.address %></h2>
-	<h6>
-	<b>(Select Three Different 4 Hour Intervals for Contractors To Come Inspect Property)</b>
-	</h6>
+	<i>Give us three different potential times for contractors to come inspect property.
+	<h6>(They have 2 hours to complete inspection if time is selected so please plan ahead to have the property available.)</i></h6>
+	<br>
 		<div class="row">
 			<div class="2u 12u(mobilep)">
 			<%= form_for @bid, url: user_bids_path do |f| %>
-				<h5> Schedule Date </h5>
+				<h5> First Date </h5>
 				<%= f.date_field :date1%>
-				<h5> Begin Time </h5>
+				<h5> First Time </h5>
 				<%= f.time_field :start_time1%>
-				<h5> End Time </h5>
-		    	<%= f.time_field :end_time1%>
-		    	<h5> Schedule Date 2 </h5>
+		    	<h5> Second Date </h5>
 				<%= f.date_field :date2%>
-				<h5> Begin Time 2</h5>
+				<h5> Second Time </h5>
 				<%= f.time_field :start_time2%>
-				<h5> End Time 2</h5>
-		    	<%= f.time_field :end_time2%>
-		    	<h5> Schedule Date </h5>
+		    	<h5> Third Date </h5>
 				<%= f.date_field :date3%>
-				<h5> Begin Time </h5>
+				<h5> Third  Time </h5>
 				<%= f.time_field :start_time3%>
-				<h5> End Time </h5>
-		    	<%= f.time_field :end_time3%>
 		    	</div>
 		    	<div class="4u 12u(mobilep)">
 				<h5> Contact Name </h5>
