@@ -10,9 +10,15 @@ gem 'geokit-rails'
 
 gem 'money-rails'
 
-# gem 'encrypted_form_fields'
-
 gem 'mailboxer'
+
+# Use delayed job for running background jobs
+gem 'delayed_job_active_record'
+
+# Need daemons to start delayed_job
+gem 'daemons'
+
+# gem 'encrypted_form_fields'
 
 # gem "bower-rails", "~> 0.11.0"
 

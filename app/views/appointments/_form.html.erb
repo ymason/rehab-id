@@ -1,0 +1,28 @@
+<%= form_for Appointment.new, :html => { :class => "form-horizontal appointment" } do |f| %>
+    <div class="box">
+      <form method="post" action="#">
+        <div class="row uniform 50%">
+          <div class="6u 12u(mobilep)">
+            <%= time_select :appointment, :time %>
+          </div>
+          <div class="6u 12u(mobilep)">
+             <%= date_select :appointment, :time %>
+          </div>
+        </div>
+        <div class="row uniform 50%">
+          <div class="12u">
+            <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "Pacific Time (US & Canada)" %>
+          </div>
+        </div>
+        <div class="row uniform">
+          <div class="12u">
+            <ul class="actions align-center">
+              <%= f.submit nil %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                appointments_path, :class => 'btn btn-default' %>
+            </ul>
+          </div>
+        </div>
+      </form>
+    </div>
+<% end %>

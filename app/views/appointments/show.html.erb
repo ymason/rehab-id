@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Full address:</strong>
+  <%= @appointment.full_address %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @appointment.name %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @appointment.phone_number %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @appointment.time %>
+</p>
+
+<p>
+  <strong>Time zone:</strong>
+  <%= @appointment.time_zone %>
+</p>
+
+<p>
+  <strong>Bid:</strong>
+  <%= @appointment.bid %>
+</p>
+
+<p>
+  <strong>Contractor bid:</strong>
+  <%= @appointment.contractor_bid %>
+</p>
+
+<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
+<%= link_to 'Back', appointments_path %>
