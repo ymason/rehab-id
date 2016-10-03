@@ -9,14 +9,11 @@
 
 			<h2> Inspection Schedule</h2>
 
-			<h4>First Availabity: <%= @bid.date1 %></h4>
-				<h5><%= @bid.start_time1 %> - <%= @bid.end_time1 %></h5>
+			<h4>First Availabity: <%= @bid.date1 %> @ <%= @bid.start_time1.strftime("%I:%M %p") %></h4>
 
-			<h4>Second Availabity: <%= @bid.date2 %></h4>
-				<h5><%= @bid.start_time2 %> - <%= @bid.end_time2 %></h5>
+			<h4>Second Availabity: <%= @bid.date2 %> @ <%= @bid.start_time2.strftime("%I:%M %p") %></h4>
 
-			<h4>Third Availabity: <%= @bid.date3 %></h4>
-				<h5><%= @bid.start_time3 %> - <%= @bid.end_time3 %></h5>
+			<h4>Third Availabity: <%= @bid.date3 %> @ <%= @bid.start_time3.strftime("%I:%M %p") %></h4>
 		</div>
 
 		<div class="4u 12u(mobilep)">

@@ -87,13 +87,10 @@ class BidsController < ApplicationController
 		@bid.update(
 			date1: params[:bid][:date1],
 			start_time1: params[:bid][:start_time1],
-			end_time1: params[:bid][:end_time1],
 			date2: params[:bid][:date2],
 			start_time2: params[:bid][:start_time2],
-			end_time2: params[:bid][:end_time2],
 			date3: params[:bid][:date3],
 			start_time3: params[:bid][:start_time3],
-			end_time3: params[:bid][:end_time3],
 			contact_name: params[:bid][:contact_name],
 			contact_phone: params[:bid][:contact_phone],
 			contact_email: params[:bid][:contact_email],
