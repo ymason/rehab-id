@@ -56,11 +56,13 @@ class BidsController < ApplicationController
 	def show
 		@bid = Bid.find_by(id: params[:id])
 
-		@bid_project = @bid.project
+		@user = User.find_by(id: params[:user_id])
+
+		@project = @bid.project
 
 		@bid_projects = @bid.bid_projects
 
-		@project_estimate = @bid_project.min_and_max
+		@project_estimate = @project.min_and_max
 
 		@minimum = @project_estimate[0]
 
@@ -70,7 +72,18 @@ class BidsController < ApplicationController
 
 		@maximum_number = number_to_currency(@maximum, :precision => 0)
 
-		authorize @bid_project
+		# @contractors = []
+
+		# @contractor_bid = @bid_project.contractor_bid
+
+		# @contractor_id = @contractor_bid.user_id
+
+		# @bid.bid_projects.each do | bid |
+		# 	@user = bid.contactor_bid.user_id
+		# 	contractors.push(@user)
+		# end
+
+		authorize @project
 	end
 
 	def edit

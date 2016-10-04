@@ -1,10 +1,10 @@
-<% if policy(@bid_project).show? %>
+<% if policy(@project).show? %>
 	<div class="row">
 		<div class="4u 12u(mobilep)">
 
 			<h2>Property Address</h2>
 
-			 <%= @bid_project.address %> <%= @bid_project.city %>, <%= @bid_project.state %> <%= @bid_project.zip_code %>
+			 <%= @project.address %> <%= @project.city %>, <%= @project.state %> <%= @project.zip_code %>
 			 <br>
 
 			<h2> Inspection Schedule</h2>
@@ -14,33 +14,38 @@
 			<h4>Second Availabity: <%= @bid.date2 %> @ <%= @bid.start_time2.strftime("%I:%M %p") %></h4>
 
 			<h4>Third Availabity: <%= @bid.date3 %> @ <%= @bid.start_time3.strftime("%I:%M %p") %></h4>
-
-			<h4><%= link_to "Communicate With Contractors", new_user_project_bid_bid_project_path(current_user.id, @project.id, @bid.id) %></h4>
+			
 		</div>
 
 		<div class="4u 12u(mobilep)">
-		<% if @bid_projects.all? {|project| project.total == nil} %>
-			<h2>No Current Bids</h2>
-				<h4> Waiting on bids.. </h4>
-		<% else %>
-			<h2>Current Bids</h2>
-			<% @bid_projects.each.with_index(1) do | bid, index | %>
-				<% if bid.total =! nil %>
+			<% if @bid_projects.all? {|project| project.total == nil} %>
+				<h2>No Current Bids</h2>
+					<h4> Waiting on bids.. </h4>
+			<% else %>
+				<h2>Current Bids</h2>
+				<% @bid_projects.each.with_index(1) do | bid, index | %>
 					<ul>
-					   <li>
-					   <h4> Bid #<%= index %></h4>
-							<h5>Total: <%= number_to_currency(bid.total, :precision => 0) %> </h5>	
-							<h5>Estimated Project Length: <%= bid.days %> Days </h5>
-							<h5>Number of Draws: <%= bid.draws %> </h5>
-							<h5>Breakdown: <%= bid.breakdown %> </h5>
-							<td><%= button_to 'Select This Bid', {:controller => "bid_projects", :action => "update", :user_id => current_user.id, :project_id=> @bid_project.id, :bid_id=> @bid.id, :id=> bid.id}, :method=>:patch  %></td>
-						</li>
+						<% if bid.accepted? %>
+							<h4> Accepted Bid </h4>
+									<h5>Total: <%= number_to_currency(bid.total, :precision => 0) %> </h5>	
+									<h5>Estimated Project Length: <%= bid.days %> Days </h5>
+									<h5>Number of Draws: <%= bid.draws %> </h5>
+									<h5>Breakdown: <%= bid.breakdown %> </h5>
+									<td><%= button_to 'Message This Contractor', {:controller => "bid_projects", :action => "show", :user_id => @user.id, :project_id=> @project.id, :bid_id=> @bid.id, :id=> bid.id, :contractor_id=> bid.contractor_bid.user_id, :index=>index}, :method=>:get  %></td>
+						<% else %>
+							   <li>
+							   <h4> Bid #<%= index %></h4>
+									<h5>Total: <%= number_to_currency(bid.total, :precision => 0) %> </h5>	
+									<h5>Estimated Project Length: <%= bid.days %> Days </h5>
+									<h5>Number of Draws: <%= bid.draws %> </h5>
+									<h5>Breakdown: <%= bid.breakdown %> </h5>
+									<td><%= button_to 'Message This Contractor', {:controller => "bid_projects", :action => "show", :user_id => current_user.id, :project_id=> @project.id, :bid_id=> @bid.id, :id=> bid.id, :contractor_id=> bid.contractor_bid.user_id}, :method=>:get  %></td>
+									<td><%= button_to 'Select This Bid', {:controller => "bid_projects", :action => "update", :user_id => current_user.id, :project_id=> @project.id, :bid_id=> @bid.id, :id=> bid.id, :index=>index}, :method=>:patch  %></td>
+								</li>
+						<% end %>
 					</ul>
-				<% else %>
 				<% end %>
 			<% end %>
-
-		<% end %>
 		</div>
 
 		<div class="4u 12u(mobilep)">
@@ -48,7 +53,7 @@
 			<h4><%= @minimum_number %> - <%= @maximum_number %></h4>
 				<h2> Rehab Needs:</h2>
 			<ul>
-				<% @bid_project.project_features.each do | f | %>
+				<% @project.project_features.each do | f | %>
 					<% if f.feature.self? || f.feature.extra?  %>
 					  	<li>
 							<h5><%= f.feature.name %></h5>

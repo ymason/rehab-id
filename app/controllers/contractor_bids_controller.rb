@@ -37,12 +37,22 @@ class ContractorBidsController < ApplicationController
 	end
 
 	def show
+
 		@contractor_bid = ContractorBid.find_by(id: params[:id])
+
+		@contractor_id = @contractor_bid.user_id
+
 		@user = User.find_by(id: params[:user_id])
-		
-		@bid = @contractor_bid.bid_project.bid
+
+		@bid_project = @contractor_bid.bid_project
+
+    	@bid = @bid_project.bid
 
     	@project = @bid.project
+
+    	@project_user_id = @project.user_id
+
+    	@project_user = @project.user
 
     	authorize @contractor_bid
 	end

@@ -2,11 +2,10 @@
 	<div class="row">
 		<div class="4u 12u(mobilep)">
 		<h2>Send new message</h2>
-			<%= form_tag conversation_path, method: :post do %>
-					<%= select_tag :user_id, options_from_collection_for_select(User.all - [@current_user], :id, :name) %>
-
-					<%= text_field_tag :subject, nil, placeholder: "Subject" %>
-
+			<%= form_tag bid_message_create_path(@user.id, @project.id, @bid.id, @bid_project.id), method: :post do %>
+	
+					<%= hidden_field_tag :contractor_id, @contractor_id %>
+					<%= hidden_field_tag :project_user, @project_user %>
 					<%= text_area_tag :body, nil, placeholder: "Leave a message" %>
 
 					<%= file_field_tag :attachment %>

@@ -10,12 +10,9 @@ Rails.application.routes.draw do
     resources :lender_loans
   end
 
-
-
   resources :projects, only: [] do
     resources :project_features
   end
-
 
   resources :lender_quotes, only: [] do
     resources :loan_applications
@@ -24,7 +21,7 @@ Rails.application.routes.draw do
   resources :users, only: [] do
   resources :projects, only: [] do
     resources :bids do
-      resources :bid_projects do
+      resources :bid_projects, only: [:update] do
         resources :messages
 
           collection do 
@@ -64,4 +61,8 @@ Rails.application.routes.draw do
   post '/bid_projects/:bid_project_id/messages' => 'messages#create', as: :conversation_messages
   get '/users/:user_id/contractor_bids/:id/appointment' => 'contractor_bids#appointment', as: :appointment
   patch '/users/:user_id/contractor_bids/:ids' => 'contractor_bids#update', as: :submit_bid
+  get '/users/:user_id/projects/:project_id/bids/:bid_id/bid_projects/:id/conversation' => 'bid_projects#new', as: :bid_message
+  post '/users/:user_id/projects/:project_id/bids/:bid_id/bid_projects/:id/conversation' => 'bid_projects#create', as: :bid_message_create
+  post '/users/:user_id/projects/:project_id/bids/:bid_id/bid_projects/:bid_project_id/messages' => 'messages#create', as: :new_bid_message
+  get '/users/:user_id/projects/:project_id/bids/:bid_id/bid_projects/:id' => 'bid_projects#show', as: :bid_message_show
 end
