@@ -109,6 +109,16 @@ class Project < ApplicationRecord
 
       min_max = [@project_minimum, @project_maximum]
   end
+
+  def time_zone
+
+    @lat = self.lat
+
+    @lng = self.lng
+
+    time_zone = Timezone.lookup(@lat, @lng)
+  end
+  
 end
 
 # # If hash has key then add it, if doesn't have key then create it,

@@ -12,6 +12,8 @@ class UsersController < ApplicationController
 		@user_lender_loans = current_user.lender_loans
 
 		@user_project_bids = current_user.bids
+
+		@user_contract_bids = current_user.contractor_bids
 	end
 
 	def create

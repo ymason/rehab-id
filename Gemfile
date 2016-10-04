@@ -1,20 +1,39 @@
 source 'https://rubygems.org'
 
+# User login system
 gem 'devise'
 
+# Set up user policies
 gem 'pundit'
 
+# YAML/Secret Files
 gem 'figaro'
 
+#Geocoding 
 gem 'geokit-rails'
 
+# Money helper for variables
 gem 'money-rails'
 
 # gem 'encrypted_form_fields'
 
+# User messaging
 gem 'mailboxer'
 
+# Get Timezones from Coordinates
 gem 'timezone', '~> 1.0'
+
+# Use Twilio
+gem 'twilio-ruby'
+
+# # Use bootstrap themes
+# gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
+# Use delayed job for running background jobs
+gem 'delayed_job_active_record'
+
+# Need daemons to start delayed_job
+gem 'daemons'
 
 # gem "bower-rails", "~> 0.11.0"
 
@@ -25,8 +44,6 @@ gem 'timezone', '~> 1.0'
 # gem "therubyracer"
 
 # gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-
-# gem "twitter-bootstrap-rails"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'

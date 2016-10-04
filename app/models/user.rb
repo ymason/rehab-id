@@ -80,8 +80,12 @@ class User < ApplicationRecord
     self.id == bid.project.user_id
   end
 
-   def owner_of_bid_approval?(bid_project)
+  def owner_of_bid_approval?(bid_project)
     self.id == bid_project.bid.project.user_id
+  end
+
+  def owner_of_contractor_bid(contractor_bid)
+    self.id == contractor_bid.user_id
   end
 
   # Loans Policies

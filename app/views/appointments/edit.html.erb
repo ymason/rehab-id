@@ -1,0 +1,6 @@
+<h1>Editing Appointment</h1>
+
+<%= render 'form', appointment: @appointment %>
+
+<%= link_to 'Show', @appointment %> |
+<%= link_to 'Back', user_contractor_bid_appointments_path(current_user.id, @contractor_bid_id) %>

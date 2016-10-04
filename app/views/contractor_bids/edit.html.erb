@@ -1,0 +1,19 @@
+<% if policy(current_user).edit? %>
+	<h2>Submit Your Bid</h2>
+		<div class="row">
+			<div class="6u 12u(mobilep)">
+			<%= form_for @contractor_bid, url: submit_bid_path(@user.id, @contractor_bid.id) do |f| %>
+				<h5> Total </h5>
+				<%= f.number_field :total%>
+				<h5> # of Draws </h5>
+				<%= f.number_field :draws%>
+				<h5> Estimated # of Days For Completion </h5>
+		    	<%= f.number_field :days %>
+				<h5> Breakdown </h5>
+				<%= f.text_area :breakdown%>
+				<br>
+			<%= f.submit "Submit New Terms" %>
+			</div>
+		</div>
+	<% end %>
+<% end %>
