@@ -24,21 +24,27 @@ Rails.application.routes.draw do
   resources :users, only: [] do
   resources :projects, only: [] do
     resources :bids do
+      resources :bid_projects do
+        resources :messages
+
+          collection do 
+            get :inbox
+            get :all, action: :index
+            get :sent 
+            get :trash 
+
+          end
+        end
       end
     end
   end
 
-  resources :bid_projects do
-    resources :messages
-
-      collection do 
-        get :inbox
-        get :all, action: :index
-        get :sent 
-        get :trash 
-
+  resources :users, only: [] do
+  resources :contractor_bids do
+    resources :appointments, except: [:new, :index]
       end
     end
+
 
 	root to: 'home#index'
   get '/contact' => 'home#show', as: :contact
@@ -56,4 +62,6 @@ Rails.application.routes.draw do
   patch '/users/:user_id/projects/:project_id/bids/:bid_id/bid_projects/:id/accepted' =>  'bid_projects#update', as: :bid_accepted
   post '/bid_projects' => 'bid_projects#create', as: :conversation
   post '/bid_projects/:bid_project_id/messages' => 'messages#create', as: :conversation_messages
+  get '/users/:user_id/contractor_bids/:id/appointment' => 'contractor_bids#appointment', as: :appointment
+  patch '/users/:user_id/contractor_bids/:ids' => 'contractor_bids#update', as: :submit_bid
 end

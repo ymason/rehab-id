@@ -1,0 +1,9 @@
+<ul>
+<% @start_times.each.with_index(1) do | time, index | %>
+	   <li>
+	   <h4> Time Option #<%= index %></h4>
+			<h5> <%= time %> </h5>	
+			<td><%= button_to 'Select This Time', {:controller => "appointments", :action => "create", :user_id => @user.id, :contractor_bid_id=> @contractor_bid.id, :bid_id=> @bid.id, :name => @user.name, :phone_number=> @user.phone, :time=> time, :time_zone=> @time_zone}, :method=>:post  %></td>
+		</li>
+<% end %>
+</ul>

@@ -52,6 +52,10 @@ class BidProjectsController < ApplicationController
 
 		@bid_project = BidProject.find_by(id: params[:id])
 
+		@bid = @bid_project.project
+
+		@project = @bid.project
+
 		@bid_project.update(
 			accepted: 1
 			)

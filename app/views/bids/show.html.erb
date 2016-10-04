@@ -14,6 +14,8 @@
 			<h4>Second Availabity: <%= @bid.date2 %> @ <%= @bid.start_time2.strftime("%I:%M %p") %></h4>
 
 			<h4>Third Availabity: <%= @bid.date3 %> @ <%= @bid.start_time3.strftime("%I:%M %p") %></h4>
+
+			<h4><%= link_to "Communicate With Contractors", new_user_project_bid_bid_project_path(current_user.id, @project.id, @bid.id) %></h4>
 		</div>
 
 		<div class="4u 12u(mobilep)">
