@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   acts_as_mappable :auto_geocode=>{:field=>:full_address, :error_message=>'Could not geocode address'}
 
-
   has_many :projects
 
   has_many :price_features
@@ -38,12 +37,6 @@ class User < ApplicationRecord
   after_create :send_welcome_email
 
   enum role: [:admin, :lender, :contractor, :user]
-
-  acts_as_messageable
-
-  def mailboxer_email(object)
-    self.email
-  end
 
   def full_address
     "#{self.address} #{self.city} #{self.state}"

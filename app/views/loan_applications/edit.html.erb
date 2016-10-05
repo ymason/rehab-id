@@ -1,5 +1,5 @@
 <% if policy(@loan_application).edit? %>
-	<h4><b> Congratulations Your Pre-Approved, Please Complete Application</b> </h4>
+	<h4><b> Congratulations You're Pre-Approved, Please Complete Application</b> </h4>
 		<div class="row">
 			<div class="2u 12u(mobilep)">
 			<%= form_for @loan_application, url: loan_application_path do |f| %>
@@ -20,6 +20,9 @@
 				<br>
 				<h5> Legal Zip Code </h5>
 				<%= f.number_field :legal_zip_code%>
+				<br><br>
+				<h5> Upload Entity Docs </h5>
+			    <%= f.file_field :entity_docs %>
 			</div>
 
 			<div class="2u 12u(mobilep)">

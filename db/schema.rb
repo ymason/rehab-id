@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161002213402) do
+ActiveRecord::Schema.define(version: 20161004232942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.string   "name"
+    t.string   "phone_number"
+    t.datetime "time"
+    t.string   "time_zone"
+    t.integer  "bid_id"
+    t.integer  "contractor_bid_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["bid_id"], name: "index_appointments_on_bid_id", using: :btree
+    t.index ["contractor_bid_id"], name: "index_appointments_on_contractor_bid_id", using: :btree
+  end
 
   create_table "bid_projects", force: :cascade do |t|
     t.integer  "contractor_bid_id"
@@ -58,6 +71,21 @@ ActiveRecord::Schema.define(version: 20161002213402) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_contractor_bids_on_user_id", using: :btree
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
   create_table "estimates", force: :cascade do |t|
@@ -190,6 +218,7 @@ ActiveRecord::Schema.define(version: 20161002213402) do
     t.integer  "lender_quote_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.string   "entity_docs"
     t.index ["lender_loan_id"], name: "index_loan_applications_on_lender_loan_id", using: :btree
     t.index ["lender_quote_id"], name: "index_loan_applications_on_lender_quote_id", using: :btree
   end
@@ -330,6 +359,8 @@ ActiveRecord::Schema.define(version: 20161002213402) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "appointments", "bids"
+  add_foreign_key "appointments", "contractor_bids"
   add_foreign_key "bid_projects", "bids"
   add_foreign_key "bid_projects", "contractor_bids"
   add_foreign_key "bids", "projects"

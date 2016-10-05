@@ -10,12 +10,9 @@ Rails.application.routes.draw do
     resources :lender_loans
   end
 
-
-
   resources :projects, only: [] do
     resources :project_features
   end
-
 
   resources :lender_quotes, only: [] do
     resources :loan_applications
@@ -27,18 +24,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  resources :bid_projects do
-    resources :messages
-
-      collection do 
-        get :inbox
-        get :all, action: :index
-        get :sent 
-        get :trash 
-
-      end
-    end
 
 	root to: 'home#index'
   get '/contact' => 'home#show', as: :contact
@@ -54,6 +39,5 @@ Rails.application.routes.draw do
   post '/users/:user_id/projects/:project_id/bids' => 'bids#create', as: :bids
   patch '/users/:user_id/projects/:project_id/bids/:id' => 'bids#update', as: :user_bids
   patch '/users/:user_id/projects/:project_id/bids/:bid_id/bid_projects/:id/accepted' =>  'bid_projects#update', as: :bid_accepted
-  post '/bid_projects' => 'bid_projects#create', as: :conversation
-  post '/bid_projects/:bid_project_id/messages' => 'messages#create', as: :conversation_messages
+
 end

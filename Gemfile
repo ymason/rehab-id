@@ -10,9 +10,13 @@ gem 'geokit-rails'
 
 gem 'money-rails'
 
-# gem 'encrypted_form_fields'
+# Need for CarrierWave to communicate with Amazon S3
 
-gem 'mailboxer'
+gem "fog"
+
+gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
+
+# gem 'encrypted_form_fields'
 
 gem 'timezone', '~> 1.0'
 

@@ -2,8 +2,6 @@ class LoanQuotesController < ApplicationController
 
 	include ActionView::Helpers::NumberHelper
 
-	skip_after_action :verify_authorized, :only => :index
-
 	def new
 		@loan_quote = LoanQuote.new
 
@@ -56,11 +54,5 @@ class LoanQuotesController < ApplicationController
 		@loan_quote_arv = number_to_currency(@loan_quote.arv, :precision => 0)
 
 		authorize @loan_quote
-	end
-
-	def index
-		@user = current_user
-
-		@all_user_loan_quotes = @user.loan_quotes
 	end
 end

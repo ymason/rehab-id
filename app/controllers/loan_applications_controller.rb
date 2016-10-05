@@ -1,7 +1,5 @@
 class LoanApplicationsController < ApplicationController
 
-	skip_after_action :verify_authorized, :only => :edit
-
 	include ActionView::Helpers::NumberHelper
 
 	def new
@@ -22,6 +20,10 @@ class LoanApplicationsController < ApplicationController
 			)
 
 		authorize current_user
+
+		if LoanApplication.find_by(lender_quote_id: @lender_quote_id).blank?
+			@loan_application = LoanApplication.find_by(lender_quote_id: @lender_quote_id)
+			redirect_to edit_lender_quote_loan_application_path(@lender_quote_id, @loan_application.id)
 
 		if @loan_application.save
 
