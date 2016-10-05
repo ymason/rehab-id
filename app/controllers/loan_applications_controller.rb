@@ -2,43 +2,40 @@ class LoanApplicationsController < ApplicationController
 
 	include ActionView::Helpers::NumberHelper
 
-	def new
-		@loan_application = LoanApplication.new
-
-		authorize current_user
-	end
-
 	def create
 
-		@lender_loan = LenderLoan.create(user_id: params[:lender_id])
 
 		@lender_quote_id = params[:lender_quote_id]
+		@loan_quote_id = params[:loan_quote_id]
+		authorize current_user
 
+		if LoanApplication.find_by(lender_quote_id: @lender_quote_id).blank?
+		@lender_loan = LenderLoan.create(user_id: params[:lender_id])
+		
 		@loan_application = LoanApplication.new(
 			lender_loan_id: @lender_loan.id,
 			lender_quote_id: @lender_quote_id,
 			)
 
-		authorize current_user
+			if @loan_application.save
 
-		if LoanApplication.find_by(lender_quote_id: @lender_quote_id).blank?
+				@loan_quote = LoanQuote.find_by(id: @loan_quote_id)
+
+				@lender_loan.update(
+					address: @loan_quote.address,
+					city: @loan_quote.city,
+					state: @loan_quote.state,
+					zip_code: @loan_quote.zip_code,
+					loan_application_id: @loan_application.id)
+
+				redirect_to edit_lender_quote_loan_application_path(@lender_quote_id, @loan_application.id)
+			else
+				redirect_to user_loan_quote_path(current_user.id, @loan_quote_id)
+
+			end	
+		else
 			@loan_application = LoanApplication.find_by(lender_quote_id: @lender_quote_id)
 			redirect_to edit_lender_quote_loan_application_path(@lender_quote_id, @loan_application.id)
-
-		if @loan_application.save
-
-			@loan_quote = @loan_application.lender_quote.loan_quote
-
-			@lender_loan.update(
-				address: @loan_quote.address,
-				city: @loan_quote.city,
-				state: @loan_quote.state,
-				zip_code: @loan_quote.zip_code,
-				loan_application_id: @loan_application.id)
-
-			redirect_to edit_lender_quote_loan_application_path(@lender_quote_id, @loan_application.id)
-		else
-			redirect_to dashboard_path
 		end
 	end
 
@@ -62,6 +59,8 @@ class LoanApplicationsController < ApplicationController
 			legal_address: params[:loan_application][:legal_address],
 			legal_city: params[:loan_application][:legal_city],
 			legal_state: params[:loan_application][:legal_state],
+			legal_zip_code: params[:loan_application][:legal_zip_code],
+			entity_docs: params[:loan_application][:entity_docs],
 			mailing_address: params[:loan_application][:mailing_address],
 			mailing_city: params[:loan_application][:mailing_city],
 			mailing_state: params[:loan_application][:mailing_state],
@@ -97,8 +96,15 @@ class LoanApplicationsController < ApplicationController
 			insurance_phone: params[:loan_application][:insurance_phone]
 			)
 
-			redirect_to dashboard_path
+			# if update then redirect if not then render edit
+			@lender_quote_id = @loan_application.lender_quote_id
+			redirect_to lender_quote_loan_application_path(@lender_quote_id, @loan_application.id)
 
 			authorize @loan_application
+	end
+
+	def show
+		@loan_application = LoanApplication.find_by(id: params[:id])
+		authorize @loan_application
 	end
 end

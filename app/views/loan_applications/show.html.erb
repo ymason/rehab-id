@@ -1,0 +1,135 @@
+<% if policy(@loan_application).show? %>
+	<h2> Loan Application</h2>
+	<div class="row">
+		<div class="4u 12u(mobilep)">
+
+
+			<ul>
+			  	<li>
+					<h5>Occupied: <%= @loan_application.occupied %></h5>
+				</li>
+			   	<li>
+					<h5>Loan Purpose: <%= @loan_application.loan_purpose %></h5>
+				</li>
+				<li>
+					<h5>Entity Name: <%= @loan_application.entity_name %></h5>
+				</li>
+			   <li>
+					<h5>Entity Type: <%= @loan_application.entity_type %></h5>
+				</li>
+				 <li>
+					<h4><%= link_to "Entity Docs", @loan_application.entity_docs.url %></h4>
+				</li>
+
+				<li>
+					<h5>State Formed: <%= @loan_application.state %></h5>
+				</li>
+			   	<li>
+					<h5>EIN: <%= @loan_application.ein %></h5>
+				</li>
+				<li>
+					<h5>Legal Address: <%= @loan_application.legal_address %> <%= @loan_application.legal_city %> <%= @loan_application.legal_state %> </h5>
+				</li>
+			   <li>
+					<h5>Mailing Address: <%= @loan_application.mailing_address %> <%= @loan_application.mailing_city %> <%= @loan_application.mailing_state %> <%= @loan_application.mailing_zip_code %></h5>
+				</li>
+			</ul>
+		</div>
+
+		<div class="4u 12u(mobilep)">
+			<ul>
+			  	<li>
+					<h5>Owner Name: <%= @loan_application.owner_name %></h5>
+				</li>
+			   	<li>
+					<h5>Owner Title: <%= @loan_application.owner_title %></h5>
+				</li>
+				<li>
+					<h5>Owner Email: <%= @loan_application.owner_email %></h5>
+				</li>
+			   <li>
+					<h5>Owner SS: <%= @loan_application.owner_ss %></h5>
+				</li>
+				<li>
+					<h5>Owner Phone #: <%= @loan_application.owner_phone %></h5>
+				</li>
+			   	<li>
+					<h5>Owner DOB: <%= @loan_application.owner_dob %></h5>
+				</li>
+				<li>
+					<h5>Guarantor Name: <%= @loan_application.guarantor_name %></h5>
+				</li>
+				<li>
+					<h5>Guarantor Email: <%= @loan_application.guarantor_email %></h5>
+				</li>
+			   <li>
+					<h5>Guarantor SS: <%= @loan_application.guarantor_ss %></h5>
+				</li>
+				<li>
+					<h5>Guarantor Phone #: <%= @loan_application.guarantor_phone %></h5>
+				</li>
+			   	<li>
+					<h5>Guarantor DOB: <%= @loan_application.owner_dob %></h5>
+				</li>
+				<li>
+					<h5>Contact Name: <%= @loan_application.contact_name %></h5>
+				</li>
+				<li>
+					<h5>Contact Email: <%= @loan_application.contact_email %></h5>
+				</li>
+				<li>
+					<h5>Contact Phone #: <%= @loan_application.contact_phone %></h5>
+				</li>
+			</ul>
+		</div>
+		<div class="4u 12u(mobilep)">
+			<ul>
+			  	<li>
+					<h5>Property Instructionss: <%= @loan_application.property_instructions %></h5>
+				</li>
+			   	<li>
+					<h5>Rehab Time: <%= @loan_application.rehab_time %></h5>
+				</li>
+				<li>
+					<h5>Add Sq. Ft.: <%= @loan_application.add_sq_ft %></h5>
+				</li>
+			   <li>
+					<h5>Rehabber: <%= @loan_application.rehabber %></h5>
+				</li>
+				<li>
+					<h5>Contractor Name: <%= @loan_application.contractor_name %></h5>
+				</li>
+				<li>
+					<h5>Contractor Company: <%= @loan_application.contractor_company %></h5>
+				</li>
+				<li>
+					<h5>Contractor Phone #: <%= @loan_application.contractor_phone %></h5>
+				</li>
+				<li>
+					<h5>Contractor Email: <%= @loan_application.contractor_email %></h5>
+				</li>
+			   	<li>
+					<h5>Closer Name: <%= @loan_application.closer_name %></h5>
+				</li>
+				<li>
+					<h5>Closer Company: <%= @loan_application.closer_company %></h5>
+				</li>
+				<li>
+					<h5>Closer Phone #: <%= @loan_application.closer_phone %></h5>
+				</li>
+				<li>
+					<h5>Closer Email: <%= @loan_application.closer_email %></h5>
+				</li>
+				<li>
+					<h5>Insurance Name: <%= @loan_application.insurance_name %></h5>
+				</li>
+				<li>
+					<h5>Insurance Email: <%= @loan_application.insurance_email %></h5>
+				</li>
+				<li>
+					<h5>Insurance Phone #: <%= @loan_application.insurance_phone %></h5>
+				</li>
+			</ul>
+		</div>
+	</div>
+<% end %>
