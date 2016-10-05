@@ -5,6 +5,8 @@ class LoanQuotesController < ApplicationController
 	def new
 		@loan_quote = LoanQuote.new
 
+		@user = User.find_by(id: params[:user_id])
+
 		@property_types = LoanQuote.property_types
 
 		authorize current_user
