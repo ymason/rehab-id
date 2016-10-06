@@ -1,4 +1,4 @@
-class LenderUndewritingPolicy < ApplicationPolicy
+class LenderUnderwritingPolicy < ApplicationPolicy
 	def index
 		admin_or_owner_of_lender_underwriting?
 	end

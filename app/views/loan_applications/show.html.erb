@@ -18,9 +18,7 @@
 					<h5>Entity Type: <%= @loan_application.entity_type %></h5>
 				</li>
 				 <li>
-					<h4> Entity Docs</h4>
-
-					<%= render pdf: @loan_application.entity_docs.url, orientation: 'Portrait', page_size:  'Letter' %></h4>
+					<h4><%= link_to "Entity Docs", @loan_application.entity_docs.url %></h4>
 				</li>
 
 				<li>

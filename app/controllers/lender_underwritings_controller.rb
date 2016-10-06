@@ -6,8 +6,9 @@ class LenderUnderwritingsController < ApplicationController
 
 	def new
 		@lender_underwriting = LenderUnderwriting.new
+		@user = User.find_by(id: params[:user_id])
 
-		authorize current_user
+		authorize @user
 	end
 
 	def create

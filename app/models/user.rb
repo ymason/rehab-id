@@ -79,8 +79,8 @@ class User < ApplicationRecord
 
   # Loans Policies
 
-  def lender_own_underwriting?(lender_underwriting)
-      self.id = lender_underwriting.user_id
+  def lender_own_underwriting?(loan_underwriting)
+      self.id = loan_underwriting.user_id
   end
 
   def owner_of_loan_quote?(loan_quote)
