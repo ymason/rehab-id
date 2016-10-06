@@ -42,18 +42,33 @@
 
 			<div class="4u 12u(mobilep)">
 				<h2> Contractor Bids </h2>
-				<h4><td><%= button_to 'Get Bids Now', {:controller => "projects", :action => "index", :user_id => current_user.id}, :method=>:get  %></td></h4>
-				<% if current_user.bids.exists? %>
-					<h3> Current Project Bids</h3>
-					<ul>
-						<% @user_project_bids.each do | bid | %>
-							<li>
-								<h5><%= link_to "#{bid.project.address}", user_project_bid_path(current_user.id, bid.project.id, bid.id) %></h5>
-							</li>
+				<% if current_user.contractor? %>
+				<ul>
+					<% @user_contract_bids.each do | contract_bid | %>
+						<% if contract_bid.appointment.nil? %>
+									<li>
+										<h5><%= link_to "Schedule Appointment To Inspect #{contract_bid.bid_project.bid.project.address}", appointment_path(current_user.id, contract_bid.id) %></h5>
+									</li>
+						<% else %>
+							<h5><%= link_to "Make Bid For #{contract_bid.bid_project.bid.project.address}", user_contractor_bid_path(current_user.id, contract_bid.id) %></h5>
+						<% end %>
 						<% end %>
 					</ul>
 				<% else %>
-					<h3> No Current Bids</h3>
+					<h4><td><%= button_to 'Get Bids Now', {:controller => "projects", :action => "index", :user_id => current_user.id}, :method=>:get  %></td></h4>
+					<br>
+					<% if current_user.bids.exists? %>
+						<h3> Current Project Bids</h3>
+						<ul>
+							<% @user_project_bids.each do | bid | %>
+								<li>
+									<h5><%= link_to "#{bid.project.address}", user_project_bid_path(current_user.id, bid.project.id, bid.id) %></h5>
+								</li>
+							<% end %>
+						</ul>
+					<% else %>
+						<h3> No Current Bids</h3>
+					<% end %>
 				<% end %>
 			</div>
 
