@@ -1,14 +1,14 @@
-<% if policy(@loan_underwriting).show? %>
+<% if policy(@lender_underwriting).show? %>
 	<div class="row">
 		<div class="6u 12u(mobilep)">
-			<h2>Loan Type:</h2>
+			<h2>Loan Name:</h2>
+			<h5><%= @lender_underwriting.name%></h5>
 
 			<h2>Company Address</h2>
-			 <%= @loan_underwriting.address %> <%= @loan_underwriting.city %>, <%= @loan_underwriting.state %> <%= @loan_underwriting.zip_code %>
+			 <%= @lender_underwriting.address %> <%= @lender_underwriting.city %>, <%= @lender_underwriting.state %> <%= @lender_underwriting.zip_code %>
 			 <br>
 
-			<h2> Loan Terms </h2>
-
+			<h2> Loan Terms: </h2>
 			<ul>
 			  	<li>
 					<h5>Max LTV: <%= @ltv %></h5>
@@ -16,56 +16,56 @@
 			   	<li>
 					<h5>Max ARV: <%= @arv %></h5>
 				</li>
-				<li>
-					<h5>Min. Experience: <%= @loan_underwriting.experience %> Past Rehabs</h5>
-				</li>
 			   <li>
 					<h5>Interest Rate: <%= @interest_rate %></h5>
 				</li>
 				<li>
-					<h5>Min. Loan Amount: <%= @loan_min %></h5>
+					<h5>Origination Fee: <%= @origination_fee %></h5>
 				</li>
 			</ul>
 		</div>
-			<div class="6u 12u(mobilep)">
-				<h2><%= @loan_underwriting.name%></h2>
-				<ul>
-				   	<li>
-						<h5>Max Loan Amount: <%= @loan_max %></h5>
-					</li>
-					<li>
-						<h5>Origination Fee: <%= @origination_fee %></h5>
-					</li>
-				   <li>
-						<h5>Length of Term: <%= @loan_underwriting.term %> Months</h5>
-					</li>
-					<li>
-						<h5>Max Time To Process Loan: <%= @loan_underwriting.process_time %> Days</h5>
-					</li>
-				   <li>
-						<h5>Pre-Payment Penalty: <%= @loan_underwriting.pre_payment %> Months</h5>
-					</li>
-				</ul>
+		<div class="6u 12u(mobilep)">
+			<h2> Loan Requirements: </h2>
+			<ul>
+			<li>
+				<h5>Min. Loan Amount: <%= @loan_min %></h5>
+			</li>
+			   	<li>
+					<h5>Max Loan Amount: <%= @loan_max %></h5>
+				</li>
+			<li>
+				<h5>Min. Experience: <%= @lender_underwriting.experience %> Past Rehabs</h5>
+			</li>
+			   <li>
+					<h5>Length of Term: <%= @lender_underwriting.term %> Months</h5>
+				</li>
+				<li>
+					<h5>Max Time To Process Loan: <%= @lender_underwriting.process_time %> Days</h5>
+				</li>
+			   <li>
+					<h5>Pre-Payment Penalty: <%= @lender_underwriting.pre_payment %> Months</h5>
+				</li>
+			</ul>
 
-				<% if @loan_underwriting != nil %>
-					<h2> Rehab Loan Terms </h2>
-				<ul>
-				  	<li>
-						<h5>Max LTC: <%= @ltc %></h5>
-					</li>
-				   	<li>
-						<h5>Max # of Draws: <%= @loan_underwriting.draws %> Draws</h5>
-					</li>
-					<li>
-						<h5>Min. Draw Amount: <%= @min_draw %></h5>
-					</li>
-				   <li>
-						<h5>Min. Final Draw: <%= @min_final_draw %></h5>
-					</li>
-				<% end %>
-			
-				<h4><%= link_to 'Edit Loan Terms', edit_user_lender_underwriting_path(current_user.id, @loan_underwriting.id)%></h4>
-				 <h4><%= link_to 'Create New Loan Terms', new_user_lender_underwriting_path(current_user.id)%></h4>
-			</div>
+			<% if @lender_underwriting.ltc != nil %>
+				<h2> Rehab Loan Terms: </h2>
+			<ul>
+			  	<li>
+					<h5>Max LTC: <%= @ltc %></h5>
+				</li>
+			   	<li>
+					<h5>Max # of Draws: <%= @lender_underwriting.draws %> Draws</h5>
+				</li>
+				<li>
+					<h5>Min. Draw Amount: <%= @min_draw %></h5>
+				</li>
+			   <li>
+					<h5>Min. Final Draw: <%= @min_final_draw %></h5>
+				</li>
+			<% end %>
+			<br>
+			<h4><%= link_to 'Edit Loan Terms', edit_user_lender_underwriting_path(current_user.id, @lender_underwriting.id)%></h4>
+			 <h4><%= link_to 'Create New Loan Terms', new_user_lender_underwriting_path(current_user.id)%></h4>
 		</div>
+	</div>
 <% end %>

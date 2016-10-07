@@ -1,0 +1,23 @@
+<% if policy(@contractor_bid).show? %>
+	<div class="row">
+		<div class="4u 12u(mobilep)">
+			<h2>Property Address</h2>
+
+			 <h4><%= @project.address %> <%= @project.city %>, <%= @project.state %> <%= @project.zip_code %></h4>
+
+			<% if @contractor_bid.total.nil? %>
+			<h2>No Bid Placed</h2>
+
+			<td><%= button_to 'Click Here To Submit Bid Now', {:controller => "contractor_bids", :action => "edit", :user_id => current_user.id, :id=> @contractor_bid.id} , :method=>:get  %></td>
+			<% else %>
+			 <h2> Bid Info</h2>
+
+			<h5>Total: <%= number_to_currency(@contractor_bid.total, :precision => 0) %> </h5>
+			<h5>Estimated Time for Completion: <%= @contractor_bid.days %> Days </h5>
+			<h5># of Draws: <%= @contractor_bid.draws %> Draws </h5>
+			<h5>Breakdown: <%= @contractor_bid.breakdown %> </h5>
+			<h5><%= link_to 'Edit Your Bid', edit_user_contractor_bid_path(current_user.id, @contractor_bid.id) %>
+			<% end %></h5>
+		</div>
+	</div>
+<% end %>

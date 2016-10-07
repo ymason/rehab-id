@@ -1,4 +1,5 @@
 class BidProjectsController < ApplicationController
+	before_action :set_project, only: [:show, :edit, :update, :destroy]
 
 	def create 
 		@recipients = User.find(params[:user_id])
@@ -9,9 +10,6 @@ class BidProjectsController < ApplicationController
 	end
 
 	def update
-
-		@bid_project = BidProject.find_by(id: params[:id])
-
 		@bid_project.update(
 			accepted: 1
 			)
@@ -26,4 +24,12 @@ class BidProjectsController < ApplicationController
 
 		authorize @bid_project 
 	end
+
+	private
+
+	 def set_bid_project
+      @bid_project = BidProject.find(params[:id])
+      @bid = @bid_project.project
+      @project = @bid.project
+    end
 end

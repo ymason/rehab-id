@@ -9,7 +9,6 @@ class PriceFeaturesController < ApplicationController
 	end
 
 	def create
-
 		params[:feature].each do |f|
 			feature_hash = {}
 			feature_hash[:feature_id] = f[:feature_id]

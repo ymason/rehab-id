@@ -1,8 +1,7 @@
 class LenderLoansController < ApplicationController
+	before_action :set_lender_loan, only: [:show, :edit, :update, :destroy]
 
 	def show
-		@lender_loan = LenderLoan.find_by(id: params[:id])
-
 		@loan_application_id = @lender_loan.loan_application_id
 
 		@loan_application = LoanApplication.find_by(id: @loan_application_id)
@@ -13,15 +12,10 @@ class LenderLoansController < ApplicationController
 
 		@lender_underwriting = LenderUnderwriting.find_by(id: @lender_underwriting_id)
 
-		authorize current_user
+		authorize @lender_loan
 	end
 
 	def update
-
-		@lender_loan_id = params[:id]
-
-		@lender_loan = LenderLoan.where(id: @lender_loan_id)
-
 		@lender_loan.update(
 			approved: 1
 			)
@@ -30,4 +24,11 @@ class LenderLoansController < ApplicationController
 
 		authorize @lender_loan
 	end
+
+	private
+
+	 def set_lender_loan
+      @lender_loan = LenderLoan.find(params[:id])
+    end
+
 end

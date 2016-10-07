@@ -1,11 +1,11 @@
 class BidProjectPolicy < ApplicationPolicy
 
 	def index
-		user.admin? || user.user? || user.contractor?
+		user.admin?
 	end
 
 	def show
-		admin_or_owner_of_bid_project?
+		admin_or_owner_of_bid_project_or_owner_of_contractor_bid?
 	end
 
 	def new?
@@ -47,8 +47,8 @@ class BidProjectPolicy < ApplicationPolicy
 
 	private
 
-	def admin_or_owner_of_bid_project?
-		user.admin? || (user.user? && user.owner_of_bid_approval?(record))
+	def admin_or_owner_of_bid_project_or_owner_of_contractor_bid?
+		user.admin? || (user.user? && user.owner_of_bid_approval?(record)) || (user.contractor? && user.owner_of_contractor_bid?(record))
 	end
 
 end

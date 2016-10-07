@@ -6,6 +6,22 @@ class LoanQuote < ApplicationRecord
 
   after_save :create_quotes
 
+  validates :user_id, presence: true
+  validates :property_type, presence: true
+  validates :purchase, presence: true
+  validates :occupied, presence: true
+  validates :address, presence: true
+  validates :city, presence: true
+  validates :state, presence: true
+  validates :zip_code, presence: true
+  validates :price, presence: true
+  validates :down_payment, presence: true
+  validates :rehab, presence: true
+  validates :arv, presence: true
+  validates :experience, presence: true
+  validates :fico, presence: true
+  validates :referral, presence: true
+
   def full_address
     "#{self.address} #{self.city} #{self.state}"
   end

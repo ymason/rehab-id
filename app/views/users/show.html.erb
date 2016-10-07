@@ -3,26 +3,57 @@
 	<div class="row">
 		<div class="4u 12u(mobilep)">
 			<h2> Project Estimates </h2>
-			<h4><%= link_to 'Create New Project', new_user_project_path(current_user.id)%><br>
-			<br><%= link_to 'Create Pricing', new_user_price_feature_path(current_user.id)%><br></h4>
-			<br>
-			<br><h3>Your Projects</h3>
+			<% if current_user.contractor? %>
 				<ul>
-					<% @all_user_projects.each do | project | %>
-						<li>
-							<h5><%= link_to project.address, user_project_path(current_user.id, project.id) %></h5>
-						</li>
-					<% end %>
-				</ul>
-			</div>
-
-			<div class="4u 12u(mobilep)">
-				<h2> Loan Quotes </h2>
-				<h4><%= link_to 'Create Lending Policy', new_user_lender_underwriting_path(current_user.id)%> |
-				<%= link_to 'See Your Policies', user_lender_underwritings_path(current_user.id)%><br>
-				<br><%= link_to 'Get New Loan', new_user_loan_quote_path(current_user.id)%><br></h4>
+				<li><h4><%= link_to 'Create Your Pricing', new_user_price_feature_path(current_user.id)%></li>
 				<br>
-				<br><h3>Your Loans</h3>
+				<li><h4><%= link_to 'See Your Pricing', new_user_price_feature_path(current_user.id)%></h4></li>
+				<% else %>
+				<ul>
+				<li><h4><%= link_to 'Get New Estimate', new_user_project_path(current_user.id)%></h4></li>
+					<br><br>
+					<h3>Your Projects</h3>
+					<% if current_user.projects.exists? %>
+						<ul>
+							<% @all_user_projects.each do | project | %>
+								<li>
+									<h5><%= link_to project.address, user_project_path(current_user.id, project.id) %></h5>
+								</li>
+							<% end %>
+						</ul>
+					<% else %>
+						<ul>
+						<li><h5> No Current Projects</h5></li>
+						</ul>
+					<% end %>
+			<% end %>
+		</div>
+
+		<div class="4u 12u(mobilep)">
+			<h2> Loan Quotes </h2>
+			<% if current_user.lender? %>
+				<ul>
+				<li><h4><%= link_to 'Create New Lending Policy', new_user_lender_underwriting_path(current_user.id)%></h4></li>
+				<br>
+				<li><h4><%= link_to 'See All Your Policies', user_lender_underwritings_path(current_user.id)%></h4></li>
+				<% if current_user.lender_loans.exists? %>
+					<h3>Lender Loans</h3>
+						<ul>
+							<% @user_lender_loans.each do | loan | %>
+								<li>
+									<h5><%= link_to loan.address, user_lender_loan_path(current_user.id, loan.id) %></h5>
+								</li>
+							<% end %>
+						</ul>
+				<% else %>
+				<% end %>
+			<% else %>
+				<ul>
+				<li><h4><%= link_to 'Get New Loan', new_user_loan_quote_path(current_user.id)%></h4></li>
+				</ul>
+				<br>
+				<h3>Your Loans</h3>
+				<% if current_user.loan_quotes.exists? %>
 					<ul>
 						<% @all_user_loans.each do | loan | %>
 							<li>
@@ -30,47 +61,63 @@
 							</li>
 						<% end %>
 					</ul>
-				<br><h3>Lender Loans</h3>
+				<% else %>
 					<ul>
-						<% @user_lender_loans.each do | loan | %>
+					<li><h5> No Current Loans</h5></li>
+					</ul>
+				<% end %>
+			<% end %>
+		</div>
+
+		<div class="4u 12u(mobilep)">
+			<h2> Contractor Bids </h2>
+			<% if current_user.contractor? %>
+				<% if current_user.contractor_bids.exists? %>
+					<% @user_contract_bids.each do | contract_bid | %>
+						<% if contract_bid.appointment.nil? %>
+							<ul>
+								<li>
+									<h4><%= link_to "Schedule Appointment To Inspect", appointment_path(current_user.id, contract_bid.id) %></h4>
+								</li>
+							</ul>
+						<% else %>
+							<ul>
+							<% if contract_bid.total.nil? %>
+								<li>
+								<h4><%= link_to "Make Bid For #{contract_bid.bid_project.bid.project.address}", user_contractor_bid_path(current_user.id, contract_bid.id) %></h4>
+								</li>
+								<br>
+							<% else %>
+								<li>
+								<h4><%= link_to "View Bid For #{contract_bid.bid_project.bid.project.address}", user_contractor_bid_path(current_user.id, contract_bid.id) %></h4>
+								</li>
+								<br>
+							<% end %>
+							</ul>
+						<% end %>
+					<% end %>
+				<% else %>
+					<h4> No Current Bids Available. </h4>
+				<% end %>
+			<% else %>
+				<h4><%= link_to "Get Bids Now", user_projects_path(current_user.id) %></h4>
+				<br><br>
+				<h3>Project Bids</h3>
+				<% if current_user.bids.exists? %>
+					<ul>
+						<% @user_project_bids.each do | bid | %>
 							<li>
-								<h5><%= link_to loan.address, user_lender_loan_path(current_user.id, loan.id) %></h5>
+								<h5><%= link_to "#{bid.project.address}", user_project_bid_path(current_user.id, bid.project.id, bid.id) %></h5>
 							</li>
 						<% end %>
 					</ul>
-			</div>
-
-			<div class="4u 12u(mobilep)">
-				<h2> Contractor Bids </h2>
-				<% if current_user.contractor? %>
-				<ul>
-					<% @user_contract_bids.each do | contract_bid | %>
-						<% if contract_bid.appointment.nil? %>
-									<li>
-										<h5><%= link_to "Schedule Appointment To Inspect #{contract_bid.bid_project.bid.project.address}", appointment_path(current_user.id, contract_bid.id) %></h5>
-									</li>
-						<% else %>
-							<h5><%= link_to "Make Bid For #{contract_bid.bid_project.bid.project.address}", user_contractor_bid_path(current_user.id, contract_bid.id) %></h5>
-						<% end %>
-						<% end %>
-					</ul>
 				<% else %>
-					<h4><td><%= button_to 'Get Bids Now', {:controller => "projects", :action => "index", :user_id => current_user.id}, :method=>:get  %></td></h4>
-					<br>
-					<% if current_user.bids.exists? %>
-						<h3> Current Project Bids</h3>
-						<ul>
-							<% @user_project_bids.each do | bid | %>
-								<li>
-									<h5><%= link_to "#{bid.project.address}", user_project_bid_path(current_user.id, bid.project.id, bid.id) %></h5>
-								</li>
-							<% end %>
-						</ul>
-					<% else %>
-						<h3> No Current Bids</h3>
-					<% end %>
+				<h5> No Current Bids</h5>
 				<% end %>
-			</div>
+			<% end %>
+			<br><br><br><br><br><br><br>
+		</div>
+	</div>
 
 <% else %>
 	<h2> Please sign up or log in..</h2>

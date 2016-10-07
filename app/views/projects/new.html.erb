@@ -1,6 +1,9 @@
 <% if policy(current_user).new? %>
 	<h2> Tell Us About Your Rehab Needs </h2>
-		<%= form_for @project, url: user_projects_path do |f| %>
+		<%= form_for @project do |f| %>
+			<% if @project.errors.any? %>
+			 	<%= form_errors_for @project %>
+			 <% end %>
 			<div class="row">
 		      <div class="3u 12u(mobilep) col-md-3 ">
 		          <div class="field">

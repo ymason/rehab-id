@@ -2,39 +2,43 @@
 <h4><b> Tell Us About Your Lending Terms</b> </h4>
 	<div class="row">
 		<div class="4u 12u(mobilep)">
-			<%= form_for @loan_quote, url: loan_quote_path(@user.id) do |f| %>
-				<h5> Property Type  </h5>
-				<%= f.select :property_type, options_for_select(@property_types.collect { |type| [type[0].humanize, type[0]] }, selected: @loan_quote.property_type), {} , class: "form-control" %>
-				<br>
-				<%= f.radio_button(:purchase, "") %>
-				<%= label_tag(:purchase, "This is a new purchase") %>
-				<h5> Adresss </h5>
+			<%= form_for @loan_quote, url: loan_quote_path(current_user) do |f| %>
+			<% if @loan_quote.errors.any? %>
+		 		<%= form_errors_for @loan_quote %>
+		 	<% end %>
+				<h4> Property Type  </h4>
+				<%= f.select :property_type, @property_types.collect {|type| [ type[0].humanize] } %>
+				<h4> Is this a new purchase or refinance? </h4>
+				<%= f.select :purchase, ([['New purchase', 1], ['Refinance', 0]]) %>
+				<h4> Will this property be occupied? </h4>
+				<%= f.select :occupied, ([['Non-owner occupied', 1], ['Owner occupied', 0]]) %>
+				<h4> Adresss </h4>
 				<%= f.text_field :address%>
-				<h5> City </h5>
+				<h4> City </h4>
 				<%= f.text_field :city%>
-				<h5> State</h5>
+				<h4> State</h4>
 				<%= f.select :state, options_for_select(us_states) %>
 				<br>
-				<h5> Zip Code </h5>
+				<h4> Zip Code </h4>
 				<%= f.number_field :zip_code%>
 		</div>
 
 		<div class="2u 12u(mobilep)">
-				<h5> Purchase Price </h5>
+				<h4> Purchase Price </h4>
 				<%= f.number_field :price%>
-				<h5> Downpayment </h5>
+				<h4> Downpayment </h4>
 				<%= f.number_field :down_payment%>
-				<h5> Rehab Budget </h5>
+				<h4> Rehab Budget </h4>
 				<%= f.number_field :rehab%>
-				<h5> After Rehab Value</h5>
+				<h4> After Rehab Value</h4>
 				<h6><em>(best estimate) </em></h6>
 				<%= f.number_field :arv%>
-				<h5> Experience </h5>
+				<h4> Experience </h4>
 				<h6><em>(number of rehabs completed) </em></h6>
 				<%= f.number_field :experience%>
-				<h5> FICO Score</h5>
+				<h4> FICO Score</h4>
 				<%= f.number_field :fico%>
-				<h5> Refferal Source</h5>
+				<h4> Refferal Source</h4>
 				<%= f.text_field :referral%>
 				<br>
 			<%= f.submit "Search for Loans" %>

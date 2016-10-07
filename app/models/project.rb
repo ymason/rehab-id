@@ -5,6 +5,14 @@ class Project < ApplicationRecord
   has_many :estimates
   has_many :features, through: :project_features
   has_one :bid
+  
+  validates :address, presence: true
+  validates :city, presence: true
+  validates :state, presence: true
+  validates :zip_code, presence: true
+  validates :square_feet, presence: true
+  validates :rooms, presence: true
+  validates :bathrooms, presence: true
 
 
   acts_as_mappable :auto_geocode=>{:field=>:full_address, :error_message=>'Could not geocode address'}
@@ -109,6 +117,16 @@ class Project < ApplicationRecord
 
       min_max = [@project_minimum, @project_maximum]
   end
+
+  def time_zone
+
+    @lat = self.lat
+
+    @lng = self.lng
+
+    time_zone = Timezone.lookup(@lat, @lng)
+  end
+  
 end
 
 # # If hash has key then add it, if doesn't have key then create it,

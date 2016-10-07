@@ -1,11 +1,14 @@
-<% if policy(@bid_project).edit? %>
-	<h2> Schedule Inspections for <%= @bid_project.address %></h2>
+<% if policy(@project).edit? %>
+	<h2> Schedule Inspections for <%= @project.address %></h2>
 	<i>Give us three different potential times for contractors to come inspect property.
-	<h6>(They have 2 hours to complete inspection if time is selected so please plan ahead to have the property available.)</i></h6>
+	<h6>(You do not need to be present at property but please plan ahead to make sure property is accessible.)</i></h6>
 	<br>
 		<div class="row">
 			<div class="2u 12u(mobilep)">
 			<%= form_for @bid, url: user_bids_path do |f| %>
+				<% if @bid.errors.any? %>
+		 			<%= form_errors_for @bid %>
+		 		<% end %>
 				<h5> First Date </h5>
 				<%= f.date_field :date1%>
 				<h5> First Time </h5>
@@ -26,11 +29,11 @@
 				<%= f.text_field :contact_email%>
 				<h5> Contact Phone </h5>
 				<%= f.text_field :contact_phone%>
-				<h5> Instructions (i.e. Lockbox location) </h5>
+				<h5> Instructions (i.e. Lockbox location or access to property.) </h5>
 				<%= f.text_area :instructions%>
 				<br>
 				<br>
-		<%= f.submit "Schedule Inspections" %>
+			<%= f.submit "Schedule Inspections" %>
 			</div>
 		</div>
 	<% end %>

@@ -17,9 +17,7 @@
     <div id="page-wrapper">
       <%= render 'shared/navbar' %>
       <div section class="box">
-        <!-- <div class="row">
-          <div class="6u 12u(mobilep)">
-            <div class="container"> -->
+      <%= yield :form_errors %>
         <%= yield %>
             </div>
           </div>

@@ -1,7 +1,7 @@
 class ProjectPolicy < ApplicationPolicy
 
 	def index
-		user.admin?
+		user.admin? || user_is_self?
 	end
 
 	def show

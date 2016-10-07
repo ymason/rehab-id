@@ -1,11 +1,9 @@
 class LoanQuotesController < ApplicationController
-
 	include ActionView::Helpers::NumberHelper
+	before_action :set_loan_quote, only: [:show, :edit, :update, :destroy]
 
 	def new
 		@loan_quote = LoanQuote.new
-
-		@user = User.find_by(id: params[:user_id])
 
 		@property_types = LoanQuote.property_types
 
@@ -13,39 +11,25 @@ class LoanQuotesController < ApplicationController
 	end
 
 	def create
+		@property_types = LoanQuote.property_types
 
-		@loan_quote = LoanQuote.new(
-			user_id: params[:user_id],
-			property_type: params[:loan_quote][:property_type].to_i,
-			purchase: params[:loan_quote][:purchase],
-			occupied: params[:loan_quote][:occupied],
-			fico: params[:loan_quote][:fico],
-			address: params[:loan_quote][:address],
-			city: params[:loan_quote][:city],
-			state: params[:loan_quote][:state],
-			zip_code: params[:loan_quote][:zip_code],
-			price: params[:loan_quote][:price],
-			down_payment: params[:loan_quote][:down_payment],
-			rehab: params[:loan_quote][:rehab],
-			arv: params[:loan_quote][:arv],
-			experience: params[:loan_quote][:experience],
-			referral: params[:loan_quote][:referral]
-			)
+		@loan_quote = LoanQuote.new(loan_quote_params)
 
-		authorize current_user
+		@loan_quote.property_type = params[:loan_quote][:property_type].to_i
+		@loan_quote.purchase = params[:loan_quote][:purchase].to_i
+		@loan_quote.occupied = params[:loan_quote][:occupied].to_i
+		@loan_quote.user_id = current_user.id
 
 		if @loan_quote.save
 			redirect_to user_loan_quote_path(current_user.id, @loan_quote.id)
 		else
 			render 'new'
 		end
+		authorize current_user
 	end
 
 	def show
-
-		@loan_quote = LoanQuote.find_by(id: params[:id])
-
-		@user = User.find_by(id: params[:user_id])
+		@user = User.find(params[:user_id])
 
 		@loan_quote_price = number_to_currency(@loan_quote.price, :precision => 0)
 
@@ -57,4 +41,17 @@ class LoanQuotesController < ApplicationController
 
 		authorize @loan_quote
 	end
+
+	# Add Edit/Update Method
+
+	private
+
+	  def set_loan_quote
+      @loan_quote = LoanQuote.find(params[:id])
+    end
+
+	def loan_quote_params
+      params.require(:loan_quote).permit(:user_id, :fico, :address, :city, :state, :zip_code, :price, :down_payment, :rehab, :arv, :experience, :referral)
+    end
+
 end

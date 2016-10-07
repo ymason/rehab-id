@@ -1,8 +1,11 @@
 <% if policy(@loan_application).edit? %>
-	<h4><b> Congratulations You're Pre-Approved, Please Complete Application</b> </h4>
+	<h2>Congrats Your Pre-Approved, Please Complete Application </h2>
 		<div class="row">
 			<div class="2u 12u(mobilep)">
 			<%= form_for @loan_application, url: loan_application_path do |f| %>
+				<% if @loan_application.errors.any? %>
+		 			<%= form_errors_for @loan_application %>
+		 		<% end %>
 				<h5> Purchasing Entity Name </h5>
 				<%= f.text_field :entity_name%>
 				<h5> Entity Type </h5>
@@ -62,10 +65,10 @@
 				<%= f.date_field :guarantor_dob	%>
 				<br>
 				<br>
-				<%= f.radio_button(:occupied, "") %>
-				<%= label_tag(:occupied, "This property will be non-owner occupied.") %>
-				<%= f.radio_button(:loan_purpose, "") %>
-				<%= label_tag(:loan_purpose, "This loan is for business purposes only.") %>
+				<h4> This loan is for business purposes only? </h4>
+				<%= f.select :loan_purpose, ([['Yes', 1], ['No', 0]]) %>
+				<h4> This property will be non-owner occupied? </h4>
+				<%= f.select :occupied, ([['Yes', 1], ['No', 0]]) %>
 				</div>
 
 			<div class="2u 12u(mobilep)">

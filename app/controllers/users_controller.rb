@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
 
-	before_action :authenticate_user!, only: :show
-
 	def show
-		authorize current_user
-
 		@all_user_projects = current_user.projects
 
 		@all_user_loans = current_user.loan_quotes
@@ -12,6 +8,10 @@ class UsersController < ApplicationController
 		@user_lender_loans = current_user.lender_loans
 
 		@user_project_bids = current_user.bids
+
+		@user_contract_bids = current_user.contractor_bids
+
+		authorize current_user
 	end
 
 	def create

@@ -1,7 +1,6 @@
 class ProjectsController < ApplicationController
 	include ActionView::Helpers::NumberHelper
-
-	skip_after_action :verify_authorized, :only => :index
+	before_action :set_project, only: [:show, :edit, :update, :destroy]
 
 	def new
 		@project = Project.new
@@ -11,16 +10,8 @@ class ProjectsController < ApplicationController
 
 	def create
 
-		@project = Project.new(
-			user_id: params[:user_id],
-			address: params[:project][:address],
-			city: params[:project][:city],
-			state: params[:project][:state],
-			zip_code: params[:project][:zip_code],
-			square_feet: params[:project][:square_feet],
-			rooms: params[:project][:rooms],
-			bathrooms: params[:project][:bathrooms]
-			)
+		@project = Project.new(project_params)
+		@project.user_id = current_user.id
 
 		authorize current_user
 
@@ -40,7 +31,6 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-		@project = Project.find_by(id: params[:id])
 
 		@user = User.find_by(id: params[:user_id])
 
@@ -62,5 +52,15 @@ class ProjectsController < ApplicationController
 
 		authorize @project
 	end
+	
+	private
+
+	def set_project
+      @project = Project.find(params[:id])
+    end
+
+	def project_params
+      params.require(:project).permit(:user_id, :address, :city, :state, :zip_code, :square_feet, :rooms, :bathrooms)
+    end
 	
 end

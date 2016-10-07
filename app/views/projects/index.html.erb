@@ -1,8 +1,22 @@
-<ul>
-	<% @all_user_projects.each do | project | %>
-		<li>
-			<h2><%= project.address %></h2>
-			<td><%= button_to 'Get Project Bids', {:controller => "bids", :action => "create", :project_id => project.id, :user_id => current_user.id, :contractors => User.local_contractors(project).pluck(:id)}, :method=>:post  %></td>
-		</li>
-	<% end %>
-</ul>
+<div class="row">
+	<div class="12u 12u(mobilep) col-md-3 ">
+		<% if current_user.projects.exists? %>
+		<h2><%= link_to 'Create A New Project', new_user_project_path(current_user.id)%></h2>
+			<ul>
+				<% @all_user_projects.each do | project | %>
+					<% if project.bid.date1.nil? || project.bid.date2.nil? || project.bid.date3.nil? %>
+						<li>
+							<h2><%= project.address %></h2>
+							<td><%= button_to 'Get Project Bids', {:controller => "bids", :action => "create", :project_id => project.id, :user_id => current_user.id, :contractors => User.local_contractors(project).pluck(:id)}, :method=>:post  %></td>
+						</li>
+					<% else %>
+					<% end %>
+				<% end %>
+			</ul>
+		<% else %>
+			<h2> No Projects Created Yet </h2>
+			<br>
+			<h4><%= link_to 'Create New Project', new_user_project_path(current_user.id)%></h4>
+		<% end %>
+	</div>
+</div>

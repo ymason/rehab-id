@@ -1,5 +1,5 @@
 <ul>
-	<% @all_lender_under_writing.each do | policy | %>
+	<% @all_lender_underwriting.each do | policy | %>
 		<li>
 			<h2><%= link_to policy.address, user_lender_underwriting_path(@user.id, policy.id) %></h2>
 		</li>
