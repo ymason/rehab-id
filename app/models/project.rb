@@ -11,8 +11,8 @@ class Project < ApplicationRecord
   validates :state, presence: true
   validates :zip_code, presence: true
   validates :square_feet, presence: true
-  validates :rooms, presence: true
-  validates :bathrooms, presence: true
+  validates :rooms, presence: true, on: :rooms
+  validates :bathrooms, presence: true, on: :rooms
 
 
   acts_as_mappable :auto_geocode=>{:field=>:full_address, :error_message=>'Could not geocode address'}

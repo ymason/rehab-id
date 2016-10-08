@@ -20,6 +20,10 @@ class ProjectPolicy < ApplicationPolicy
 		show?
 	end
 
+	def rooms?
+		show
+	end
+
 	def edit?
 		show?
 	end

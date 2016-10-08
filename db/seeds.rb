@@ -36,9 +36,9 @@ doors = Feature.create(name: "Doors", feature_type: 1)
 #9
 windows = Feature.create(name: "Windows", feature_type: 1)
 #10
-demoliton = Feature.create(name: "Demolition", feature_type: 1)
+paint = Feature.create(name: "Paint", feature_type: 1)
 #11
-bathroom = Feature.create(name: "Full Bathroom", feature_type: 1)
+demoliton = Feature.create(name: "Demolition", feature_type: 1)
 #12
 roof_flat = Feature.create(name: "Flat", feature_type: 2)
 #13
@@ -60,13 +60,23 @@ exterior_porch = Feature.create(name: "Porch", feature_type: 3)
 #21
 exterior_patio = Feature.create(name: "Patio", feature_type: 3)
 #22
-plumbing = Feature.create(name: "Plumbing", feature_type: 3)
+tub = Feature.create(name: "Tub", feature_type: 4)
 #23
-hvac = Feature.create(name: "HVAC", feature_type: 3)
+shower = Feature.create(name: "Shower", feature_type: 4)
 #24
-electrical = Feature.create(name: "Electrical", feature_type: 3)
+fixtures = Feature.create(name: "Fixtures", feature_type: 4)
 #25
-kitchen = Feature.create(name: "Kitchen", feature_type: 1)
+walls = Feature.create(name: "Walls", feature_type: 4)
+#26
+demolition = Feature.create(name: "Demolition", feature_type: 4)
+#27
+plumbing = Feature.create(name: "Plumbing", feature_type: 5)
+#28
+hvac = Feature.create(name: "HVAC", feature_type: 6)
+#29
+electrical = Feature.create(name: "Electrical", feature_type: 7)
+#30
+kitchen = Feature.create(name: "Kitchen", feature_type: 8)
 
 
 # Dummy Contractos
@@ -108,7 +118,11 @@ admin = User.create(name: "Yemani", email: "yemani@yemani.com", phone:"305-555-5
 	PriceFeature.create(user_id: 1, feature_id: 23, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 1, feature_id: 24, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 1, feature_id: 25, floor: 1000, ceiling: 2000)
-
+	PriceFeature.create(user_id: 1, feature_id: 26, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 27, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 28, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 29, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 30, floor: 1000, ceiling: 2000)
 	# Contractor2 Prices
 	PriceFeature.create(user_id: 2, feature_id: 1, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 2, feature_id: 2, floor: 1000, ceiling: 2000)
@@ -135,6 +149,11 @@ admin = User.create(name: "Yemani", email: "yemani@yemani.com", phone:"305-555-5
 	PriceFeature.create(user_id: 2, feature_id: 23, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 2, feature_id: 24, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 2, feature_id: 25, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 26, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 27, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 28, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 29, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 2, feature_id: 30, floor: 1000, ceiling: 2000)
 
 	# Contractor3 Prices
 	PriceFeature.create(user_id: 3, feature_id: 1, floor: 1000, ceiling: 2000)
@@ -162,6 +181,11 @@ admin = User.create(name: "Yemani", email: "yemani@yemani.com", phone:"305-555-5
 	PriceFeature.create(user_id: 3, feature_id: 23, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 3, feature_id: 24, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 3, feature_id: 25, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 26, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 27, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 28, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 29, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 3, feature_id: 30, floor: 1000, ceiling: 2000)
 
 # Dummy Lenders
 
@@ -417,4 +441,3 @@ lender3 = User.create(name: "Walter", email: "fasd121fs1424f@adf.com", phone:"30
 # plumbing = Feature.create(room_id: 13, room_feature_id: 11)
 # #79
 # stairs = Feature.create(room_id: 14, room_feature_id: 14)
-

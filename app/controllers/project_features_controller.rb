@@ -4,11 +4,15 @@ class ProjectFeaturesController < ApplicationController
 	def new
 		@user_project_features = ProjectFeature.new
 
+		@rooms = @project.rooms
+
+		@bathrooms = @project.bathrooms
+
 		authorize current_user
 	end
 
 	def create
-		params[:feature].each do |f|
+		params[:project_feature].each do |f|
 			feature_hash = {}
 			feature_hash[:feature_id] = f[:feature_id]
 
@@ -31,6 +35,6 @@ class ProjectFeaturesController < ApplicationController
 	def set_project
 	@user = current_user
     @project_id = params[:project_id]
-	@project = Project.where(id: @project_id)
+	@project = Project.find(@project_id)
     end
 end

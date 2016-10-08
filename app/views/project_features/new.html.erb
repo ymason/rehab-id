@@ -1,10 +1,70 @@
-<%= render 'shared/wrap' %>	
 <% if policy(current_user).new? %>
-	
-	<%= form_tag "/projects/#{@project_id}/project_features", method: :post do %>
-    	<%= render 'features_form' %>  
-    <br>
-    <br>   
-  <%= submit_tag "Submit" %>
-  <% end %>
+<h2> Project Features</h2>
+	<div class="row">
+	  	<div class="2u 12u(mobilep) col-md-3 ">
+			<%= form_for @user_project_features do |f| %>
+				<% if @user_project_features.errors.any? %>
+				 	<%= form_errors_for @project %>
+				 <% end %>
+			<%= @rooms.times.with_index(1) do | room, index | %>
+				<ul>
+				   <li>
+				   <h4> Room <%= index %></h4>
+				  	<%= f.collection_check_boxes :feature_id, Feature.where(feature_type: 1), :id, :name do |b| %>
+				      <%= b.check_box %>
+				      <%= b.label %>
+				 	<% end %>
+				 	</li>
+				 </ul>
+			<% end %>
+		</div>
+
+			<div class="2u 12u(mobilep) col-md-3 ">
+				<%= @bathrooms.times.with_index(1) do | room, index | %>
+						<ul>
+						   <li>
+						   <h4> Bathroom <%= index %></h4>
+						  	<%= f.collection_check_boxes :feature_id, Feature.where(feature_type: 4), :id, :name do |b| %>
+						      <%= b.check_box %>
+						      <%= b.label %>
+						 	<% end %>
+						 	</li>
+						 </ul>
+					<% end %>
+			</div>
+
+			<% if @project.exterior? %>
+				<div class="2u 12u(mobilep) col-md-3 ">
+						 	<h4>Exterior Features</h4>
+						  	<%= f.collection_check_boxes :feature_id, Feature.where(feature_type: 3), :id, :name do |b| %>
+						      <%= b.check_box %>
+						      <%= b.label %>
+						 	<% end %>
+				</div>
+			<% else %>
+			<% end %>
+
+			<% if @project.roof? %>
+				<div class="2u 12u(mobilep) col-md-3 ">
+							<h4>Roofing</h4>
+						 	<%= f.collection_select(:feature_id, Feature.where(feature_type: 2), :id, :name, prompt: true) %>
+							<br>
+							<br>
+				</div>
+			<% else %>
+			<% end %>
+			<% if @project.floor? %>
+				<div class="2u 12u(mobilep) col-md-3 ">
+							<h4>Flooring</h4>
+						 	<%= f.collection_select(:feature_id, Feature.where(feature_type: 0), :id, :name, prompt: true) %>
+							<br>
+							<br>
+				</div>
+			<% else %>
+			<% end %>
+			<br><br><br><br>
+			<%= f.submit "Create New Project" %>
+
+		<% end %>
+     </div>
 <% end %>

@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 	include ActionView::Helpers::NumberHelper
-	before_action :set_project, only: [:show, :edit, :update, :destroy]
+	before_action :set_project, only: [:show, :rooms, :edit, :update, :destroy]
 
 	def new
 		@project = Project.new
@@ -16,10 +16,21 @@ class ProjectsController < ApplicationController
 		authorize current_user
 
 		if @project.save
-			redirect_to new_project_project_feature_path(@project.id) 
+			redirect_to project_rooms_path(current_user.id, @project.id) 
 		else
 			render 'new'
 		end
+	end
+
+	def rooms
+		authorize @project
+	end
+
+	def update
+		@project.update(room_params)
+
+		redirect_to new_project_project_feature_path(@project.id) 
+		authorize @project
 	end
 
 	def index
@@ -60,7 +71,11 @@ class ProjectsController < ApplicationController
     end
 
 	def project_params
-      params.require(:project).permit(:user_id, :address, :city, :state, :zip_code, :square_feet, :rooms, :bathrooms)
+      params.require(:project).permit(:user_id, :address, :city, :state, :zip_code, :square_feet)
+    end
+
+    def room_params
+    	params.require(:project).permit(:rooms, :bathrooms, :kitchen, :exterior, :plumbing, :electrical, :hvac, :roof, :floor)
     end
 	
 end

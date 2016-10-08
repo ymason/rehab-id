@@ -6,7 +6,10 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   after_action :verify_authorized, :except => :index, unless: :devise_controller?
 
-
+  def after_sign_in_path_for(resource)
+    dashboard_path
+  end
+  
   def us_states
     [
       ['Alabama', 'AL'],
