@@ -15,6 +15,10 @@ class ProjectFeaturePolicy < ApplicationPolicy
 		new?
 	end
 
+	def rooms?
+		new?
+	end
+
 	def update?
 		show?
 	end

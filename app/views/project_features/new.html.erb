@@ -2,9 +2,10 @@
 <% if policy(current_user).new? %>
 	
 	<%= form_tag "/projects/#{@project_id}/project_features", method: :post do %>
-    	<%= render 'features_form' %>  
-    <br>
-    <br>   
-  <%= submit_tag "Submit" %>
+    	<div class="row">
+			<div class="3u 12u(mobilep)">
+				<%= render 'features_form' %>  
+  		</div>
+  		<br>
   <% end %>
 <% end %>

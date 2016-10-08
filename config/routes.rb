@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
 	resources :users, only: [] do
-  	resources :projects
+  	resources :projects, except: [:create, :update]
     resources :price_features, except: [:create]
     resources :lender_underwritings, except: [:create]
     resources :loan_quotes, except: [:create]
@@ -45,8 +45,11 @@ Rails.application.routes.draw do
 	root to: 'home#index'
   get '/contact' => 'home#contact', as: :contact
 	get '/dashboard' => 'users#show', as: :dashboard
-  post '/users/:user_id/projects' => 'project#create', as: :projects
+  post '/users/:user_id/projects' => 'projects#create', as: :projects
+  patch '/users/:user_id/projects/:id/' => 'projects#update', as: :add_rooms
   post '/projects/:project_id/project_features' => 'project_features#create', as: :project_features
+  get ':project_id/project_features/rooms' => 'project_features#rooms', as: :rooms
+  post '/projects/:project_id/project_features/rooms' => 'project_features#create_rooms', as: :create_rooms
   post '/users/:user_id/price_features' => 'price_features#create', as: :price_features
   post '/users/:user_id/loan_quotes' => 'loan_quotes#create', as: :loan_quote
   post '/users/:user_id/lender_underwritings' => 'lender_underwritings#create', as: :lender_underwriting
@@ -60,8 +63,6 @@ Rails.application.routes.draw do
   get '/users/:user_id/contractor_bids/:id/appointment' => 'contractor_bids#appointment', as: :appointment
   patch '/users/:user_id/contractor_bids/:ids' => 'contractor_bids#update', as: :submit_bid
 
-  # get '/projects/:project_id/add_rooms' => 'projects#rooms', as: :add_rooms
-  # patch '/projects/:project_id/add_rooms' => 'projects#create_rooms', as: :create_rooms
 
 end
 

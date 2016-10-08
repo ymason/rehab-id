@@ -9,17 +9,27 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
-
 		@project = Project.new(project_params)
 		@project.user_id = current_user.id
 
 		authorize current_user
 
 		if @project.save
-			redirect_to new_project_project_feature_path(@project.id) 
+			redirect_to edit_user_project_path(current_user.id, @project.id) 
 		else
 			render 'new'
 		end
+	end
+
+	def edit
+		authorize @project
+	end
+
+	def update
+		@project.update(room_params)
+
+		redirect_to rooms_path(@project.id) 
+		authorize @project
 	end
 
 	def index
@@ -56,11 +66,15 @@ class ProjectsController < ApplicationController
 	private
 
 	def set_project
-      @project = Project.find(params[:id])
+      	@project = Project.find(params[:id])
     end
 
 	def project_params
-      params.require(:project).permit(:user_id, :address, :city, :state, :zip_code, :square_feet, :rooms, :bathrooms)
+      params.require(:project).permit(:user_id, :address, :city, :state, :zip_code, :square_feet)
+    end
+
+    def room_params
+    	params.require(:project).permit(:rooms, :bathrooms, :kitchen, :exterior, :plumbing, :electrical, :hvac, :roof, :floor)
     end
 	
 end

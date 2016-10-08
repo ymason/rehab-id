@@ -1,0 +1,36 @@
+<% if policy(@project).edit? %>
+	<h2> Tell Us About Your Rehab Needs </h2>
+	<div class="row">
+		<div class="3u 12u(mobilep) col-md-3 ">
+			<%= form_for @project, url: add_rooms_path(current_user.id, @project.id), method: :patch do |f| %>
+				<h4> # of Rooms That Need Rehab?</h4>
+				<h6><em>(including living, family, dining, etc.)</em> </h6>
+				<%= f.number_field :rooms%>
+				<h4># of Bathrooms That Need Rehab? </h4>
+				<%= f.number_field :bathrooms%>
+		</div>
+
+		<div class="3u 12u(mobilep) col-md-3 ">
+				<h4> Do You Need A New Kitchen? </h4>
+				<%= f.select :kitchen, ([['No', 0], ['Yes', 1]]) %>
+				<h4> Do You Need New Roofing? </h4>
+				<%= f.select :roof, ([['No', 0], ['Yes', 1]]) %>
+				<h4> Do You Need New Flooring? </h4>
+				<%= f.select :floor, ([['No', 0], ['Yes', 1]]) %>
+		</div>
+
+		<div class="3u 12u(mobilep) col-md-3 ">
+				<h4> Do You Need Any Exterior Work? </h4>
+				<%= f.select :exterior, ([['No', 0], ['Yes', 1]]) %>
+				<h4> Do You Need Any Plumbing Work? </h4>
+				<%= f.select :plumbing, ([['No', 0], ['Yes', 1]]) %>
+				<h4> Do You Need Any Electrical Work? </h4>
+				<%= f.select :electrical, ([['No', 0], ['Yes', 1]]) %>
+				<h4> Do You Need Any HVAC Work? </h4>
+				<%= f.select :hvac, ([['No', 0], ['Yes', 1]]) %>
+				<br>
+				<%= f.submit "Add Rooms" %>
+			<% end %>
+		</div>
+	</div>
+<% end %>

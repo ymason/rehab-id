@@ -11,8 +11,8 @@ class Project < ApplicationRecord
   validates :state, presence: true
   validates :zip_code, presence: true
   validates :square_feet, presence: true
-  validates :rooms, presence: true
-  validates :bathrooms, presence: true
+  validates :rooms, presence: true, on: :rooms
+  validates :bathrooms, presence: true, on: :rooms
 
 
   acts_as_mappable :auto_geocode=>{:field=>:full_address, :error_message=>'Could not geocode address'}
@@ -25,15 +25,21 @@ class Project < ApplicationRecord
 
     # What is needed to get an estimate
 
-    contractors = User.local_contractors(self)
+    local_contractors = User.local_contractors(self)
+    contractors = []
+
+    local_contractors.each do | c |
+      user_id = c.id
+      contractor = User.find(user_id)
+
+      contractors.push(contractor)
+    end
 
     features = []
 
     contractors.each do | c |
 
-      contractor_prices = c.price_features
-
-          contractor_prices.each do | p |
+          c.price_features.each do | p |
 
             if self.project_features.exists?(:feature_id => p.feature.id)
 
@@ -58,6 +64,8 @@ class Project < ApplicationRecord
               hash = {:price_feature_id => @price_feature_id, :project_feature_id => @project_feature_id, :feature_id => @feature_id, :avg_floor => @floor_price, :avg_ceiling => @ceiling_price, :user_id => @user_id}
 
               features.push(hash)
+
+            else
 
           end
         end
