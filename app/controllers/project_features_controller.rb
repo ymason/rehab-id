@@ -20,11 +20,16 @@ class ProjectFeaturesController < ApplicationController
 	def create_rooms
 		params[:feature].each do |f|
 			feature_hash = {}
-			feature_hash[:feature_id] = f[:feature_id]
 
-		p = ProjectFeature.new(feature_hash)
-		p.project_id = @project_id	
-		p.save
+			if f[:feature_id].nil?
+
+			else
+				feature_hash[:feature_id] = f[:feature_id]
+
+			p = ProjectFeature.new(feature_hash)
+			p.project_id = @project_id	
+			p.save
+			end
 		end
 
 		redirect_to new_project_project_feature_path(@project.id)
@@ -35,6 +40,7 @@ class ProjectFeaturesController < ApplicationController
 		params[:feature].each do |f|
 			feature_hash = {}
 			feature_hash[:feature_id] = f[:feature_id]
+
 
 		p = ProjectFeature.new(feature_hash)
 		p.project_id = @project_id	

@@ -11,23 +11,17 @@
 		<% else %>
 		<h4><%= @minimum_number %> - <%= @maximum_number %></h4>
 			<h2> Rehab Needs:</h2>
-		<ul>
 			<% @project.features.each do | f | %>
 				<% if f.roof? || f.floors? %>
-				   <li>
-						<h5><%= f.name %> <%= f.feature_type %></h5>
-					</li>
+				<li>
+					<h5><%= f.name %> <%= f.feature_type %></h5>
+				</li>
+				<% else %>
+				<li>
+					<h5><%= f.name %></h5>
+				</li>
 				<% end %>
-				<% if f.bathroom? %>
-					<li>
-						<h5><%= f.feature_type.capitalize %> <%= f.name %></h5>
-					</li>
-				<% end %>
-				  	<li>
-						<h5><%= f.name %></h5>
-					</li>
-			<% end %>
-				</ul>
+		<% end %>
 
 		<h4><%= link_to 'Add Project Features', new_project_project_feature_path(@project.id)%></h4>
 		</div>
