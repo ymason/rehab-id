@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     end
 
 	root to: 'home#index'
-  get '/contact' => 'home#show', as: :contact
+  get '/contact' => 'home#contact', as: :contact
 	get '/dashboard' => 'users#show', as: :dashboard
   post '/users/:user_id/projects' => 'project#create', as: :projects
   post '/projects/:project_id/project_features' => 'project_features#create', as: :project_features
