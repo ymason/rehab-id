@@ -12,16 +12,20 @@
 		<h4><%= @minimum_number %> - <%= @maximum_number %></h4>
 			<h2> Rehab Needs:</h2>
 		<ul>
-			<% @project.project_features.each do | f | %>
-				<% if f.feature.self? || f.feature.extra?  %>
-				  	<li>
-						<h5><%= f.feature.name %></h5>
-					</li>
-				<% else %> 
+			<% @project.features.each do | f | %>
+				<% if f.roof? || f.floors? %>
 				   <li>
-						<h5><%= f.feature.name %> <%= f.feature.feature_type %></h5>
+						<h5><%= f.name %> <%= f.feature_type %></h5>
 					</li>
 				<% end %>
+				<% if f.bathroom? %>
+					<li>
+						<h5><%= f.feature_type.capitalize %> <%= f.name %></h5>
+					</li>
+				<% end %>
+				  	<li>
+						<h5><%= f.name %></h5>
+					</li>
 			<% end %>
 				</ul>
 

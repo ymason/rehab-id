@@ -1,6 +1,6 @@
 <% if policy(current_user).new? %>
-	<h2> Tell Us About Your Rehab Needs </h2>
-		<%= form_for @project do |f| %>
+	<h2> Project Information </h2>
+		<%= form_for @project, url: projects_path(current_user.id), method: :post do |f| %>
 			<% if @project.errors.any? %>
 			 	<%= form_errors_for @project %>
 			 <% end %>
@@ -17,12 +17,6 @@
 						<%= f.number_field :zip_code%>
 						<h5> Square Feet </h5>
 						<%= f.number_field :square_feet%>
-						<h5> # of Rooms To Rehab</h5>
-						<h6><em>(incl. living, family, dining, etc.) </h6>
-						<%= f.number_field :rooms%>
-
-						<h5> # of Bathrooms To Rehab</h5>
-						<%= f.number_field :bathrooms%>
 						<br>
 						<br>
 						<%= f.submit "Create New Project" %>

@@ -1,10 +1,34 @@
 class ProjectFeaturesController < ApplicationController
-	before_action :set_project, only: [:new, :create, :edit, :update, :destroy]
+	before_action :set_project, only: [:new, :create, :rooms, :create_rooms, :edit, :update, :destroy]
+	skip_after_action :verify_authorized, :only => [:rooms, :create_rooms]
 
 	def new
 		@user_project_features = ProjectFeature.new
 
 		authorize current_user
+	end
+
+	def rooms
+		@user_project_features = ProjectFeature.new
+
+		@rooms = @project.rooms
+
+		@bathrooms = @project.bathrooms
+
+	end
+
+	def create_rooms
+		params[:feature].each do |f|
+			feature_hash = {}
+			feature_hash[:feature_id] = f[:feature_id]
+
+		p = ProjectFeature.new(feature_hash)
+		p.project_id = @project_id	
+		p.save
+		end
+
+		redirect_to new_project_project_feature_path(@project.id)
+
 	end
 
 	def create
@@ -31,6 +55,6 @@ class ProjectFeaturesController < ApplicationController
 	def set_project
 	@user = current_user
     @project_id = params[:project_id]
-	@project = Project.where(id: @project_id)
+	@project = Project.find(@project_id)
     end
 end
