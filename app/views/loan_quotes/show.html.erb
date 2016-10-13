@@ -26,11 +26,13 @@
 		</div>
 
 			<div class="4u 12u(mobilep)">
-				<h2>Available Loans</h2>
+			<h2>Available Loans</h2>
 			<% @loan_quote.lender_quotes.each.with_index(1) do | l, index | %>
-				<ul>
-				   <li>
-				   <h4> Option <%= index %>
+			<ul>
+				<% if l.loan_application.present? %>
+					<% if l.loan_application.lender_loan.approved? %>
+						<li>
+						<h4><b>Congrats This Loan Has Been Approved</b></h4>
 						<h5>Interest Rate: <%= number_to_percentage(l.interest_rate * 100, precision: 0) %> </h5>
 						<h5>Loan Amount: <%= number_to_currency(l.loan_purchase, :precision => 0) %> </h5>
 						<h5>Origination Fee: <%= number_to_currency(l.origination_fee, :precision => 0) %> </h5>
@@ -40,8 +42,24 @@
 						<h5>Max # of Draws: <%= l.draws %> Draws </h5>
 						<h5>Minimum Draw Amount: <%= number_to_currency(l.min_draw, :precision => 0) %> </h5>
 						<h5>Minimum Final Draw Holdback: <%= number_to_percentage(l.min_final_draw * 100, precision: 0) %> </h5>
-						<td><%= button_to 'Select This Loan', {:controller => "loan_applications", :action => "create", :lender_id => l.lender_underwriting.user_id, :lender_quote_id=> params[:id], loan_quote_id: @loan_quote.id} , :method=>:post  %></td>
-					</li>
+						</li>
+					<% else %>
+					<% end %>
+				<% else %>
+					   <li>
+					   <h4> Option <%= index %>
+							<h5>Interest Rate: <%= number_to_percentage(l.interest_rate * 100, precision: 0) %> </h5>
+							<h5>Loan Amount: <%= number_to_currency(l.loan_purchase, :precision => 0) %> </h5>
+							<h5>Origination Fee: <%= number_to_currency(l.origination_fee, :precision => 0) %> </h5>
+							<h5>Term: <%= l.term %> Months </h5>	
+							<h5>Pre-Payment Penalty: <%= l.pre_payment %> Months </h5>
+							<h5>Rehab Loan: <%= number_to_currency(l.loan_rehab, :precision => 0) %> </h5>
+							<h5>Max # of Draws: <%= l.draws %> Draws </h5>
+							<h5>Minimum Draw Amount: <%= number_to_currency(l.min_draw, :precision => 0) %> </h5>
+							<h5>Minimum Final Draw Holdback: <%= number_to_percentage(l.min_final_draw * 100, precision: 0) %> </h5>
+							<td><%= button_to 'Select This Loan', {:controller => "loan_applications", :action => "create", :lender_id => l.lender_underwriting.user_id, :lender_quote_id=> l.id, loan_quote_id: @loan_quote.id} , :method=>:post  %></td>
+						</li>
+					<% end %>
 				</ul>
 				<% end %>
 

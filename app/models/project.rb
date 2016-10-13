@@ -1,11 +1,9 @@
 class Project < ApplicationRecord
   belongs_to :user
-
   has_many :project_features
   has_many :estimates
   has_many :features, through: :project_features
   has_one :bid
-  
   validates :address, presence: true
   validates :city, presence: true
   validates :state, presence: true
@@ -13,16 +11,13 @@ class Project < ApplicationRecord
   validates :square_feet, presence: true
   validates :rooms, presence: true, on: :rooms
   validates :bathrooms, presence: true, on: :rooms
-
-
   acts_as_mappable :auto_geocode=>{:field=>:full_address, :error_message=>'Could not geocode address'}
 
   def full_address
     "#{self.address} #{self.city} #{self.state}"
   end
 
-  def create_estimates
-
+  def create_estimates(new_features)
     # What is needed to get an estimate
 
     local_contractors = User.local_contractors(self)
@@ -35,63 +30,50 @@ class Project < ApplicationRecord
       contractors.push(contractor)
     end
 
-    features = []
+    contractor_ids = []
+
+    price_features = []
 
     contractors.each do | c |
+      contractor_ids.push(c.id) 
+      c.price_features.each do | p |
+        price_features.push(p)
+      end
+    end
 
-          c.price_features.each do | p |
+    # Make sure the estimate is unique based on project_feature and contractors_prices
+    project_features = (new_features.map(&:feature_id) & price_features.map(&:feature_id))
+    
+    features = []
+    
+    contractors.each do | c |
+      c.price_features.each do | p |
+        if project_features.include? p.feature_id
+        features.push(p)
+        end
+      end
+    end
 
-            if self.project_features.exists?(:feature_id => p.feature.id)
+    estimates = []
 
-      # Make sure the estimate is unique based on project_feature and contractors
-
+      features.each do | e |
       # How to create an estimate
+        # if self.estimates.exists?(price_feature_id: p.id)
+        @project_feature = self.project_features.find_by(feature_id: e.feature.id)
 
-              @floor_price = p.floor
+        @project_feature_id = @project_feature.id
 
-              @ceiling_price = p.ceiling
-
-              @feature_id = p.feature.id
-
-              @price_feature_id = p.id
-
-              @user_id = p.user_id
-
-              @project_feature = self.project_features.find_by(feature_id: p.feature.id)
-
-              @project_feature_id = @project_feature.id
-
-              hash = {:price_feature_id => @price_feature_id, :project_feature_id => @project_feature_id, :feature_id => @feature_id, :avg_floor => @floor_price, :avg_ceiling => @ceiling_price, :user_id => @user_id}
-
-              features.push(hash)
-
-            else
-
-          end
-        end
+        estimates << Estimate.new(:price_feature_id => e.id, :project_id => self.id, :project_feature_id => @project_feature_id, :feature_id => e.feature.id, :avg_floor => e.floor, :avg_ceiling => e.ceiling)
       end
 
-        features.each do |f|
+    Estimate.import estimates, on_duplicate_key_ignore: true
 
-          estimate_hash = {}
-          estimate_hash[:price_feature_id] = f[:price_feature_id]
-          estimate_hash[:project_feature_id] = f[:project_feature_id]
-          estimate_hash[:feature_id] = f[:feature_id]
-          estimate_hash[:avg_floor] = f[:avg_floor]
-          estimate_hash[:avg_ceiling] = f[:avg_ceiling]
-
-            if self.estimates.exists?(price_feature_id: f[:price_feature_id])
-
-            else
-            p = Estimate.new(estimate_hash)
-
-            p.project_id = self.id
-
-            p.save
-            end
-        end
-        
-      end
+    # books = []
+    # 10.times do |i| 
+    #   books << Book.new(:name => "book #{i}")
+    # end
+    # Book.import books
+  end
 
   def min_and_max
   # What to do with all estimates
@@ -136,43 +118,3 @@ class Project < ApplicationRecord
   end
   
 end
-
-# # If hash has key then add it, if doesn't have key then create it,
-#       # make it an array, and add feature to it.
-
-#       @floor_price = p.floor
-
-#               @ceiling_price = p.ceiling
-
-#               @feature_id = p.feature.id
-
-#               if floor[@feature_id] == nil
-#                   floor[@feature_id] = [@floor_price]
-#                 else
-#                   floor[@feature_id].push[@floor_price]
-#                 end
-
-#                 if ceiling[@feature_id] == nil
-#                     ceiling[@feature_id] = [@ceiling_price]
-#                   else
-#                     ceiling[@feature_id].push[@ceiling_price]
-
-# price_minimum = floor.reduce(0, :+)
-
-# price_maximum = ceiling.reduce(0, :+)
-
-# @avg_floor = price_minimum / floor.length
-
-# @avg_ceiling = price_maximum / ceiling.length
-
-# @project_feature_id = 
-
-# @project_id = self.id
-
-
-# Estimate.new(
-#   project_feature_id: @project_feature_id,
-#   project_id: @project_id,
-#   avg_floor: @avg_floor,
-#   avg_ceiling: @avg_ceiling
-#   )

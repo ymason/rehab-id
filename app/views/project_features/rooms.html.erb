@@ -1,11 +1,11 @@
 <%= form_tag "/projects/#{@project_id}/project_features/rooms", method: :post do %>
-	<h3>Rooms</h3>
-	<em> Only select features if needed. </em>
+	<h3>Project Features</h3>
+	<em> Only select features if needed.</em>
 	<div class="row">
 		<div class="2u 12u(mobilep)">
 			<ul>
 			   <li>
-			   <h4> Rooms</h4>
+			   <h4>Rooms</h4>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 1), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 1), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 1), :id, :name), prompt: "Select if needed" %><br>
@@ -18,7 +18,7 @@
 		<div class="2u 12u(mobilep) col-md-3 ">
 			<ul>
 			   <li>
-			   	<h4> Bathrooms</h4>
+			   	<h4>Bathrooms</h4>
 			   	<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 4), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 4), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 4), :id, :name), prompt: "Select if needed" %><br>
@@ -26,7 +26,38 @@
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 4), :id, :name), prompt: "Select if needed" %><br>
 			 	</li>
 			 </ul>
+		</div>
+		<% if @project.exterior? %>
+		<div class="2u 12u(mobilep) col-md-3 ">
+			<h4>Exterior Features</h4>
+			<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 3), :id, :name), prompt: "Select only if needed" %><br>
+			<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 3), :id, :name), prompt: "Select only if needed" %><br>
+			<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 3), :id, :name), prompt: "Select only if needed" %><br>
+			<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 3), :id, :name), prompt: "Select only if needed" %><br>
+			<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 3), :id, :name), prompt: "Select only if needed" %><br>
+		</div>
+		<% else %>
+		<% end %>
+
+		<% if @project.floor? %>
+		<div class="2u 12u(mobilep) col-md-3 ">
+			<h4>Floors</h4>
+			<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 0), :id, :name), prompt: "Select only if needed" %>
+		</div>
+		<% else %>
+		<% end %>
+
+		<% if @project.roof? %>
+		<div class="2u 12u(mobilep) col-md-3 ">
+			<h4>Roof</h4>
+			<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 2), :id, :name), prompt: "Select only if needed" %><br>
+			<%= submit_tag "Submit" %>
+		</div>
+		<% else %>
+		<div class="2u 12u(mobilep) col-md-3 ">
 		<%= submit_tag "Submit" %>
 		</div>
-	</div>
+		<% end %>
+
+		</div>
 <% end %>

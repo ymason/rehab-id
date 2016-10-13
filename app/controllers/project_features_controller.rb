@@ -14,10 +14,11 @@ class ProjectFeaturesController < ApplicationController
 		@rooms = @project.rooms
 
 		@bathrooms = @project.bathrooms
-
 	end
 
 	def create_rooms
+		new_features = []
+
 		params[:feature].each do |f|
 			feature_hash = {}
 
@@ -29,28 +30,41 @@ class ProjectFeaturesController < ApplicationController
 			p = ProjectFeature.new(feature_hash)
 			p.project_id = @project_id	
 			p.save
+
+			new_features.push(p)
 			end
 		end
 
-		redirect_to new_project_project_feature_path(@project.id)
+		@project.create_estimates(new_features)
 
+		redirect_to user_project_path(current_user.id, @project_id)
 	end
 
-	def create
-		params[:feature].each do |f|
-			feature_hash = {}
-			feature_hash[:feature_id] = f[:feature_id]
+	# def create
+	# 	new_features = []
 
+	# 	params[:feature].each do |f|
+	# 		feature_hash = {}
 
-		p = ProjectFeature.new(feature_hash)
-		p.project_id = @project_id	
-		p.save
-		end
+	# 		if f[:feature_id].nil?
 
-	redirect_to user_project_path(current_user.id, @project_id)
+	# 		else
+	# 			feature_hash[:feature_id] = f[:feature_id]
 
-	authorize current_user
-	end
+	# 		p = ProjectFeature.new(feature_hash)
+	# 		p.project_id = @project_id	
+	# 		p.save
+
+	# 		new_features.push(p)
+	# 		end
+	# 	end
+
+	# @project.create_estimates(new_features)
+
+	# redirect_to user_project_path(current_user.id, @project_id)
+
+	# authorize current_user
+	# end
 
 	# Add Edit/Update Method
 	# p.project.project_features.exists?(feature_id: f[:feature_id])

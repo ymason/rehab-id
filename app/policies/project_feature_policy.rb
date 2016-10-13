@@ -15,6 +15,10 @@ class ProjectFeaturePolicy < ApplicationPolicy
 		new?
 	end
 
+	def create_rooms?
+		new?
+	end
+
 	def rooms?
 		new?
 	end

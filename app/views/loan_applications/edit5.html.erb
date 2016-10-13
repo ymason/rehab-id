@@ -1,0 +1,29 @@
+<h3>Loan Application | Closing & Insurance Agent Info</h3>
+	<div class="row">		
+		<div class="2u 12u(mobilep)">
+		<%= form_for @loan_application, url: loan_application5_path do |f| %>
+			<% if @loan_application.errors.any? %>
+	 			<%= form_errors_for @loan_application %>
+	 		<% end %>
+			<h5> Closer Name </h5>
+			<%= f.text_field :closer_name %>
+			<h5> Closer Company </h5>
+			<%= f.text_field :closer_company %>
+			<h5> Closer Email </h5>
+			<%= f.text_field :closer_email %>
+			<h5> Closer Phone Number </h5>
+			<%= f.number_field :closer_phone %>
+		</div>
+		<div class="2u 12u(mobilep)">
+			<h5> Insurance Agent Name </h5>
+			<%= f.text_field :insurance_name %>
+			<h5> Insurance Email </h5>
+			<%= f.text_field :insurance_email %>
+			<h5> Insurance Phone Number </h5>
+			<%= f.number_field :insurance_phone %>
+			<br>
+			<br>
+			<%= f.submit "Submit Application" %>
+			</div>
+	<% end %>
+</div>

@@ -1,5 +1,5 @@
 class BidProjectsController < ApplicationController
-	before_action :set_project, only: [:show, :edit, :update, :destroy]
+	before_action :set_bid_project, only: [:show, :edit, :update, :destroy]
 
 	def create 
 		@recipients = User.find(params[:user_id])
@@ -20,8 +20,11 @@ class BidProjectsController < ApplicationController
 			accepted: 1
 			)
 
-		redirect_to dashboard_path
+		user_id = params[:user_id]
+		project_id = params[:project_id]
+		bid_id = params[:bid_id]
 
+		redirect_to user_project_bid_path(user_id, project_id, bid_id)
 		authorize @bid_project 
 	end
 
@@ -29,7 +32,7 @@ class BidProjectsController < ApplicationController
 
 	 def set_bid_project
       @bid_project = BidProject.find(params[:id])
-      @bid = @bid_project.project
+      @bid = @bid_project.bid
       @project = @bid.project
     end
 end

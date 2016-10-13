@@ -1,10 +1,10 @@
 class LenderLoanPolicy < ApplicationPolicy
 	def index
-		admin_or_owner_of_lender_loan?
+		user.admin?
 	end
 
 	def show
-		index?
+		admin_or_owner_of_lender_loan?
 	end
 
 	def new?
@@ -16,15 +16,15 @@ class LenderLoanPolicy < ApplicationPolicy
 	end
 
 	def update?
-		index?
+		show?
 	end
 
 	def edit?
-		index?
+		show?
 	end
 
 	def destroy?
-		index?
+		show?
 	end
 
 	private

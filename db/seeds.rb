@@ -58,6 +58,8 @@ hvac = Feature.create(name: "HVAC", feature_type: 6)
 electrical = Feature.create(name: "Electrical", feature_type: 7)
 #30
 kitchen = Feature.create(name: "Kitchen", feature_type: 8)
+#31
+stairs = Feature.create(name: "Stairs", feature_type: 9)
 
 
 # Dummy Contractos
@@ -104,6 +106,7 @@ admin = User.create(name: "Yemani", email: "yemani@yemani.com", phone:"305-555-5
 	PriceFeature.create(user_id: 1, feature_id: 28, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 1, feature_id: 29, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 1, feature_id: 30, floor: 1000, ceiling: 2000)
+	PriceFeature.create(user_id: 1, feature_id: 31, floor: 1000, ceiling: 2000)
 	# Contractor2 Prices
 	PriceFeature.create(user_id: 2, feature_id: 1, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 2, feature_id: 2, floor: 1000, ceiling: 2000)
@@ -135,7 +138,7 @@ admin = User.create(name: "Yemani", email: "yemani@yemani.com", phone:"305-555-5
 	PriceFeature.create(user_id: 2, feature_id: 28, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 2, feature_id: 29, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 2, feature_id: 30, floor: 1000, ceiling: 2000)
-
+	PriceFeature.create(user_id: 2, feature_id: 31, floor: 1000, ceiling: 2000)
 	# Contractor3 Prices
 	PriceFeature.create(user_id: 3, feature_id: 1, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 3, feature_id: 2, floor: 1000, ceiling: 2000)
@@ -167,7 +170,7 @@ admin = User.create(name: "Yemani", email: "yemani@yemani.com", phone:"305-555-5
 	PriceFeature.create(user_id: 3, feature_id: 28, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 3, feature_id: 29, floor: 1000, ceiling: 2000)
 	PriceFeature.create(user_id: 3, feature_id: 30, floor: 1000, ceiling: 2000)
-
+	PriceFeature.create(user_id: 3, feature_id: 31, floor: 1000, ceiling: 2000)
 # Dummy Lenders
 
 lender1 = User.create(name: "John", email: "fasdfs21f@adf.com", phone:"305-551-4212", role: 1, password: "angrybirds", password_confirmation: "angrybirds", address: "120 SW 8 St", city: "Miami", state: "Florida", zip_code: "33130")

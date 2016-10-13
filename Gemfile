@@ -15,6 +15,9 @@ gem 'geokit-rails'
 # Money helper for variables
 gem 'money-rails'
 
+# Library for bulk inserting data using ActiveRecord.
+gem "activerecord-import", ">= 0.2.0"
+
 # Need for CarrierWave to communicate with Amazon S3
 
 gem "fog"

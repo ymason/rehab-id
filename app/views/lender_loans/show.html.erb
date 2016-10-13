@@ -1,9 +1,10 @@
 <% if policy(@lender_loan).show? %>
+	<h2>Loan Application</h2>
 	<div class="row">
 		<div class="4u 12u(mobilep)">
-			<h2>Property Address</h2>
-
-			 <h4><%= @lender_loan.address %> <%= @lender_loan.city %>, <%= @lender_loan.state %> <%= @lender_loan.zip_code %></h4>
+			 <h4>Property Address:</h4>
+			 <br>
+			 <h5><%= @lender_loan.address %> <%= @lender_loan.city %>, <%= @lender_loan.state %> <%= @lender_loan.zip_code %></h5>
 
 			 <h2> Loan Terms</h2>
 
@@ -28,8 +29,6 @@
 
 			<% end %>
 		</div>
-
-		<h2><%= link_to "See Loan Application Information Below", lender_quote_loan_application_path(@lender_quote.id, @loan_application_id) %></h2>
 
 		<div class="2u 12u(mobilep)">
 			<ul>
@@ -181,7 +180,5 @@
 				</li>
 			</ul>
 		</div>
-
-		<h2><%= link_to "Click Here To View Underwriting Policy", user_lender_underwriting_path(current_user.id, @lender_underwriting_id) %></h2>
 	</div>
 <% end %>

@@ -1,0 +1,41 @@
+<h3>Loan Application | Property & Contractor Info</h3>
+	<div class="row">		
+		<div class="2u 12u(mobilep)">
+		<%= form_for @loan_application, url: loan_application4_path do |f| %>
+			<% if @loan_application.errors.any? %>
+	 			<%= form_errors_for @loan_application %>
+	 		<% end %>
+			<h5> Contact Name </h5>
+			<%= f.text_field :contact_name %>
+			<h5> Contact Email </h5>
+			<%= f.text_field :contact_email%>
+			<h5> Contact Phone Number </h5>
+			<%= f.number_field :contact_phone%>
+			<h5> Closing Date </h5>
+			<%= f.date_field :closing_date%>
+			<h5> Property Instructions </h5>
+			<%= f.text_area :property_instructions %>
+			<h5> Estimated Rehab Time</h5>
+			<%= f.number_field :rehab_time, placeholder: "Months" %>
+			<h5> Sq. Ft Being Added? </h5>
+			<%= f.number_field :add_sq_ft, placeholder: "0 if None"%>
+		</div>
+
+		<div class="2u 12u(mobilep)">
+			<h5> Are you doing rehab?</h5>
+			<h6><em>(If No then please fill out below)</em> </h6>
+			<%= f.select :rehabber, ([['Yes', 1], ['No', 0]]) %>
+			<h5> Contractor Name </h5>
+			<%= f.text_field :contractor_name %>
+			<h5> Contractor Company </h5>
+			<%= f.text_field :contractor_company %>
+			<h5> Contractor Email </h5>
+			<%= f.text_field :contractor_email%>
+			<h5> Contractor Phone Number </h5>
+			<%= f.number_field :contractor_phone%>
+			<br>
+			<br>
+			<%= f.submit "Next" %>
+			</div>
+	<% end %>
+</div>

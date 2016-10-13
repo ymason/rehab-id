@@ -3,7 +3,7 @@ class ProjectFeature < ApplicationRecord
   belongs_to :feature
 
   # before_save :feature_exist
-  after_save :create_estimates
+  # after_save :create_estimate
 
   private
 
@@ -15,8 +15,8 @@ class ProjectFeature < ApplicationRecord
   	# 	end
   	# end
 
-    def create_estimates
-      	self.project.create_estimates
-    end
+    # def create_estimate
+    #   	self.project.create_estimates
+    # end
 
 end

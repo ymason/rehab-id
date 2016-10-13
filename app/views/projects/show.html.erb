@@ -4,6 +4,8 @@
 			<h2>Project</h2>
 			 <%= @project.address %> <%= @project.city %>, <%= @project.state %> <%= @project.zip_code %> | <%= @project_sqft %> Sq. Feet
 			 <br>
+			 <%= @project.rooms %> Rooms | <%= @project.bathrooms %> Bathrooms
+			 <br>
 
 		<h2> Estimated Cost </h2>
 		<% if @minimum_number == "$0" %>

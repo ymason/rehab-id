@@ -1,0 +1,29 @@
+<h3>Loan Application | Loan Purpose & Guarantor Info</h3>
+	<div class="row">		
+		<div class="2u 12u(mobilep)">
+		<%= form_for @loan_application, url: loan_application3_path do |f| %>
+			<% if @loan_application.errors.any? %>
+	 			<%= form_errors_for @loan_application %>
+	 		<% end %>
+			<h5> Guarantor Name </h5>
+			<%= f.text_field :guarantor_name %>
+			<h5> Guarantor Email </h5>
+			<%= f.text_field :guarantor_email%>
+			<h5> Guarantor Social Security </h5>
+			<%= f.number_field :guarantor_ss%>
+			<h5> Guarantor Phone Number </h5>
+			<%= f.number_field :guarantor_phone%>
+			<h5> Guarantor Date of Birth </h5>
+			<%= f.date_field :guarantor_dob	%>
+		</div>
+
+		<div class="2u 12u(mobilep)">
+			<h4> This loan is for business purposes only? </h4>
+			<%= f.select :loan_purpose, ([['Yes', 1], ['No', 0]]) %>
+			<h4> This property will be non-owner occupied? </h4>
+			<%= f.select :occupied, ([['Yes', 1], ['No', 0]]) %>
+			<br>
+			<%= f.submit "Next" %>
+		</div>
+	<% end %>
+</div>

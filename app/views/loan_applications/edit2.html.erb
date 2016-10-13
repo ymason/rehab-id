@@ -1,0 +1,37 @@
+<h3>Loan Application | Company Mailing & Owner Info</h3>
+	<div class="row">
+		<div class="2u 12u(mobilep)">
+		<%= form_for @loan_application, url: loan_application2_path do |f| %>
+			<% if @loan_application.errors.any? %>
+	 			<%= form_errors_for @loan_application %>
+	 		<% end %>
+			<h5> Mailing Adresss </h5>
+			<%= f.text_field :mailing_address%>
+			<h5> Mailing City </h5>
+			<%= f.text_field :mailing_city%>
+			<h5> Mailing State</h5>
+			<%= f.select :mailing_state, options_for_select(us_states) %>
+			<h5> Mailing Zip Code </h5>
+			<%= f.number_field :mailing_zip_code%>
+			<br>
+			<h5> Owner Name </h5>
+			<%= f.text_field :owner_name %>
+		</div>
+
+		<div class="2u 12u(mobilep)">
+			<h5> Owner Title </h5>
+			<%= f.text_field :owner_title, placeholder: "i.e. Manager"%>
+			<h5> Owner Email </h5>
+			<%= f.text_field :owner_email%>
+			<h5> Owner Social Security </h5>
+			<%= f.number_field :owner_ss%>
+			<h5> Owner Phone Number </h5>
+			<%= f.number_field :owner_phone%>
+			<h5> Owner Date of Birth </h5>
+			<%= f.date_field :owner_dob	%>
+			<br>
+			<br>
+			<%= f.submit "Next" %>
+		</div>
+	<% end %>
+</div>

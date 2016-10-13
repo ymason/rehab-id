@@ -1,7 +1,7 @@
 class LoanApplicationsController < ApplicationController
 	include ActionView::Helpers::NumberHelper
-	before_action :set_loan_app, only: [:show, :edit, :update, :destroy]
-
+	before_action :set_loan_app, only: [:show, :edit, :edit2, :edit3, :edit4, :edit5, :update, :update2, :update3, :update4, :update5, :destroy]
+	skip_after_action :verify_authorized, :only => [:edit2, :edit3, :edit4, :edit5, :update2, :update3, :update4, :update5]
 	def create
 		@lender_quote_id = params[:lender_quote_id]
 		@loan_quote_id = params[:loan_quote_id]
@@ -26,14 +26,14 @@ class LoanApplicationsController < ApplicationController
 					zip_code: @loan_quote.zip_code,
 					loan_application_id: @loan_application.id)
 
-				redirect_to edit_lender_quote_loan_application_path(@lender_quote_id, @loan_application.id)
+				redirect_to loan_edit_path(@lender_quote_id, @loan_application.id)
 			else
 				redirect_to user_loan_quote_path(current_user.id, @loan_quote_id)
 
 			end	
 		else
 			@loan_application = LoanApplication.find_by(lender_quote_id: @lender_quote_id)
-			redirect_to edit_lender_quote_loan_application_path(@lender_quote_id, @loan_application.id)
+			redirect_to loan_edit_path(@lender_quote_id, @loan_application.id)
 		end
 	end
 
@@ -42,14 +42,60 @@ class LoanApplicationsController < ApplicationController
 		# if update then redirect if not then render edit
 	end
 
+	def edit2
+	end
+
+	def edit3
+	end
+
+	def edit4
+	end
+
+	def edit5
+	end
+
 	def update
+		@loan_application.update(application_params)
+		@loan_application.loan_purpose = params[:loan_application][:loan_purpose].to_i
+		@loan_application.occupied = params[:loan_application][:occupied].to_i
+		@lender_quote_id = @loan_application.lender_quote_id
+		redirect_to loan_edit2_path(@lender_quote_id, @loan_application.id)
+
+		authorize @loan_application
+	end
+
+	def update2
+		@loan_application.update(application_params)
+		@loan_application.loan_purpose = params[:loan_application][:loan_purpose].to_i
+		@loan_application.occupied = params[:loan_application][:occupied].to_i
+		@lender_quote_id = @loan_application.lender_quote_id
+		redirect_to loan_edit3_path(@lender_quote_id, @loan_application.id)
+	end
+
+	def update3
+		@loan_application.update(application_params)
+		@loan_application.loan_purpose = params[:loan_application][:loan_purpose].to_i
+		@loan_application.occupied = params[:loan_application][:occupied].to_i
+		@lender_quote_id = @loan_application.lender_quote_id
+		redirect_to loan_edit4_path(@lender_quote_id, @loan_application.id)
+	end
+
+	def update4
+		@loan_application.update(application_params)
+		@loan_application.loan_purpose = params[:loan_application][:loan_purpose].to_i
+		@loan_application.occupied = params[:loan_application][:occupied].to_i
+		@lender_quote_id = @loan_application.lender_quote_id
+		redirect_to loan_edit5_path(@lender_quote_id, @loan_application.id)
+
+	end
+
+	def update5
 		@loan_application.update(application_params)
 		@loan_application.loan_purpose = params[:loan_application][:loan_purpose].to_i
 		@loan_application.occupied = params[:loan_application][:occupied].to_i
 		@lender_quote_id = @loan_application.lender_quote_id
 		redirect_to lender_quote_loan_application_path(@lender_quote_id, @loan_application.id)
 
-		authorize @loan_application
 	end
 
 	def show

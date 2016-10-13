@@ -33,7 +33,6 @@ class ProjectsController < ApplicationController
 	end
 
 	def index
-
 		@user = current_user
 
 		@all_user_projects = @user.projects
@@ -41,7 +40,6 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
-
 		@user = User.find_by(id: params[:user_id])
 
 		@contractors = User.local_contractors(@project)
