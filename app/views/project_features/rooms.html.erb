@@ -3,30 +3,23 @@
 	<em> Only select features if needed.</em>
 	<div class="row">
 		<div class="2u 12u(mobilep)">
-			<ul>
-			   <li>
 			   <h4>Rooms</h4>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 1), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 1), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 1), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 1), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 1), :id, :name), prompt: "Select if needed" %>
-					</li>
-				</ul>
 			</div>
 
 		<div class="2u 12u(mobilep) col-md-3 ">
-			<ul>
-			   <li>
 			   	<h4>Bathrooms</h4>
 			   	<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 4), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 4), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 4), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 4), :id, :name), prompt: "Select if needed" %><br>
 				<%= select_tag "feature[][feature_id]", options_from_collection_for_select(Feature.where(feature_type: 4), :id, :name), prompt: "Select if needed" %><br>
-			 	</li>
-			 </ul>
 		</div>
+		
 		<% if @project.exterior? %>
 		<div class="2u 12u(mobilep) col-md-3 ">
 			<h4>Exterior Features</h4>
